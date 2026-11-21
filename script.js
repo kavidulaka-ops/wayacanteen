@@ -1,60 +1,76 @@
-// Get elements
+// ==========================================================================
+// WAYACANTEEN - STUDENT LOGIN CONTROLLER
+// ==========================================================================
 
 const loginForm = document.getElementById("loginForm");
-
 const indexNumber = document.getElementById("indexNumber");
-
 const password = document.getElementById("password");
-
 const indexError = document.getElementById("indexError");
-
 const passwordError = document.getElementById("passwordError");
-
 const loginMessage = document.getElementById("loginMessage");
-
 const togglePassword = document.getElementById("togglePassword");
-
 const forgotPassword = document.getElementById("forgotPassword");
 
-
 // Show / Hide Password
+if (togglePassword && password) {
+    togglePassword.addEventListener("click", function () {
+        if (password.type === "password") {
+            password.type = "text";
+            togglePassword.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+        } else {
+            password.type = "password";
+            togglePassword.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+        }
+    });
+}
 
-togglePassword.addEventListener("click", function () {
-
-    if (password.type === "password") {
-
-        password.type = "text";
-
-        togglePassword.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
-
-    } else {
-
-        password.type = "password";
-
-        togglePassword.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
-
-    }
-
+// Clear errors on input
+[indexNumber, password].forEach(input => {
+    if (!input) return;
+    input.addEventListener("input", function () {
+        if (input.id === "indexNumber" && indexError) indexError.textContent = "";
+        if (input.id === "password" && passwordError) passwordError.textContent = "";
+        if (loginMessage) loginMessage.hidden = true;
+    });
 });
 
-loginForm.addEventListener("submit", function (event) {
+if (loginForm) {
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    event.preventDefault();
+        const indexValue = indexNumber.value.trim();
+        const passwordValue = password.value.trim();
 
-    const indexValue = indexNumber.value.trim();
-    const passwordValue = password.value.trim();
+        if (indexValue === "") {
+            indexError.textContent = "Please enter your index number.";
+            return;
+        }
 
-    if (indexValue === "") {
-        indexError.textContent =
-            "Please enter your index number.";
-        return;
-    }
+        if (passwordValue === "") {
+            passwordError.textContent = "Please enter your password.";
+            return;
+        }
 
-    if (passwordValue === "") {
-        passwordError.textContent =
-            "Please enter your password.";
-        return;
-    }
+        // On static hosting (e.g. GitHub Pages) where Java Servlets are unavailable
+        if (window.location.hostname.includes("github.io") || window.location.protocol === "file:") {
+            const stored = localStorage.getItem("wayacanteen_registered_" + indexValue);
+            let userObj = {
+                student_id: 1,
+                index_number: indexValue,
+                full_name: "Student (" + indexValue + ")",
+                email: indexValue + "@wyb.ac.lk"
+            };
+            if (stored) {
+                try {
+                    userObj = JSON.parse(stored);
+                } catch (e) {}
+            }
+            sessionStorage.setItem("currentStudent", JSON.stringify(userObj));
+            window.location.href = "home.html";
+            return;
+        }
 
-    loginForm.submit();
-});
+        // Real Java Servlet + MySQL submission on Tomcat
+        loginForm.submit();
+    });
+}
