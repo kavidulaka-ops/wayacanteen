@@ -277,31 +277,6 @@
 
                     </div>
 
-                    <!-- FEEDBACK & REVIEWS CARD -->
-                    <div class="service-card feedback-card"
-                         onclick="openFeedback()"
-                         role="button"
-                         tabindex="0"
-                         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openFeedback(); }">
-
-                        <div class="card-top-row">
-                            <div class="card-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                            </div>
-                            <span class="service-pill-badge">Feedback &amp; Reviews</span>
-                        </div>
-
-                        <div class="card-content">
-                            <p class="service-desc">
-                                Rate meals, counter speed, and canteen service.
-                            </p>
-                            <span class="card-link">
-                                Give Feedback →
-                            </span>
-                        </div>
-
-                    </div>
-
                 </div>
 
             </div>
@@ -456,6 +431,16 @@
             });
     })();
     </script>
+
+    <!-- ================= FLOATING BOTTOM-RIGHT FEEDBACK BUTTON ================= -->
+    <a href="feedback.html" class="floating-bottom-feedback-btn" id="floatingFeedbackBtn" title="Give Canteen Feedback" aria-label="Give Canteen Feedback">
+        <div class="fb-fab-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </div>
+        <span class="fb-fab-text">Feedback</span>
+    </a>
 
     <script src="canteen-queue-live.js"></script>
 </body>

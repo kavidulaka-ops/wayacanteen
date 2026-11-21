@@ -1131,19 +1131,60 @@ footer {
     box-shadow: 0 4px 10px rgba(234, 88, 12, 0.25);
 }
 
-/* 5th Service Card: Feedback Card Center Span */
-.service-card.feedback-card {
-    grid-column: 1 / -1;
-    max-width: 580px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
+/* ==========================================================================
+   FLOATING BOTTOM-RIGHT FEEDBACK BUTTON
+   Theme: Signature 3D Orange (#ea580c -> #c2410c)
+   Typography: Strictly 3 Font Sizes (13px for label)
+   ========================================================================== */
+.floating-bottom-feedback-btn {
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    z-index: 998;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 9999px;
+    padding: 10px 18px 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 25px -3px rgba(234, 88, 12, 0.45), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease;
+    cursor: pointer;
 }
 
-@media (max-width: 900px) {
-    .service-card.feedback-card {
-        grid-column: auto;
-        max-width: 100%;
+.floating-bottom-feedback-btn .fb-fab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.floating-bottom-feedback-btn .fb-fab-text {
+    letter-spacing: 0.3px;
+}
+
+.floating-bottom-feedback-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 16px 32px -4px rgba(234, 88, 12, 0.55), 0 6px 10px -2px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: #ffffff;
+}
+
+.floating-bottom-feedback-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+@media (max-width: 640px) {
+    .floating-bottom-feedback-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 8px 14px 8px 12px;
     }
 }
 
