@@ -25,7 +25,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
 
     <link rel="stylesheet" href="food.css">
-    <link rel="stylesheet" href="pending-orders.css">
+    <link rel="stylesheet" href="pending-orders.css?v=20261121_v2">
     <link rel="stylesheet" href="pwa.css">
 
     <script src="pwa-install.js" defer></script>
@@ -33,28 +33,29 @@
 
 <body class="food-page-body">
 
-    <!-- Diagonal Subtle Overlay -->
+    <!-- Diagonal Subtle Texture Overlay -->
     <div class="food-bg-pattern" aria-hidden="true"></div>
 
     <!-- Outer Decorative Props Layer -->
     <div class="food-props-layer" aria-hidden="true">
         <img src="images/samosa-3d.png" class="food-float-prop prop-food-samosa" alt="Samosa">
-        <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
-        <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
         <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
+        <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
+        <img src="images/yellow-rice-plate-3d.png" class="food-float-prop prop-food-rice" alt="Rice Plate">
     </div>
 
-    <!-- Top Canopy Header -->
+    <!-- Top Canopy Header (Signature Orange) -->
     <header class="food-hero-canopy">
         <nav class="food-navbar">
             <div class="brand" onclick="goDashboard()" role="button" tabindex="0" title="Staff Dashboard">
                 <div class="brand-icon">W</div>
                 <div>
-                    <span style="font-size: 16px; font-weight: 700; color: #1e293b;">WAYACANTEEN</span>
-                    <small style="display: block; font-size: 13px; color: #ea580c; font-weight: 600;">Orders Desk</small>
+                    <span style="font-size: 16px; font-weight: 700; color: #ffffff;">WAYACANTEEN</span>
+                    <small style="display: block; font-size: 13px; color: rgba(255, 255, 255, 0.85); font-weight: 500;">Orders Desk</small>
                 </div>
             </div>
 
+            <!-- Live Canteen Rush Badge -->
             <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
                 <span class="pill-live-tag">LIVE</span>
                 <span class="pill-dot"></span>
@@ -76,47 +77,59 @@
                 </button>
             </div>
         </nav>
+
+        <div class="food-hero-content">
+            <div class="canteen-tag-pill">
+                <span class="tag-dot"></span>
+                <span>REAL-TIME ORDER DESK</span>
+            </div>
+            <h1 class="food-hero-title">Pending Orders &amp; Active Queue</h1>
+            <p class="food-hero-subtitle">
+                Review incoming student orders, send them to preparation queue, and notify students for counter pickup.
+            </p>
+        </div>
     </header>
 
-    <!-- Main Container Card -->
-    <main class="food-main-stage">
+    <!-- Bottom Sweeping White Floor Wave -->
+    <div class="food-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+            <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
 
-        <div class="food-section-header">
-            <div>
-                <span class="section-tag">REAL-TIME ORDER DESK</span>
-                <h1 class="section-title">Pending Orders &amp; Active Queue</h1>
-                <p class="section-subtitle">Review incoming orders, send to preparation queue, and notify students when ready</p>
+    <!-- Main Floor Section -->
+    <main class="food-floor-section">
+        <div class="food-floor-container">
+
+            <!-- Primary Mode Tabs Bar -->
+            <div class="tabs-bar">
+                <button class="tab-btn active" id="tabPending" onclick="switchMainTab('pending')" type="button">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <span>Pending Orders</span>
+                    <span class="badge" id="pendingTabCount">0</span>
+                </button>
+
+                <button class="tab-btn" id="tabAccepted" onclick="switchMainTab('accepted')" type="button">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>Active Queue (Accepted / Preparing)</span>
+                    <span class="badge" id="acceptedTabCount">0</span>
+                </button>
             </div>
+
+            <!-- Filter Sub-Tabs -->
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterOrders('All')" type="button">All Orders</button>
+                <button class="filter-btn" onclick="filterOrders('Food')" type="button">Food Only</button>
+                <button class="filter-btn" onclick="filterOrders('Stationery')" type="button">Stationery Only</button>
+                <button class="filter-btn" onclick="filterOrders('Both')" type="button">Combined</button>
+            </div>
+
+            <!-- Orders Grid Container -->
+            <section id="ordersContainer" class="orders-container">
+                <!-- JavaScript renders order cards here -->
+            </section>
+
         </div>
-
-        <!-- Primary Mode Tabs Bar -->
-        <div class="tabs-bar" style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
-            <button class="tab-btn active" id="tabPending" onclick="switchMainTab('pending')" type="button">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                <span>Pending Orders</span>
-                <span class="badge" id="pendingTabCount">0</span>
-            </button>
-
-            <button class="tab-btn" id="tabAccepted" onclick="switchMainTab('accepted')" type="button">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                <span>Active Queue (Accepted / Preparing)</span>
-                <span class="badge" id="acceptedTabCount">0</span>
-            </button>
-        </div>
-
-        <!-- Filter Sub-Tabs -->
-        <div class="filters" style="display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap;">
-            <button class="filter-btn active" onclick="filterOrders('All')" type="button">All Orders</button>
-            <button class="filter-btn" onclick="filterOrders('Food')" type="button">Food Only</button>
-            <button class="filter-btn" onclick="filterOrders('Stationery')" type="button">Stationery Only</button>
-            <button class="filter-btn" onclick="filterOrders('Both')" type="button">Combined</button>
-        </div>
-
-        <!-- Orders Grid Container -->
-        <section id="ordersContainer" class="orders-container">
-            <!-- JavaScript will render order cards here -->
-        </section>
-
     </main>
 
     <!-- Reject Confirmation Modal -->
@@ -132,11 +145,19 @@
         </div>
     </div>
 
+    <!-- App Footer -->
     <footer class="app-footer">
         <div class="footer-inner">
             <div class="footer-brand">
                 <div class="brand-icon" style="width: 28px; height: 28px; font-size: 16px;">W</div>
                 <span>&copy; 2026 <strong>WAYACANTEEN</strong> - Staff Operations Desk</span>
+            </div>
+            <div class="footer-links">
+                <a href="staff-dashboard.html">Dashboard</a>
+                <a href="staff-food.html">Food Menu</a>
+                <a href="staff-stationery.html">Stationery</a>
+                <a href="qr-scanner.html">Scan QR</a>
+                <a href="order-history.html">Order History</a>
             </div>
         </div>
     </footer>

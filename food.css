@@ -888,7 +888,11 @@ body {
         padding: 10px 14px;
         gap: 8px;
     }
+    .brand small {
+        display: none !important;
+    }
     .nav-right {
+        margin-left: auto;
         gap: 6px;
     }
     .nav-right .nav-back-btn span,
