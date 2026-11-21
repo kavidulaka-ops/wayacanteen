@@ -348,9 +348,11 @@ function showOrderQR(orderCode, totalAmount) {
     const box = document.createElement("div");
 
     box.style.cssText = `
-        background: white;
-        padding: 28px;
-        border-radius: 16px;
+        background: #ffffff;
+        padding: 32px 28px;
+        border-radius: 24px;
+        border: 2px solid #fed7aa;
+        box-shadow: 0 20px 45px rgba(234, 88, 12, 0.2);
         text-align: center;
         max-width: 340px;
         width: 100%;
@@ -358,16 +360,42 @@ function showOrderQR(orderCode, totalAmount) {
     `;
 
     const title = document.createElement("h2");
-    title.textContent = "Your Order QR";
+    title.textContent = "Counter Pickup QR";
+    title.style.cssText = `
+        font-size: 24px;
+        font-weight: 700;
+        color: #ea580c;
+        margin: 0 0 8px 0;
+    `;
 
     const code = document.createElement("p");
     code.textContent = orderCode;
+    code.style.cssText = `
+        font-size: 13px;
+        font-weight: 700;
+        color: #ea580c;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        padding: 4px 14px;
+        border-radius: 9999px;
+        display: inline-block;
+        margin: 0 0 16px 0;
+    `;
 
     const image = document.createElement("img");
     image.alt = "QR code for order " + orderCode;
-    image.width = 200;
-    image.height = 200;
-    image.style.maxWidth = "100%";
+    image.width = 190;
+    image.height = 190;
+    image.style.cssText = `
+        padding: 12px;
+        background: #ffffff;
+        border: 2px solid #ea580c;
+        border-radius: 18px;
+        box-shadow: 0 8px 20px rgba(234, 88, 12, 0.15);
+        margin-bottom: 14px;
+        display: inline-block;
+        max-width: 100%;
+    `;
 
     // QR contains only the order code
     image.src =
@@ -377,17 +405,27 @@ function showOrderQR(orderCode, totalAmount) {
     const total = document.createElement("p");
     total.textContent =
         "Total: Rs. " + Number(totalAmount).toFixed(2);
+    total.style.cssText = `
+        font-size: 16px;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 20px 0;
+    `;
 
     const closeButton = document.createElement("button");
     closeButton.type = "button";
     closeButton.textContent = "Close";
     closeButton.style.cssText = `
-        padding: 10px 24px;
+        width: 100%;
+        height: 44px;
         border: none;
-        border-radius: 8px;
-        background: #2563eb;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
         color: white;
+        font-size: 16px;
+        font-weight: 600;
         cursor: pointer;
+        box-shadow: 0 8px 18px rgba(234, 88, 12, 0.3);
     `;
 
     closeButton.addEventListener("click", () => modal.remove());

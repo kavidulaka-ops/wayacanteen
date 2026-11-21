@@ -17,12 +17,16 @@ let cart =
 // CHECK CART
 // =====================================
 
-if (cart.length === 0) {
-
+const urlParams = new URLSearchParams(window.location.search);
+if (cart.length === 0 && urlParams.has("demo")) {
+    cart = [
+        { name: "Chicken Kottu", price: 450, quantity: 2, image: "chicken_kottu.png" },
+        { name: "Ulundu Vadai", price: 90, quantity: 2, image: "ulundu_vadai.png" },
+        { name: "CR Single Rule Exercise Book", price: 280, quantity: 1, image: "cr_single_rule.png" }
+    ];
+} else if (cart.length === 0) {
     alert("Your cart is empty.");
-
-    window.location.href =
-        "cart.html";
+    window.location.href = "cart.html";
 }
 
 
@@ -236,6 +240,7 @@ function displayOrderItems() {
             "order-item";
 
 
+        const typeLabel = item.itemType ? `${item.itemType} · ` : (item.category ? `${item.category} · ` : "");
         itemElement.innerHTML = `
 
             <div class="item-details">
@@ -245,9 +250,7 @@ function displayOrderItems() {
                 </h3>
 
                 <p>
-                    ${item.itemType}
-                    · Rs. ${Number(item.price).toFixed(2)}
-                    × ${item.quantity}
+                    ${typeLabel}Rs. ${Number(item.price).toFixed(2)} × ${item.quantity}
                 </p>
 
             </div>
@@ -537,6 +540,26 @@ document.getElementById(
 ).src =
     qrUrl;
 
+
+// =====================================
+// PLACE ORDER ACTION
+// =====================================
+
+function placeOrder() {
+    const btn = document.getElementById("btnPlaceOrder");
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span>Placing Order...</span>`;
+    }
+
+    // Clear active cart from localStorage
+    localStorage.removeItem("cantinCart");
+    localStorage.removeItem("cantinPickupSlot");
+    localStorage.removeItem("cantinPickupTime");
+
+    alert("Order Placed Successfully! Your pickup order and QR code are registered. You can track preparation in My Orders.");
+    window.location.href = "student-order-history.html";
+}
 
 // =====================================
 // BACK TO HOME
