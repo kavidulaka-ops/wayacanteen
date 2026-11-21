@@ -14,7 +14,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
 }
 
 /* ==========================================================================
-   STAFF ANONYMOUS HELP CENTER (SIGNATURE ORANGE)
+   STAFF ANONYMOUS HELP CENTER (SIGNATURE ORANGE 3D THEME)
    ========================================================================== */
 
 /* ================= SUMMARY CARDS ================= */
@@ -27,13 +27,19 @@ p, span, label, input, select, textarea, .desc, .details, button {
 
 .summary-card {
     background: #ffffff;
-    border: 1px solid rgba(254, 215, 170, 0.6);
+    border: 1px solid rgba(254, 215, 170, 0.7);
     border-radius: 16px;
     padding: 18px 20px;
     display: flex;
     align-items: center;
     gap: 16px;
-    box-shadow: 0 4px 12px rgba(194, 65, 12, 0.04);
+    box-shadow: 0 4px 14px rgba(194, 65, 12, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(194, 65, 12, 0.08);
 }
 
 .summary-card .card-icon {
@@ -52,20 +58,22 @@ p, span, label, input, select, textarea, .desc, .details, button {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    display: block;
 }
 
 .summary-card h2 {
     font-size: 24px;
     font-weight: 700;
-    color: #1e293b;
+    color: #0f172a;
     margin-top: 2px;
+    line-height: 1.2;
 }
 
 /* ================= TABS BAR ================= */
 .tabs-bar {
     display: flex;
     gap: 10px;
-    border-bottom: 2px solid #ffedd5;
+    border-bottom: 2px solid #fed7aa;
     margin-bottom: 24px;
     overflow-x: auto;
     padding-bottom: 2px;
@@ -106,6 +114,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
     border-radius: 999px;
     font-size: 13px;
     font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .tab-btn.active .badge {
@@ -113,7 +122,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
     color: #ffffff;
 }
 
-/* ================= REQUESTS CONTAINER ================= */
+/* ================= REQUESTS CONTAINER & CARDS ================= */
 .staff-requests-list {
     display: flex;
     flex-direction: column;
@@ -122,31 +131,53 @@ p, span, label, input, select, textarea, .desc, .details, button {
 
 .staff-request-card {
     background: #ffffff;
-    border: 1px solid rgba(254, 215, 170, 0.6);
+    border: 1.5px solid #fed7aa;
     border-radius: 18px;
     padding: 22px;
-    box-shadow: 0 4px 12px rgba(194, 65, 12, 0.04);
+    box-shadow: 0 4px 14px rgba(194, 65, 12, 0.05);
     transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .staff-request-card:hover {
-    box-shadow: 0 8px 24px rgba(194, 65, 12, 0.08);
-    border-color: #fdba74;
+    box-shadow: 0 8px 24px rgba(194, 65, 12, 0.09);
+    border-color: #fb923c;
 }
 
+/* Card Header Row */
 .card-header-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.ref-code {
+.card-ref-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card-ref-code, .ref-code {
     font-size: 13px;
     font-weight: 700;
     color: #ea580c;
     letter-spacing: 0.05em;
     background: #fff7ed;
+    border: 1px solid #ffedd5;
+    padding: 3px 10px;
+    border-radius: 8px;
+}
+
+.card-category-badge, .category-tag {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 600;
+    background: #f1f5f9;
     padding: 3px 10px;
     border-radius: 8px;
 }
@@ -156,6 +187,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
     border-radius: 999px;
     font-size: 13px;
     font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .status-pending { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
@@ -164,104 +196,103 @@ p, span, label, input, select, textarea, .desc, .details, button {
 .status-completed { background: #fdf4ff; color: #a21caf; border: 1px solid #f5d0fe; }
 .status-rejected { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
 
-.card-title-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-}
-
-.item-title {
-    font-size: 16px;
-    color: #1e293b;
-}
-
-.category-tag {
+/* Student Confidential Badge */
+.student-confidential-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 13px;
-    color: #ea580c;
-    font-weight: 600;
+    color: #64748b;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 6px 12px;
 }
 
-.card-reason-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 12px 16px;
+.student-confidential-box strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Titles and Messages */
+.request-card-title, .item-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.request-card-msg, .card-reason-box {
     font-size: 13px;
     color: #475569;
     line-height: 1.5;
-    margin-bottom: 16px;
+    background: #fafaf9;
+    border: 1px solid #f5f5f4;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 0;
 }
 
-.meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-    margin-bottom: 16px;
+/* Staff Progress Bar */
+.staff-progress-box, .progress-section {
     background: #fffaf5;
     border: 1px solid #ffedd5;
     border-radius: 12px;
-    padding: 12px 16px;
-}
-
-.meta-item {
+    padding: 14px 16px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 8px;
 }
 
-.meta-item span {
+.staff-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 13px;
-    color: #64748b;
+    font-weight: 600;
+    color: #475569;
 }
 
-.meta-item strong {
-    font-size: 13px;
-    color: #1e293b;
-}
-
-/* PROGRESS SECTION */
-.progress-section {
-    margin-bottom: 18px;
-}
-
-.progress-bar-bg {
+.staff-track, .progress-bar-bg {
     width: 100%;
     height: 10px;
     background: #f1f5f9;
     border-radius: 999px;
     overflow: hidden;
-    margin-bottom: 8px;
 }
 
-.progress-fill {
+.staff-fill, .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, #ea580c 0%, #16a34a 100%);
     border-radius: 999px;
     transition: width 0.4s ease;
 }
 
-.progress-info {
+.staff-progress-stats {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 13px;
     color: #64748b;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-/* ACTIONS ROW */
-.staff-actions-row {
+/* Card Actions Bar */
+.card-actions-bar, .staff-actions-row {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    padding-top: 12px;
+    align-items: center;
+    padding-top: 10px;
     border-top: 1px solid #f1f5f9;
 }
 
 .btn-approve,
 .btn-reject,
+.btn-donation,
 .btn-donate,
+.btn-complete,
 .btn-fulfill {
     padding: 10px 18px;
     border-radius: 10px;
@@ -287,7 +318,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
 }
 
 .btn-reject {
-    background: #fff;
+    background: #ffffff;
     border: 1px solid #fca5a5;
     color: #dc2626;
 }
@@ -296,29 +327,29 @@ p, span, label, input, select, textarea, .desc, .details, button {
     background: #fef2f2;
 }
 
-.btn-donate {
+.btn-donation, .btn-donate {
     background: #ea580c;
     color: #ffffff;
     box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25);
 }
 
-.btn-donate:hover {
+.btn-donation:hover, .btn-donate:hover {
     background: #c2410c;
     transform: translateY(-1px);
 }
 
-.btn-fulfill {
+.btn-complete, .btn-fulfill {
     background: #2563eb;
     color: #ffffff;
     box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
 }
 
-.btn-fulfill:hover {
+.btn-complete:hover, .btn-fulfill:hover {
     background: #1d4ed8;
     transform: translateY(-1px);
 }
 
-/* ================= MODAL ================= */
+/* ================= RECORD DONATION MODAL ================= */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -341,7 +372,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
     width: 100%;
     padding: 28px;
     box-shadow: 0 20px 48px -12px rgba(15, 23, 42, 0.3);
-    border: 1px solid #fed7aa;
+    border: 1.5px solid #fed7aa;
 }
 
 .modal-header {
@@ -353,12 +384,20 @@ p, span, label, input, select, textarea, .desc, .details, button {
     border-bottom: 1px solid #f1f5f9;
 }
 
+.modal-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
 .modal-close-btn {
     background: none;
     border: none;
     font-size: 24px;
     color: #94a3b8;
     cursor: pointer;
+    line-height: 1;
 }
 
 .modal-close-btn:hover {
@@ -389,13 +428,23 @@ p, span, label, input, select, textarea, .desc, .details, button {
     margin-bottom: 16px;
 }
 
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 4px;
+}
+
 .input-prefix-box {
     display: flex;
     align-items: center;
-    border: 1px solid #fed7aa;
+    border: 1.5px solid #fed7aa;
     border-radius: 10px;
     overflow: hidden;
     margin-top: 6px;
+    background: #ffffff;
+    transition: all 0.2s ease;
 }
 
 .input-prefix-box .prefix {
@@ -404,7 +453,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
     color: #ea580c;
     font-size: 13px;
     font-weight: 700;
-    border-right: 1px solid #fed7aa;
+    border-right: 1.5px solid #fed7aa;
 }
 
 .input-prefix-box input {
@@ -414,6 +463,7 @@ p, span, label, input, select, textarea, .desc, .details, button {
     font-size: 13px;
     font-family: inherit;
     outline: none;
+    color: #0f172a;
 }
 
 .input-prefix-box:focus-within {
@@ -424,12 +474,14 @@ p, span, label, input, select, textarea, .desc, .details, button {
 .form-group input[type="text"] {
     width: 100%;
     padding: 10px 14px;
-    border: 1px solid #fed7aa;
+    border: 1.5px solid #fed7aa;
     border-radius: 10px;
     font-size: 13px;
     font-family: inherit;
     outline: none;
+    color: #0f172a;
     margin-top: 6px;
+    transition: all 0.2s ease;
 }
 
 .form-group input[type="text"]:focus {
@@ -453,6 +505,12 @@ p, span, label, input, select, textarea, .desc, .details, button {
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: #e2e8f0;
+    color: #0f172a;
 }
 
 .btn-confirm {
@@ -465,17 +523,18 @@ p, span, label, input, select, textarea, .desc, .details, button {
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+    transition: all 0.2s ease;
 }
 
 .btn-confirm:hover {
     background: #c2410c;
 }
 
-/* EMPTY & LOADING */
+/* ================= EMPTY & LOADING ================= */
 .empty-state, .loading-state {
     text-align: center;
     padding: 48px 20px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 16px;
     border: 1px dashed #fed7aa;
 }
@@ -495,11 +554,62 @@ p, span, label, input, select, textarea, .desc, .details, button {
     100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 640px) {
-    .summary-grid {
-        grid-template-columns: 1fr;
-    }
-    .card-title-row {
-        flex-direction: column;
-    }
+/* ================= APP FOOTER ================= */
+.app-footer {
+    background: #ffffff;
+    border-top: 1px solid #fed7aa;
+    padding: 24px 0;
+    position: relative;
+    z-index: 10;
+    margin-top: 40px;
+}
+
+.footer-inner {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.footer-brand .brand-icon {
+    width: 28px;
+    height: 28px;
+    background: #ea580c;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.footer-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #ea580c;
 }
