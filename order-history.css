@@ -1,0 +1,474 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* === TYPOGRAPHY HIERARCHY === */
+h1, h2, .brand-name, .logo, .brand, .order-code {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+h3, h4, .card-content h3, .food-card h3, .action-card h3, .stationery-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+p, span, label, input, select, textarea, .desc, .details {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* =====================================
+   CANTIN ORDER HISTORY
+   ===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+
+/* =====================================
+   HEADER
+   ===================================== */
+
+.header {
+    height: 75px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 50px;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    background: #FFA500;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.staff-label {
+    color: #777;
+    font-size: 13px;
+}
+
+
+.back-btn {
+    border: none;
+
+    background: #FFA500;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+.back-btn:hover {
+    background: #e69500;
+}
+
+
+/* =====================================
+   MAIN
+   ===================================== */
+
+.main-container {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 45px 30px;
+}
+
+
+/* =====================================
+   PAGE HEADING
+   ===================================== */
+
+.page-heading {
+    margin-bottom: 30px;
+}
+
+
+.page-heading p {
+    color: #888;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+}
+
+
+.page-heading h1 {
+    font-size: 24px;
+
+    margin-bottom: 8px;
+}
+
+
+.page-heading span {
+    color: #777;
+
+    font-size: 16px;
+}
+
+
+/* =====================================
+   FILTERS
+   ===================================== */
+
+.filters {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+
+.filter-btn {
+    padding: 10px 20px;
+
+    border: 1px solid #ddd;
+
+    background: white;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+.filter-btn:hover {
+    background: #ffdeac;
+    color: #8a4b00;
+    border-color: #ffdeac;
+}
+
+
+.filter-btn.active {
+    background: #FFA500;
+    color: white;
+    border-color: #FFA500;
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.25);
+}
+
+
+/* =====================================
+   HISTORY CONTAINER
+   ===================================== */
+
+.history-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =====================================
+   ORDER CARD
+   ===================================== */
+
+.history-card {
+    background: white;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.04);
+}
+
+
+.order-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.order-id {
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+
+.status {
+    background: #e7f7ed;
+
+    color: #18864b;
+
+    padding: 6px 13px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================
+   ORDER INFO
+   ===================================== */
+
+.order-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.info-box span {
+    display: block;
+
+    color: #888;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+
+.info-box strong {
+    font-size: 13px;
+}
+
+
+/* =====================================
+   ITEMS
+   ===================================== */
+
+.items-section {
+    padding-top: 20px;
+}
+
+
+.items-title {
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+
+.item-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 8px 0;
+
+    color: #555;
+
+    font-size: 13px;
+}
+
+
+.item-row strong {
+    color: #222;
+}
+
+
+/* =====================================
+   TOTAL
+   ===================================== */
+
+.order-bottom {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #eee;
+}
+
+
+.total-label {
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+.total-price {
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================
+   EMPTY
+   ===================================== */
+
+.empty-history {
+    background: white;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 14px;
+
+    padding: 70px 20px;
+
+    text-align: center;
+}
+
+
+.empty-history-icon {
+    font-size: 24px;
+
+    margin-bottom: 15px;
+}
+
+
+.empty-history h2 {
+    margin-bottom: 8px;
+}
+
+
+.empty-history p {
+    color: #888;
+}
+
+
+/* =====================================
+   RESPONSIVE
+   ===================================== */
+
+@media (max-width: 800px) {
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .main-container {
+        padding: 30px 20px;
+    }
+
+    .order-info {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .staff-label {
+        display: none;
+    }
+
+    .order-info {
+        grid-template-columns: 1fr;
+    }
+
+    .order-top {
+        align-items: flex-start;
+
+        gap: 10px;
+
+        flex-direction: column;
+    }
+
+}
+/* =====================================
+   CLEAR HISTORY BUTTON
+   ===================================== */
+
+.clear-history-btn {
+    margin-left: auto;
+
+    padding: 10px 18px;
+
+    border: 1px solid #ddd;
+
+    background: white;
+
+    color: #d33;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+.clear-history-btn:hover {
+    background: #fff1f1;
+
+    border-color: #d33;
+}

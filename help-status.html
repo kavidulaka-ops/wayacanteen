@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Help Status</title>
+    <link rel="stylesheet" href="help-center.css">
+    <script src="help-status.js" defer></script>
+</head>
+<body>
+
+    <main class="help-container">
+        <a href="help-center.html" class="back-link">
+            ← Back to Help Center
+        </a>
+
+        <header class="help-header">
+            <div class="help-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            <h1>Track Your Submission</h1>
+            <p>Enter your reference number to check its status.</p>
+        </header>
+
+        <form id="statusForm">
+            <div class="form-group">
+                <label for="referenceCode">Reference Number</label>
+                <input
+                    type="text"
+                    id="referenceCode"
+                    name="referenceCode"
+                    placeholder="HELP-XXXXXXXX"
+                    maxlength="13"
+                    pattern="HELP-[A-Fa-f0-9]{8}"
+                    required>
+            </div>
+
+            <button type="submit" id="checkButton">
+                Check Status
+            </button>
+        </form>
+
+        <p id="statusMessage" role="status" aria-live="polite"></p>
+
+        <section id="resultBox" hidden>
+            <h2>Submission Details</h2>
+
+            <p><strong>Reference:</strong>
+                <span id="resultReference"></span>
+            </p>
+
+            <p><strong>Category:</strong>
+                <span id="resultCategory"></span>
+            </p>
+
+            <p><strong>Subject:</strong>
+                <span id="resultSubject"></span>
+            </p>
+
+            <p><strong>Status:</strong>
+                <span id="resultStatus" class="status-badge"></span>
+            </p>
+
+            <p><strong>Submitted:</strong>
+                <span id="resultDate"></span>
+            </p>
+
+            <div id="responseSection" hidden>
+                <h3>Staff Response</h3>
+                <p id="staffResponse"></p>
+            </div>
+        </section>
+
+        <footer>
+            Cantin · Anonymous Help Center
+        </footer>
+    </main>
+
+</body>
+</html>

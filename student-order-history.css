@@ -1,0 +1,411 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* === TYPOGRAPHY HIERARCHY === */
+h1, h2, .brand-name, .logo, .brand, .order-code {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+h3, h4, .card-content h3, .food-card h3, .action-card h3, .stationery-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+p, span, label, input, select, textarea, .desc, .details {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* =====================================
+   CANTIN - STUDENT ORDER HISTORY
+===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f7fb;
+    color: #202b3c;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+.header {
+    width: 100%;
+    min-height: 76px;
+    background: #ffffff;
+    padding: 16px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e8ecf3;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #202b3c;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    background: #FFA500;
+    color: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.back-btn {
+    padding: 11px 18px;
+    border: 1px solid #dce3ef;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #263449;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* MAIN CONTAINER */
+
+.main-container {
+    width: 86%;
+    max-width: 1200px;
+    margin: 45px auto;
+}
+
+/* PAGE HEADING */
+
+.page-heading {
+    margin-bottom: 30px;
+}
+
+.page-heading p {
+    color: #d97706;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.page-heading h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #1d2939;
+}
+
+.page-heading span {
+    color: #7b8798;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* FILTER BUTTONS */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.filter-btn {
+    padding: 11px 23px;
+    border: 1px solid #e0e6f0;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #5b6678;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filter-btn:hover {
+    background: #ffdeac;
+    border-color: #ffdeac;
+    color: #8a4b00;
+}
+
+.filter-btn.active {
+    background: #FFA500;
+    border-color: #d97706;
+    color: #ffffff;
+}
+
+/* ORDERS CONTAINER */
+
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.loading {
+    background: #ffffff;
+    padding: 45px 20px;
+    border-radius: 16px;
+    text-align: center;
+    color: #7b8798;
+    border: 1px solid #e9edf5;
+}
+
+/* ORDER CARD - USED BY JAVASCRIPT */
+
+.student-order-card {
+    background: #ffffff;
+    border: 1px solid #e8edf5;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(25, 45, 85, 0.04);
+    transition: 0.2s;
+}
+
+.student-order-card:hover {
+    box-shadow: 0 8px 25px rgba(25, 45, 85, 0.08);
+    transform: translateY(-2px);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.order-code {
+    font-size: 16px;
+    font-weight: bold;
+    color: #202b3c;
+    overflow-wrap: anywhere;
+}
+
+.order-type {
+    display: inline-block;
+    margin-top: 9px;
+    padding: 6px 10px;
+    background: #ffdeac;
+    color: #d97706;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* STATUS */
+
+.status-badge {
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #fff4d6;
+    color: #986700;
+}
+
+.status-accepted {
+    background: #dff8e8;
+    color: #167344;
+}
+
+.status-completed {
+    background: #e3efff;
+    color: #2459a9;
+}
+
+.status-cancelled {
+    background: #ffe6e6;
+    color: #bd3030;
+}
+
+/* ORDER INFORMATION */
+
+.order-info {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    padding: 18px 0;
+    border-top: 1px solid #edf0f5;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.info-item span {
+    color: #8490a2;
+    font-size: 13px;
+}
+
+.info-item strong {
+    color: #293548;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+/* TOTAL AND FOOTER */
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.order-total-label {
+    color: #7b8798;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.order-total {
+    font-size: 24px;
+    color: #202b3c;
+    font-weight: bold;
+}
+
+.accepted-info {
+    margin-top: 15px;
+    padding: 12px 15px;
+    border-radius: 9px;
+    background: #f0fbf4;
+    color: #27734a;
+    font-size: 13px;
+}
+
+/* EMPTY STATE */
+
+.empty-orders {
+    background: #ffffff;
+    border: 1px solid #e8edf5;
+    border-radius: 16px;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 24px;
+    margin-bottom: 18px;
+}
+
+.empty-orders h2 {
+    color: #293548;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.empty-orders p {
+    color: #8490a2;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ERROR MESSAGE */
+
+.error-message {
+    padding: 20px;
+    background: #fff0f0;
+    border: 1px solid #ffd5d5;
+    border-radius: 12px;
+    color: #bd3030;
+    text-align: center;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 700px) {
+    .header {
+        padding: 14px 5%;
+    }
+
+    .main-container {
+        width: 92%;
+        margin: 30px auto;
+    }
+
+    .page-heading h1 {
+        font-size: 24px;
+    }
+
+    .student-order-card {
+        padding: 18px;
+    }
+
+    .order-info {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .order-header {
+        flex-direction: column;
+    }
+
+    .order-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    .brand {
+        font-size: 24px;
+    }
+
+    .back-btn {
+        padding: 9px 12px;
+    }
+
+    .filters {
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 10px 15px;
+    }
+
+    .order-info {
+        grid-template-columns: 1fr;
+    }
+}
+.view-qr-btn {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    padding: 10px 16px !important;
+    background: #FFA500 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    transition: background 0.2s ease !important;
+}
+
+.view-qr-btn:hover {
+    background: #e69500 !important;
+}

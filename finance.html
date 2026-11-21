@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Financial Management</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="finance.css?v=20261121_orange">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Background Subtle Diagonal Stripes Texture -->
+    <div class="finance-bg-pattern" aria-hidden="true"></div>
+
+    <!-- ================= FLOATING PROPS LAYER ================= -->
+    <div class="finance-props-layer" aria-hidden="true">
+        <!-- Left: 3D Spiral Student Notebook (Top-Left) -->
+        <img src="images/stationery-notebook-3d.png" class="finance-float-prop prop-finance-notebook" alt="Notebook">
+
+        <!-- Left: 3D Yellow HB Pencil (Mid-Left) -->
+        <img src="images/stationery-pencil-3d.png" class="finance-float-prop prop-finance-pencil" alt="Pencil">
+
+        <!-- Left: 3D Samosa (Bottom-Left) -->
+        <img src="images/samosa-3d.png" class="finance-float-prop prop-finance-samosa" alt="Samosa">
+
+        <!-- Right: 3D Student Calculator (Top-Right) -->
+        <img src="images/stationery-calculator-3d.png" class="finance-float-prop prop-finance-calculator" alt="Calculator">
+
+        <!-- Right: 3D Blue Pen & Neon Highlighter (Mid-Right) -->
+        <img src="images/stationery-pen-highlighter-3d.png" class="finance-float-prop prop-finance-pen" alt="Pen and Highlighter">
+
+        <!-- Right: 3D Triangle Set Square Ruler (Bottom-Right) -->
+        <img src="images/stationery-triangle-ruler-3d.png" class="finance-float-prop prop-finance-triangle-ruler" alt="Triangle Ruler">
+
+        <!-- Floating Wire Paper Clip Accents -->
+        <svg class="finance-clip-prop clip-top-left" width="28" height="48" viewBox="0 0 28 48" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V36C7 40.4 10.6 44 15 44C19.4 44 23 40.4 23 36V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V38"></path>
+        </svg>
+
+        <svg class="finance-clip-prop clip-mid-right" width="26" height="44" viewBox="0 0 28 48" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V36C7 40.4 10.6 44 15 44C19.4 44 23 40.4 23 36V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V38"></path>
+        </svg>
+    </div>
+
+    <!-- ================= HERO CANOPY (SIGNATURE ORANGE) ================= -->
+    <header class="finance-hero-canopy">
+
+        <!-- TOP NAVBAR -->
+        <nav class="finance-navbar">
+            <div class="brand" onclick="goHome()" role="button" tabindex="0" title="WAYACANTEEN Home">
+                <div class="brand-icon">W</div>
+                <span>WAYACANTEEN</span>
+            </div>
+
+            <!-- Center Floating Live Canteen Rush Badge -->
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
+            </div>
+
+            <!-- Navbar Right Actions -->
+            <div class="nav-right">
+                <button class="nav-back-btn" onclick="goHome()" type="button" title="Back to Home Dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Home</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- HERO CONTENT -->
+        <div class="finance-hero-content">
+            <div class="canteen-tag-pill">
+                <span class="tag-dot"></span>
+                <span>Student Finance</span>
+            </div>
+
+            <h1 class="finance-hero-title">Financial Management</h1>
+            <p class="finance-hero-subtitle">Track your monthly spending, set budgets and monitor food vs stationery expenses.</p>
+        </div>
+
+    </header>
+
+    <!-- ================= BOTTOM SWEEPING WHITE FLOOR WAVE ================= -->
+    <div class="finance-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+            <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- ================= MAIN CONTENT FLOOR (WHITE BACKGROUND) ================= -->
+    <main class="finance-floor-section">
+        <div class="finance-floor-container">
+
+            <!-- ERROR NOTIFICATION -->
+            <p id="errorMessage" class="error-message" role="alert"></p>
+
+            <!-- 1. KEY METRIC SUMMARY CARDS (4 COLUMNS) -->
+            <section class="finance-summary-grid">
+
+                <!-- Card 1: This Month's Spending -->
+                <div class="summary-card highlight-card">
+                    <div class="summary-text-wrap">
+                        <p>This Month's Spending</p>
+                        <h2 id="monthlyTotal">Rs. 0.00</h2>
+                        <span id="monthLabel">Current Month</span>
+                    </div>
+                    <div class="summary-icon icon-peach">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                    </div>
+                </div>
+
+                <!-- Card 2: Today's Spending -->
+                <div class="summary-card">
+                    <div class="summary-text-wrap">
+                        <p>Today's Spending</p>
+                        <h2 id="todayTotal">Rs. 0.00</h2>
+                        <span>Accepted orders today</span>
+                    </div>
+                    <div class="summary-icon icon-blue">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                </div>
+
+                <!-- Card 3: Total Lifetime Spending -->
+                <div class="summary-card">
+                    <div class="summary-text-wrap">
+                        <p>Total Spending</p>
+                        <h2 id="lifetimeTotal">Rs. 0.00</h2>
+                        <span>All completed orders</span>
+                    </div>
+                    <div class="summary-icon icon-green">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Card 4: Total Canteen Orders -->
+                <div class="summary-card">
+                    <div class="summary-text-wrap">
+                        <p>Total Cantin Orders</p>
+                        <h2 id="orderCount">0</h2>
+                        <span>Orders in selected period</span>
+                    </div>
+                    <div class="summary-icon icon-orange">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- 2. CORE ANALYTICS ROW: BUDGET SYSTEM & CATEGORY BREAKDOWN -->
+            <div class="analytics-two-col-grid">
+
+                <!-- Monthly Budget System Card -->
+                <section class="chart-card budget-card">
+                    <div class="section-heading">
+                        <div class="heading-badge-row">
+                            <span class="sub-badge">Budget Control</span>
+                        </div>
+                        <h2>My Monthly Budget</h2>
+                        <p>Set a spending limit to stay within your monthly allowance.</p>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <label for="budgetAmount">Monthly Budget (Rs.)</label>
+
+                        <div class="budget-form">
+                            <input
+                                type="number"
+                                id="budgetAmount"
+                                min="0.01"
+                                max="99999999.99"
+                                step="0.01"
+                                placeholder="Enter your budget (e.g. 5000)"
+                            >
+
+                            <button
+                                type="button"
+                                id="saveBudgetBtn"
+                                onclick="saveMonthlyBudget()">
+                                Save Budget
+                            </button>
+                        </div>
+                    </div>
+
+                    <p id="budgetMessage" class="budget-message" role="status" aria-live="polite"></p>
+
+                    <div class="budget-progress-info">
+                        <div>
+                            <span>Spent</span>
+                            <strong id="budgetSpent">Rs. 0.00</strong>
+                        </div>
+
+                        <div>
+                            <span>Remaining</span>
+                            <strong id="budgetRemaining">Rs. 0.00</strong>
+                        </div>
+                    </div>
+
+                    <div
+                        class="budget-progress-track"
+                        role="progressbar"
+                        aria-label="Monthly budget used"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        id="budgetProgress"
+                    >
+                        <div id="budgetProgressBar" class="budget-progress-bar"></div>
+                    </div>
+
+                    <p id="budgetPercent" class="budget-percent">
+                        Set a budget to track your spending.
+                    </p>
+                </section>
+
+                <!-- Food vs Stationery Breakdown Card -->
+                <section class="chart-card expense-breakdown-card">
+                    <div class="section-heading">
+                        <div class="heading-badge-row">
+                            <span class="sub-badge">Categories</span>
+                        </div>
+                        <h2>Food vs Stationery</h2>
+                        <p>Your spending distribution by category this month.</p>
+                    </div>
+
+                    <div class="expense-breakdown">
+                        <!-- Food Item -->
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <div class="expense-category-title">
+                                    <span class="cat-indicator indicator-food"></span>
+                                    <span>Food & Drinks</span>
+                                </div>
+                                <strong id="foodTotal">Rs. 0.00</strong>
+                            </div>
+                            <div class="expense-track">
+                                <div id="foodBar" class="expense-bar food-bar"></div>
+                            </div>
+                        </div>
+
+                        <!-- Stationery Item -->
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <div class="expense-category-title">
+                                    <span class="cat-indicator indicator-stationery"></span>
+                                    <span>Stationery Supplies</span>
+                                </div>
+                                <strong id="stationeryTotal">Rs. 0.00</strong>
+                            </div>
+                            <div class="expense-track">
+                                <div id="stationeryBar" class="expense-bar stationery-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-tip-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span>Balances updated in real-time from active canteen counter receipts.</span>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- 3. BOTTOM ANALYTICS ROW: SPENDING GRAPH & MONTHLY COMPARISON -->
+            <div class="analytics-two-col-grid bottom-analytics-grid">
+
+                <!-- Monthly Spending Graph -->
+                <section class="chart-card history-card">
+                    <div class="section-heading">
+                        <div class="heading-badge-row">
+                            <span class="sub-badge">History</span>
+                        </div>
+                        <h2>Monthly Spending History</h2>
+                        <p>Your verified spending over the last six months.</p>
+                    </div>
+
+                    <div id="chartContainer" class="chart-container">
+                        <p>Loading spending data...</p>
+                    </div>
+                </section>
+
+                <!-- Monthly Comparison Card -->
+                <section class="chart-card comparison-card">
+                    <div class="section-heading">
+                        <div class="heading-badge-row">
+                            <span class="sub-badge">Comparison</span>
+                        </div>
+                        <h2>Monthly Comparison</h2>
+                        <p>Compare this month's expenses with last month.</p>
+                    </div>
+
+                    <div class="comparison-grid">
+                        <div class="comparison-item item-current">
+                            <p>This Month</p>
+                            <h2 id="comparisonCurrent">Rs. 0.00</h2>
+                        </div>
+
+                        <div class="comparison-item item-previous">
+                            <p>Last Month</p>
+                            <h2 id="comparisonPrevious">Rs. 0.00</h2>
+                        </div>
+                    </div>
+
+                    <div id="comparisonMessage" class="comparison-message">
+                        Loading comparison...
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- LIVE QUEUE UPDATER & FINANCE LOGIC SCRIPTS -->
+    <script src="canteen-queue-live.js"></script>
+    <script src="finance.js"></script>
+
+</body>
+
+</html>

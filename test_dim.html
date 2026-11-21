@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; background: orange;">
+<div id="debugDim" style="position:fixed; top:10px; left:10px; background:yellow; color:black; padding:10px; font-size:20px; font-weight:bold;"></div>
+<script>
+document.getElementById('debugDim').textContent = 'w=' + window.innerWidth + ' h=' + window.innerHeight + ' dpr=' + window.devicePixelRatio;
+</script>
+</body>
+</html>

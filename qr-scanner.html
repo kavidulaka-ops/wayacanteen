@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Scan Order QR</title>
+    <link rel="stylesheet" href="qr-scanner.css?v=20261101_v2">
+</head>
+<body>
+
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            <div>
+                <span class="brand-name">WAYACANTEEN</span>
+                <small>Staff Panel</small>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="queue-nav-btn" type="button" onclick="window.location.href='pending-orders.html'">
+                Orders & Active Queue
+            </button>
+            <button class="back-btn" type="button" onclick="goDashboard()">
+                ← Dashboard
+            </button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-heading">
+            <p>ORDER MANAGEMENT & PICKUP</p>
+            <h1>Scan Order QR</h1>
+            <span>
+                Scan the student's order QR code to automatically verify and mark the order as Paid & Completed.
+            </span>
+        </section>
+
+        <!-- SCANNER CARD -->
+        <section class="scanner-card" id="scannerMainSection">
+
+            <!-- AUTO COMPLETE TOGGLE -->
+            <div class="auto-complete-toggle-wrap">
+                <label class="auto-toggle-label" title="When enabled, scanning a QR code immediately marks the order as Paid & Completed">
+                    <input type="checkbox" id="autoCompleteToggle" checked>
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-text">Auto-mark as <strong>Paid & Completed</strong> on scan</span>
+                </label>
+            </div>
+
+            <div class="scanner-box">
+                <h3>Camera QR Scanner</h3>
+                <p>Point your camera at the student's phone screen showing the order QR.</p>
+
+                <div id="qr-reader"></div>
+
+                <div class="camera-buttons">
+                    <button type="button" id="startCameraBtn" onclick="startScanner()">
+                        Start Camera
+                    </button>
+
+                    <button type="button" id="stopCameraBtn" onclick="stopScanner()" disabled>
+                        Stop Camera
+                    </button>
+                </div>
+
+                <p id="cameraStatus" class="camera-status">
+                    Camera is not started. Click "Start Camera" to begin scanning.
+                </p>
+            </div>
+
+            <div class="scanner-divider">
+                <span>OR</span>
+            </div>
+
+            <div class="manual-section">
+                <label for="orderId">Enter Order ID manually</label>
+
+                <div class="manual-input">
+                    <input type="text" id="orderId" placeholder="Example: CNT-20261101-753">
+
+                    <button type="button" id="searchOrderBtn" onclick="findOrder()">
+                        Verify & Complete
+                    </button>
+                </div>
+            </div>
+
+            <p id="errorMessage" class="error-message"></p>
+        </section>
+
+        <!-- RESULT CARD: APPEARS WHEN AN ORDER IS SCANNED / COMPLETED -->
+        <section class="result-card" id="orderResultCard" style="display: none;">
+            <div class="result-header">
+                <div class="result-icon-badge" id="resultIcon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                <div>
+                    <h2 class="result-title" id="resultTitle">Order Paid & Completed!</h2>
+                    <span class="result-sub" id="resultSub">The student has paid and collected the items.</span>
+                </div>
+            </div>
+
+            <div class="result-details-grid">
+                <div class="detail-box">
+                    <span>Order Code</span>
+                    <strong id="resOrderCode">CNT-20261101-000</strong>
+                </div>
+
+                <div class="detail-box">
+                    <span>Student</span>
+                    <strong id="resStudentName">Student (Index: -)</strong>
+                </div>
+
+                <div class="detail-box highlight-box">
+                    <span>Amount Paid</span>
+                    <strong id="resTotalAmount">Rs. 0.00</strong>
+                </div>
+
+                <div class="detail-box">
+                    <span>Order Status</span>
+                    <strong id="resStatusBadge" class="status-pill status-completed">Paid & Completed</strong>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button type="button" class="btn-scan-next" onclick="scanNextOrder()">
+                    Scan Next Student QR
+                </button>
+
+                <button type="button" class="btn-view-queue" onclick="window.location.href='pending-orders.html'">
+                    View Active Queue
+                </button>
+
+                <button type="button" class="btn-view-details" id="btnViewDetails">
+                    Full Order Details
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="qr-scanner.js?v=20261101_v2"></script>
+</body>
+</html>

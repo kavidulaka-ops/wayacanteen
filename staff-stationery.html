@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Stationery & Supplies Management</title>
+    <link rel="stylesheet" href="staff-stationery.css?v=1">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            <div>
+                <span class="brand-name">WAYACANTEEN</span>
+                <small>Staff Panel</small>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <a href="staff-dashboard.html" class="back-btn">&#8592; Back to Dashboard</a>
+            <span class="staff-name">Staff</span>
+            <button class="logout-btn" onclick="window.location.href='staff-login.html'">Logout</button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-container">
+
+        <!-- TITLE HERO -->
+        <section class="menu-hero">
+            <div class="hero-text">
+                <p class="small-title">Canteen Supplies Control</p>
+                <h1>Stationery Items & Availability Control</h1>
+                <p>Manage the stationery supplies shown to students in real time. Turn items on/off when out of stock, add newly arrived supplies, update prices, or remove items.</p>
+            </div>
+            <div>
+                <button class="btn-add-stationery" onclick="openAddModal()">
+                    <span>&#43;</span> Add New Stationery Item
+                </button>
+            </div>
+        </section>
+
+        <!-- SUMMARY METRICS -->
+        <section class="metrics-strip">
+            <div class="metric-box total">
+                <div class="metric-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <div class="metric-info">
+                    <span>Total Stationery Items</span>
+                    <h3 id="metricTotal">0</h3>
+                </div>
+            </div>
+
+            <div class="metric-box available">
+                <div class="metric-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="metric-info">
+                    <span>In Stock (Available)</span>
+                    <h3 id="metricAvailable">0</h3>
+                </div>
+            </div>
+
+            <div class="metric-box unavailable">
+                <div class="metric-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                </div>
+                <div class="metric-info">
+                    <span>Out of Stock (Hidden)</span>
+                    <h3 id="metricUnavailable">0</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTROLS & FILTERS -->
+        <section class="controls-bar">
+            <div class="search-box">
+                <span class="search-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </span>
+                <input type="text" id="stationerySearchInput" placeholder="Search stationery by name or keyword..." oninput="handleSearchInput(event)">
+            </div>
+
+            <div class="category-pills">
+                <button class="pill-btn active" onclick="filterCategory('All', this)">All Items</button>
+                <button class="pill-btn" onclick="filterCategory('Books', this)">Books & Pads</button>
+                <button class="pill-btn" onclick="filterCategory('Writing', this)">Writing & Pens</button>
+                <button class="pill-btn" onclick="filterCategory('Other', this)">Other Supplies</button>
+            </div>
+        </section>
+
+        <!-- STATIONERY GRID -->
+        <section class="stationery-grid" id="stationeryGrid">
+            <!-- Dynamic cards loaded by staff-stationery.js -->
+        </section>
+
+    </main>
+
+    <!-- ADD / EDIT STATIONERY MODAL -->
+    <div class="modal-overlay" id="stationeryModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Stationery Item</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="stationeryForm" onsubmit="handleStationerySubmit(event)">
+                <input type="hidden" id="stationeryFormId" value="">
+                <input type="hidden" id="stationeryFormAction" value="add">
+
+                <div class="form-group">
+                    <label for="stationeryName">Item Name <span style="color:#ef4444;">*</span></label>
+                    <input type="text" id="stationeryName" placeholder="e.g. CR Book 120 Pages" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="stationeryCategory">Category <span style="color:#ef4444;">*</span></label>
+                    <select id="stationeryCategory" required>
+                        <option value="Books">Books & Pads</option>
+                        <option value="Writing">Writing & Pens</option>
+                        <option value="Other">Other Supplies</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="stationeryPrice">Price (Rs.) <span style="color:#ef4444;">*</span></label>
+                    <input type="number" id="stationeryPrice" step="0.01" min="0" placeholder="e.g. 150.00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="stationeryDesc">Description / Specification</label>
+                    <textarea id="stationeryDesc" placeholder="e.g. Ruled standard format, 80gsm paper"></textarea>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" id="stationeryFormAvailable" checked>
+                    <label for="stationeryFormAvailable">Available immediately (students can order right away)</label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="btnSubmitStationery">Add Stationery Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toastMsg" class="toast-msg"></div>
+
+    <script src="staff-stationery.js?v=1"></script>
+</body>
+</html>
