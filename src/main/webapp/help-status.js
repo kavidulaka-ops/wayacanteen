@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
         message.textContent = "";
         resultBox.hidden = true;
 
-        if (!/^HELP-[A-F0-9]{8}$/.test(code)) {
+        if (!code || code.length < 3) {
             message.textContent =
-                "Enter a valid reference number, e.g. HELP-12AB34CD.";
+                "Enter a valid reference or order code (e.g. REQ-... or CNT-...).";
             return;
         }
 
@@ -61,10 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
             statusElement.textContent = data.status;
             statusElement.className = "status-badge";
 
-            if (data.status === "Resolved") {
+            if (data.status === "Resolved" || data.status === "Completed" || data.status === "Funded") {
                 statusElement.classList.add("status-resolved");
-            } else if (data.status === "In Progress") {
+            } else if (data.status === "In Progress" || data.status === "Accepted" || data.status === "Approved") {
                 statusElement.classList.add("status-progress");
+            } else if (data.status === "Rejected") {
+                statusElement.classList.add("status-rejected");
             } else {
                 statusElement.classList.add("status-pending");
             }
@@ -75,13 +77,22 @@ document.addEventListener("DOMContentLoaded", function () {
             const staffResponse =
                 document.getElementById("staffResponse");
 
-            staffResponse.textContent =
-                data.staffResponse || "No staff response yet.";
-
-            responseSection.hidden = !data.staffResponse;
+            if (data.isOrder) {
+                staffResponse.textContent =
+                    "Counter Pickup: " + (data.pickupSlot || "Morning") + " (" + (data.pickupTime || "08:30") + ") · Total Bill: Rs. " + Number(data.totalAmount || 0).toFixed(2);
+                responseSection.hidden = false;
+            } else if (data.isHelpRequest) {
+                staffResponse.textContent =
+                    (data.message ? data.message + " · " : "") + "Goal: Rs. " + Number(data.targetAmount || 0).toFixed(2) + " (Raised: Rs. " + Number(data.collectedAmount || 0).toFixed(2) + " - " + (data.percentage || 0) + "% Funded)";
+                responseSection.hidden = false;
+            } else {
+                staffResponse.textContent =
+                    data.staffResponse || "No staff response yet.";
+                responseSection.hidden = !data.staffResponse;
+            }
 
             resultBox.hidden = false;
-            message.textContent = "Submission found successfully.";
+            message.textContent = (data.isOrder ? "Order" : "Request") + " found successfully.";
 
         } catch (error) {
             console.error("Status lookup error:", error);

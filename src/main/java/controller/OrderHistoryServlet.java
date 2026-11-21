@@ -26,26 +26,57 @@ public class OrderHistoryServlet extends HttpServlet {
                 "application/json;charset=UTF-8"
         );
 
-        String sql =
-                "SELECT " +
-                "o.order_id, " +
-                "o.order_code, " +
-                "o.order_type, " +
-                "o.total_amount, " +
-                "o.status, " +
-                "o.order_date, " +
-                "o.order_time, " +
-                "o.accepted_date, " +
-                "o.accepted_time, " +
-                "o.pickup_slot, " +
-                "o.pickup_time, " +
-                "s.index_number, " +
-                "s.full_name " +
-                "FROM orders o " +
-                "INNER JOIN students s " +
-                "ON o.student_id = s.student_id " +
-                "WHERE o.status = 'Accepted' " +
-                "ORDER BY o.order_id DESC";
+        jakarta.servlet.http.HttpSession session = request.getSession(false);
+        boolean isStaff = session != null && session.getAttribute("staffId") != null;
+        Object studentIdObj = session != null ? session.getAttribute("studentId") : null;
+        Integer studentId = (studentIdObj instanceof Number) ? ((Number) studentIdObj).intValue() : null;
+
+        String sql;
+        if (isStaff) {
+            sql = "SELECT " +
+                    "o.order_id, " +
+                    "o.order_code, " +
+                    "o.order_type, " +
+                    "o.total_amount, " +
+                    "o.status, " +
+                    "o.order_date, " +
+                    "o.order_time, " +
+                    "o.accepted_date, " +
+                    "o.accepted_time, " +
+                    "o.pickup_slot, " +
+                    "o.pickup_time, " +
+                    "s.index_number, " +
+                    "s.full_name " +
+                    "FROM orders o " +
+                    "INNER JOIN students s " +
+                    "ON o.student_id = s.student_id " +
+                    "WHERE o.status IN ('Accepted', 'Completed') " +
+                    "ORDER BY o.order_id DESC";
+        } else if (studentId != null) {
+            sql = "SELECT " +
+                    "o.order_id, " +
+                    "o.order_code, " +
+                    "o.order_type, " +
+                    "o.total_amount, " +
+                    "o.status, " +
+                    "o.order_date, " +
+                    "o.order_time, " +
+                    "o.accepted_date, " +
+                    "o.accepted_time, " +
+                    "o.pickup_slot, " +
+                    "o.pickup_time, " +
+                    "s.index_number, " +
+                    "s.full_name " +
+                    "FROM orders o " +
+                    "INNER JOIN students s " +
+                    "ON o.student_id = s.student_id " +
+                    "WHERE o.student_id = ? " +
+                    "ORDER BY o.order_id DESC";
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().println("[]");
+            return;
+        }
 
         try (
             Connection connection =
@@ -63,11 +94,13 @@ public class OrderHistoryServlet extends HttpServlet {
 
             try (
                 PreparedStatement statement =
-                        connection.prepareStatement(sql);
-
-                ResultSet result =
-                        statement.executeQuery()
+                        connection.prepareStatement(sql)
             ) {
+                if (!isStaff && studentId != null) {
+                    statement.setInt(1, studentId);
+                }
+
+                try (ResultSet result = statement.executeQuery()) {
 
                 StringBuilder json =
                         new StringBuilder();
@@ -302,6 +335,7 @@ public class OrderHistoryServlet extends HttpServlet {
                 response.getWriter().println(
                         json.toString()
                 );
+                }
             }
 
         } catch (Exception e) {

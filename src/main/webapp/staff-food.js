@@ -198,7 +198,10 @@ function openAddModal() {
     document.getElementById("btnSubmitFood").textContent = "Add Food Item";
 
     const modal = document.getElementById("foodModal");
-    if (modal) modal.classList.add("active");
+    if (modal) {
+        modal.classList.add("open");
+        modal.classList.add("active");
+    }
 }
 
 function openEditModal(foodId) {
@@ -217,12 +220,18 @@ function openEditModal(foodId) {
     document.getElementById("btnSubmitFood").textContent = "Save Changes";
 
     const modal = document.getElementById("foodModal");
-    if (modal) modal.classList.add("active");
+    if (modal) {
+        modal.classList.add("open");
+        modal.classList.add("active");
+    }
 }
 
 function closeModal() {
     const modal = document.getElementById("foodModal");
-    if (modal) modal.classList.remove("active");
+    if (modal) {
+        modal.classList.remove("open");
+        modal.classList.remove("active");
+    }
 }
 
 // Close when clicking overlay

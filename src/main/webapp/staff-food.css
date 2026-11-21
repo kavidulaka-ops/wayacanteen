@@ -442,7 +442,8 @@ p, span, label, input, select, textarea, .desc, .details, button {
     padding: 20px;
 }
 
-.modal-overlay.open {
+.modal-overlay.open,
+.modal-overlay.active {
     display: flex;
 }
 

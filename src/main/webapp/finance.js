@@ -376,22 +376,23 @@ async function saveMonthlyBudget() {
         return;
     }
 
-    const rawAmount = input.value.trim();
-    const amount = Number(rawAmount);
+    const rawClean = input.value.trim().replace(/,/g, "");
+    const amount = parseFloat(rawClean);
 
     if (
-        rawAmount === "" ||
+        rawClean === "" ||
         !Number.isFinite(amount) ||
         amount <= 0 ||
-        amount > 99999999.99 ||
-        Math.round(amount * 100) !== amount * 100
+        amount > 99999999.99
     ) {
+        message.style.color = "#dc2626";
         message.textContent =
-            "Please enter a valid budget greater than Rs. 0.";
+            "Please enter a valid positive budget amount in Rs.";
         return;
     }
 
     button.disabled = true;
+    message.style.color = "#ea580c";
     message.textContent = "Saving budget...";
 
     try {
@@ -408,6 +409,12 @@ async function saveMonthlyBudget() {
             body: body.toString()
         });
 
+        if (response.status === 401) {
+            message.style.color = "#dc2626";
+            message.innerHTML = 'Student session expired. <a href="login.html" style="color:#ea580c;font-weight:700;text-decoration:underline;">Please Log In</a> to save your budget.';
+            return;
+        }
+
         const data = await response.json();
 
         if (!response.ok || !data.success) {
@@ -417,17 +424,22 @@ async function saveMonthlyBudget() {
         }
 
         monthlyBudget = amount;
+        try {
+            localStorage.setItem("cantinMonthlyBudget", amount.toFixed(2));
+        } catch (e) {}
 
         updateBudgetDisplay();
 
+        message.style.color = "#16a34a";
         message.textContent =
-            "Monthly budget saved successfully!";
+            "Monthly budget of Rs. " + amount.toFixed(2) + " saved successfully!";
 
     } catch (error) {
         console.error("Budget saving error:", error);
 
+        message.style.color = "#dc2626";
         message.textContent =
-            "Could not save the budget. Please try again.";
+            error.message || "Could not save the budget. Please try again.";
     } finally {
         button.disabled = false;
     }

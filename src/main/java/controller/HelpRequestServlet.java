@@ -81,7 +81,35 @@ public class HelpRequestServlet extends HttpServlet {
                                     "\"createdAt\":\"" + escapeJson(rs.getString("formatted_date")) + "\"" +
                                     "}");
                         } else {
-                            out.println("{\"success\":false,\"message\":\"No request found with this reference code\"}");
+                            // Check if it is a canteen order code (e.g. CNT-...)
+                            String orderSql = "SELECT order_code, order_type, total_amount, status, " +
+                                    "DATE_FORMAT(order_date, '%d %b %Y') AS odate, TIME_FORMAT(order_time, '%h:%i %p') AS otime, " +
+                                    "pickup_slot, pickup_time FROM orders WHERE order_code = ?";
+                            try (PreparedStatement ops = connection.prepareStatement(orderSql)) {
+                                ops.setString(1, code.trim());
+                                try (ResultSet ors = ops.executeQuery()) {
+                                    if (ors.next()) {
+                                        String pSlot = ors.getString("pickup_slot") != null ? ors.getString("pickup_slot") : "Morning";
+                                        String pTime = ors.getString("pickup_time") != null ? ors.getString("pickup_time") : "08:30";
+                                        out.println("{" +
+                                                "\"success\":true," +
+                                                "\"isOrder\":true," +
+                                                "\"referenceCode\":\"" + escapeJson(ors.getString("order_code")) + "\"," +
+                                                "\"category\":\"" + escapeJson(ors.getString("order_type")) + "\"," +
+                                                "\"subject\":\"Canteen " + escapeJson(ors.getString("order_type")) + " Order\"," +
+                                                "\"message\":\"Scheduled Counter Collection: " + escapeJson(pSlot) + " (" + escapeJson(pTime) + ")\"," +
+                                                "\"targetAmount\":\"" + formatMoney(ors.getDouble("total_amount")) + "\"," +
+                                                "\"collectedAmount\":\"" + formatMoney(ors.getDouble("total_amount")) + "\"," +
+                                                "\"remainingAmount\":\"0.00\"," +
+                                                "\"percentage\":100," +
+                                                "\"status\":\"" + ors.getString("status") + "\"," +
+                                                "\"createdAt\":\"" + escapeJson(ors.getString("odate") + " at " + ors.getString("otime")) + "\"" +
+                                                "}");
+                                        return;
+                                    }
+                                }
+                            }
+                            out.println("{\"success\":false,\"message\":\"No request or order found with reference code '" + escapeJson(code.trim()) + "'\"}");
                         }
                     }
                 }

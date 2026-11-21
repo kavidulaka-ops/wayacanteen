@@ -41,8 +41,8 @@ public class StudentOrderHistoryServlet extends HttpServlet {
             return;
         }
 
-        int studentId =
-                (Integer) session.getAttribute("studentId");
+        Object sId = session.getAttribute("studentId");
+        int studentId = (sId instanceof Number) ? ((Number) sId).intValue() : Integer.parseInt(sId.toString().trim());
 
         String sql =
                 "SELECT order_id, order_code, order_type, " +

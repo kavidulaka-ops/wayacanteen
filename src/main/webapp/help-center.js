@@ -229,6 +229,32 @@ async function trackRequest() {
         const response = await fetch("/CantinWeb/help-requests?type=track&code=" + encodeURIComponent(code) + "&t=" + Date.now());
         const data = await response.json();
 
+        if (data.success && data.isOrder) {
+            const statusStyle = (data.status === "Completed") ? "background:#ecfdf5;color:#059669;" : (data.status === "Accepted" ? "background:#eff6ff;color:#2563eb;" : (data.status === "Rejected" ? "background:#fef2f2;color:#dc2626;" : "background:#fffbeb;color:#b45309;"));
+            resultBox.innerHTML = `
+                <div class="request-card" style="box-shadow: 0 10px 30px rgba(0,0,0,0.06); border-color: #fed7aa;">
+                    <div class="card-top">
+                        <span class="category-tag tag-food">${escapeHtml(data.category)} Order</span>
+                        <span class="ref-pill">#${escapeHtml(data.referenceCode)}</span>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <span style="${statusStyle} padding:4px 12px; border-radius:999px; font-weight:700; font-size:13px;">Order ${escapeHtml(data.status)}</span>
+                    </div>
+                    <h3 class="request-title">${escapeHtml(data.subject)}</h3>
+                    <p class="request-desc">${escapeHtml(data.message)}</p>
+                    <div style="margin: 16px 0; padding: 14px 18px; background: #fffaf5; border: 1.5px solid #fed7aa; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 13px; color: #64748b; font-weight: 600;">Order Bill Amount</span>
+                        <strong style="font-size: 16px; color: #ea580c;">Rs. ${Number(data.targetAmount).toFixed(2)}</strong>
+                    </div>
+                    <div class="card-help-footer">
+                        <strong>Order Time:</strong>
+                        <span>${escapeHtml(data.createdAt)}</span>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
         if (data.success) {
             const isFunded = data.status === "Funded" || data.percentage >= 100;
             const isPending = data.status === "Pending";

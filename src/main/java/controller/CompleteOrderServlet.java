@@ -94,20 +94,6 @@ public class CompleteOrderServlet extends HttpServlet {
                 return;
             }
 
-            // Pending check: QR scan CANNOT complete pending orders, staff must accept first
-            if ("Pending".equalsIgnoreCase(currentStatus)) {
-                response.getWriter().println("{" +
-                        "\"success\":false," +
-                        "\"isPending\":true," +
-                        "\"message\":\"This order is still Pending. Please Accept the order first from Pending Orders.\"," +
-                        "\"orderId\":" + foundOrderId + "," +
-                        "\"orderCode\":\"" + escapeJson(foundOrderCode) + "\"," +
-                        "\"totalAmount\":" + totalAmount + "," +
-                        "\"studentIndex\":\"" + escapeJson(studentIndex) + "\"," +
-                        "\"studentName\":\"" + escapeJson(studentName) + "\"}");
-                return;
-            }
-
             // Rejected check
             if ("Rejected".equalsIgnoreCase(currentStatus)) {
                 response.getWriter().println("{" +
@@ -118,22 +104,14 @@ public class CompleteOrderServlet extends HttpServlet {
                 return;
             }
 
-            // Must be in Accepted status to be completed via QR scan / counter payment
-            if (!"Accepted".equalsIgnoreCase(currentStatus)) {
-                response.getWriter().println("{" +
-                        "\"success\":false," +
-                        "\"message\":\"Cannot complete: Order status is " + escapeJson(currentStatus) + "\"," +
-                        "\"orderId\":" + foundOrderId + "," +
-                        "\"orderCode\":\"" + escapeJson(foundOrderCode) + "\"}");
-                return;
-            }
-
-            // 2. Mark order as Completed (strictly for Accepted orders)
+            // Mark order as Completed (allows Accepted or Pending orders via QR scan counter verification)
             String updateSql = "UPDATE orders SET " +
                     "status = 'Completed', " +
                     "completed_date = CURDATE(), " +
-                    "completed_time = CURTIME() " +
-                    "WHERE order_id = ? AND status = 'Accepted'";
+                    "completed_time = CURTIME(), " +
+                    "accepted_date = COALESCE(accepted_date, CURDATE()), " +
+                    "accepted_time = COALESCE(accepted_time, CURTIME()) " +
+                    "WHERE order_id = ? AND status IN ('Accepted', 'Pending')";
 
             try (PreparedStatement updateStmt = connection.prepareStatement(updateSql)) {
                 updateStmt.setInt(1, foundOrderId);
@@ -142,7 +120,7 @@ public class CompleteOrderServlet extends HttpServlet {
                 if (rows > 0) {
                     response.getWriter().println("{" +
                             "\"success\":true," +
-                            "\"message\":\"Order successfully marked as Paid & Completed!\"," +
+                            "\"message\":\"Order successfully verified & marked as Paid & Completed!\"," +
                             "\"orderId\":" + foundOrderId + "," +
                             "\"orderCode\":\"" + escapeJson(foundOrderCode) + "\"," +
                             "\"totalAmount\":" + totalAmount + "," +
