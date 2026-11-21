@@ -47,7 +47,7 @@ public class StudentOrderHistoryServlet extends HttpServlet {
         String sql =
                 "SELECT order_id, order_code, order_type, " +
                 "total_amount, status, rejection_reason, order_date, order_time, " +
-                "accepted_date, accepted_time, completed_date, completed_time " +
+                "accepted_date, accepted_time, completed_date, completed_time, pickup_slot, pickup_time " +
                 "FROM orders " +
                 "WHERE student_id = ? " +
                 "ORDER BY order_id DESC";
@@ -124,6 +124,12 @@ public class StudentOrderHistoryServlet extends HttpServlet {
                         String completedTime =
                                 result.getString("completed_time");
 
+                        String pickupSlot =
+                                result.getString("pickup_slot");
+
+                        String pickupTime =
+                                result.getString("pickup_time");
+
                         json.append("{");
 
                         json.append("\"orderId\":")
@@ -154,6 +160,14 @@ public class StudentOrderHistoryServlet extends HttpServlet {
 
                         json.append("\"orderTime\":\"")
                                 .append(escapeJson(orderTime))
+                                .append("\",");
+
+                        json.append("\"pickupSlot\":\"")
+                                .append(escapeJson(pickupSlot != null ? pickupSlot : "Morning"))
+                                .append("\",");
+
+                        json.append("\"pickupTime\":\"")
+                                .append(escapeJson(pickupTime != null ? pickupTime : ""))
                                 .append("\",");
 
                         json.append("\"acceptedDate\":\"")

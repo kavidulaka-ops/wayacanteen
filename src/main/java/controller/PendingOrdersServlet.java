@@ -35,6 +35,8 @@ public class PendingOrdersServlet extends HttpServlet {
                 "o.status, " +
                 "o.order_date, " +
                 "o.order_time, " +
+                "o.pickup_slot, " +
+                "o.pickup_time, " +
                 "s.index_number, " +
                 "s.full_name " +
                 "FROM orders o " +
@@ -103,6 +105,12 @@ public class PendingOrdersServlet extends HttpServlet {
                     String orderTime =
                             result.getString("order_time");
 
+                    String pickupSlot =
+                            result.getString("pickup_slot");
+
+                    String pickupTime =
+                            result.getString("pickup_time");
+
                     String indexNumber =
                             result.getString("index_number");
 
@@ -149,6 +157,16 @@ public class PendingOrdersServlet extends HttpServlet {
 
                     json.append("\"orderTime\":\"")
                             .append(escapeJson(orderTime))
+                            .append("\",");
+
+
+                    json.append("\"pickupSlot\":\"")
+                            .append(escapeJson(pickupSlot != null ? pickupSlot : "Morning"))
+                            .append("\",");
+
+
+                    json.append("\"pickupTime\":\"")
+                            .append(escapeJson(pickupTime != null ? pickupTime : ""))
                             .append("\",");
 
 

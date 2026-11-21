@@ -50,6 +50,8 @@ public class OrderDetailsServlet extends HttpServlet {
                 "o.order_time, " +
                 "o.accepted_date, " +
                 "o.accepted_time, " +
+                "o.pickup_slot, " +
+                "o.pickup_time, " +
                 "s.index_number, " +
                 "s.full_name " +
                 "FROM orders o " +
@@ -124,6 +126,12 @@ public class OrderDetailsServlet extends HttpServlet {
                     String acceptedTime =
                             result.getString("accepted_time");
 
+                    String pickupSlot =
+                            result.getString("pickup_slot");
+
+                    String pickupTime =
+                            result.getString("pickup_time");
+
                     String indexNumber =
                             result.getString("index_number");
 
@@ -158,6 +166,22 @@ public class OrderDetailsServlet extends HttpServlet {
                     )
                     .append(
                             escapeJson(orderType)
+                    )
+                    .append("\",");
+
+                    json.append(
+                            "\"pickupSlot\":\""
+                    )
+                    .append(
+                            escapeJson(pickupSlot != null ? pickupSlot : "Morning")
+                    )
+                    .append("\",");
+
+                    json.append(
+                            "\"pickupTime\":\""
+                    )
+                    .append(
+                            escapeJson(pickupTime != null ? pickupTime : "")
                     )
                     .append("\",");
 

@@ -34,6 +34,8 @@ public class AcceptedOrdersServlet extends HttpServlet {
                 "o.order_time, " +
                 "o.accepted_date, " +
                 "o.accepted_time, " +
+                "o.pickup_slot, " +
+                "o.pickup_time, " +
                 "s.index_number, " +
                 "s.full_name " +
                 "FROM orders o " +
@@ -70,6 +72,8 @@ public class AcceptedOrdersServlet extends HttpServlet {
                     String orderTime = result.getString("order_time");
                     String acceptedDate = result.getString("accepted_date");
                     String acceptedTime = result.getString("accepted_time");
+                    String pickupSlot = result.getString("pickup_slot");
+                    String pickupTime = result.getString("pickup_time");
                     String indexNumber = result.getString("index_number");
                     String fullName = result.getString("full_name");
 
@@ -83,6 +87,8 @@ public class AcceptedOrdersServlet extends HttpServlet {
                     json.append("\"orderTime\":\"").append(escapeJson(orderTime)).append("\",");
                     json.append("\"acceptedDate\":\"").append(escapeJson(acceptedDate)).append("\",");
                     json.append("\"acceptedTime\":\"").append(escapeJson(acceptedTime)).append("\",");
+                    json.append("\"pickupSlot\":\"").append(escapeJson(pickupSlot != null ? pickupSlot : "Morning")).append("\",");
+                    json.append("\"pickupTime\":\"").append(escapeJson(pickupTime != null ? pickupTime : "")).append("\",");
                     json.append("\"indexNumber\":\"").append(escapeJson(indexNumber)).append("\",");
                     json.append("\"fullName\":\"").append(escapeJson(fullName)).append("\",");
 

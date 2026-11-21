@@ -169,6 +169,11 @@ function displayOrders(filter) {
                     <strong>#${order.orderId}</strong>
                 </div>
 
+                <div class="info-item">
+                    <span>Pickup Window</span>
+                    <strong style="color: #ea580c;">${escapeHTML(order.pickupSlot || "Morning")} (${order.pickupTime ? formatTime(order.pickupTime) : "08:30"})</strong>
+                </div>
+
             </div>
 
             

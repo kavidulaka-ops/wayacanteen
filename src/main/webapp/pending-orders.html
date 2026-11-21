@@ -117,11 +117,19 @@
             </div>
 
             <!-- Filter Sub-Tabs -->
-            <div class="filters">
-                <button class="filter-btn active" onclick="filterOrders('All')" type="button">All Orders</button>
-                <button class="filter-btn" onclick="filterOrders('Food')" type="button">Food Only</button>
-                <button class="filter-btn" onclick="filterOrders('Stationery')" type="button">Stationery Only</button>
-                <button class="filter-btn" onclick="filterOrders('Both')" type="button">Combined</button>
+            <div class="filters-row-wrap">
+                <div class="filters">
+                    <button class="filter-btn category-filter-btn active" data-type="All" onclick="filterOrders('All')" type="button">All Orders</button>
+                    <button class="filter-btn category-filter-btn" data-type="Food" onclick="filterOrders('Food')" type="button">Food Only</button>
+                    <button class="filter-btn category-filter-btn" data-type="Stationery" data-slot="Stationery" onclick="filterOrders('Stationery')" type="button">Stationery Only</button>
+                    <button class="filter-btn category-filter-btn" data-type="Both" onclick="filterOrders('Both')" type="button">Combined</button>
+                </div>
+                <div class="filters slot-filters">
+                    <button class="filter-btn slot-filter-btn active" data-slot="All" onclick="filterSlot('All')" type="button">All Pickup Slots</button>
+                    <button class="filter-btn slot-filter-btn" data-slot="Morning" onclick="filterSlot('Morning')" type="button">Morning (7-11)</button>
+                    <button class="filter-btn slot-filter-btn" data-slot="Noon" onclick="filterSlot('Noon')" type="button">Noon (11-3)</button>
+                    <button class="filter-btn slot-filter-btn" data-slot="Night" onclick="filterSlot('Night')" type="button">Night (3-8)</button>
+                </div>
             </div>
 
             <!-- Orders Grid Container -->

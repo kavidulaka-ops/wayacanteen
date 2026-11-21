@@ -76,6 +76,18 @@ public class OrderServlet extends HttpServlet {
         String cartItems =
                 request.getParameter("cartItems");
 
+        String pickupSlot =
+                request.getParameter("pickupSlot");
+        if (pickupSlot == null || pickupSlot.trim().isEmpty()) {
+            pickupSlot = "Morning";
+        }
+
+        String pickupTime =
+                request.getParameter("pickupTime");
+        if (pickupTime == null || pickupTime.trim().isEmpty()) {
+            pickupTime = "08:00";
+        }
+
 
         // =====================================
         // VALIDATE DATA
@@ -146,8 +158,8 @@ public class OrderServlet extends HttpServlet {
             String orderSQL =
                     "INSERT INTO orders " +
                     "(order_code, student_id, order_type, " +
-                    "total_amount, status, order_date, order_time) " +
-                    "VALUES (?, ?, ?, ?, 'Pending', ?, ?)";
+                    "total_amount, status, order_date, order_time, pickup_slot, pickup_time) " +
+                    "VALUES (?, ?, ?, ?, 'Pending', ?, ?, ?, ?)";
 
 
             int orderId;
@@ -189,6 +201,16 @@ public class OrderServlet extends HttpServlet {
                 statement.setString(
                         6,
                         orderTime
+                );
+
+                statement.setString(
+                        7,
+                        pickupSlot
+                );
+
+                statement.setString(
+                        8,
+                        pickupTime
                 );
 
 
