@@ -353,6 +353,10 @@ function updateSummary() {
     if (elTotal) elTotal.textContent = "Rs. " + total.toFixed(2);
 }
 
+function goHome() {
+    window.location.href = "home.html";
+}
+
 function goFood() {
     window.location.href = "food.html";
 }
