@@ -1,0 +1,413 @@
+/* ==========================================================================
+   WAYACANTEEN STUDENT FEEDBACK CSS
+   Theme: Signature 3D Orange (#ea580c -> #c2410c)
+   Typography: Strictly 3 Font Sizes: 24px, 16px, 13px
+   Iconography: Strictly 0 Unicode Emojis (Pure Vector SVGs)
+   ========================================================================== */
+
+/* Main Card */
+.feedback-main-card {
+    background: #ffffff;
+    border: 1px solid #fed7aa;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    margin-bottom: 40px;
+}
+
+.form-header-badge {
+    margin-bottom: 24px;
+    display: inline-block;
+}
+
+.badge-label {
+    display: inline-flex;
+    align-items: center;
+    background: #fff7ed;
+    color: #ea580c;
+    border: 1px solid #ffedd5;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Star Rating Selector */
+.form-group-star {
+    background: #fffaf5;
+    border: 1px solid #ffedd5;
+    border-radius: 16px;
+    padding: 20px 24px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.group-title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.star-rating-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.star-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    color: #cbd5e1;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.star-btn:hover {
+    transform: scale(1.18);
+    color: #f59e0b;
+}
+
+.star-btn.active {
+    color: #f59e0b;
+}
+
+.star-btn.active svg {
+    fill: #f59e0b;
+}
+
+.rating-verbal-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ea580c;
+}
+
+/* Category Pills */
+.form-group-cat {
+    margin-bottom: 24px;
+}
+
+.category-pills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.cat-pill {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cat-pill:hover {
+    border-color: #ea580c;
+    color: #ea580c;
+    background: #fff7ed;
+}
+
+.cat-pill.active {
+    background: #ea580c;
+    border-color: #ea580c;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+}
+
+/* Identity Inputs */
+.form-group-identity {
+    margin-bottom: 24px;
+}
+
+.identity-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.anon-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.anon-toggle-label input[type="checkbox"] {
+    accent-color: #ea580c;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.identity-inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.input-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-caption {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.custom-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+    color: #1e293b;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+.anon-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #475569;
+}
+
+/* Order Code */
+.form-group-order {
+    margin-bottom: 24px;
+}
+
+.field-hint {
+    display: block;
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+/* Comments Textarea */
+.form-group-comments {
+    margin-bottom: 24px;
+}
+
+.required-star {
+    color: #ef4444;
+}
+
+.custom-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: inherit;
+    color: #1e293b;
+    background: #ffffff;
+    resize: vertical;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.custom-textarea:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+/* Quick Compliments / Chips */
+.quick-tags-container {
+    margin-top: 10px;
+}
+
+.tags-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.tags-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-tag-chip {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.quick-tag-chip:hover {
+    background: #fff7ed;
+    border-color: #ea580c;
+    color: #ea580c;
+}
+
+/* Submit Button */
+.form-actions {
+    margin-top: 28px;
+}
+
+.btn-submit-feedback {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 10px 20px -3px rgba(234, 88, 12, 0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-submit-feedback:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px -4px rgba(234, 88, 12, 0.4);
+}
+
+.btn-submit-feedback:active {
+    transform: translateY(0);
+}
+
+.btn-submit-feedback:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Success Card */
+.feedback-success-card {
+    background: #ffffff;
+    border: 1px solid #bbf7d0;
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.1);
+    margin-bottom: 40px;
+    animation: fadeInSlide 0.3s ease;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.success-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.success-desc {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.5;
+    max-width: 500px;
+    margin: 0 auto 24px auto;
+}
+
+.success-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.btn-success-reset {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-success-reset:hover {
+    border-color: #ea580c;
+    color: #ea580c;
+}
+
+.btn-success-home {
+    background: #ea580c;
+    border: none;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+    transition: transform 0.15s ease;
+}
+
+.btn-success-home:hover {
+    transform: translateY(-1px);
+}

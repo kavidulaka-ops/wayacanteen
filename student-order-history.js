@@ -185,9 +185,15 @@ function displayOrders(filter) {
         </strong>
     </div>
 
-    <button type="button" class="view-qr-btn">
-        View QR
-    </button>
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="feedback.html?orderCode=${encodeURIComponent(order.orderCode)}" class="btn-order-feedback" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:13px; font-weight:600; color:#ea580c; background:#fff7ed; border:1px solid #fed7aa; padding:8px 12px; border-radius:8px; transition:all 0.15s ease;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Feedback</span>
+        </a>
+        <button type="button" class="view-qr-btn">
+            View QR
+        </button>
+    </div>
 </div>
 
 

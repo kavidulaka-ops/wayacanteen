@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Staff Feedback Console</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="food.css?v=20261121">
+    <link rel="stylesheet" href="staff-dashboard.css?v=20261121">
+    <link rel="stylesheet" href="staff-feedback.css?v=20261121">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+<body class="food-page-body">
+
+    <!-- Diagonal Subtle Overlay -->
+    <div class="food-bg-pattern" aria-hidden="true"></div>
+
+    <!-- Outer Decorative Props Layer -->
+    <div class="food-props-layer" aria-hidden="true">
+        <img src="images/samosa-3d.png" class="food-float-prop prop-food-samosa" alt="Samosa">
+        <img src="images/sausage-bun-3d.png" class="food-float-prop prop-food-sausage-bun" alt="Sausage Bun">
+        <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
+        <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
+    </div>
+
+    <!-- Top Canopy Header -->
+    <header class="food-hero-canopy">
+        <nav class="food-navbar">
+            <div class="brand" onclick="goDashboard()" role="button" tabindex="0" title="WAYACANTEEN Staff Panel">
+                <div class="brand-icon">W</div>
+                <div class="brand-text-col">
+                    <span class="brand-title">WAYACANTEEN</span>
+                    <small class="brand-sub">Feedback Operations</small>
+                </div>
+            </div>
+
+            <!-- Live Canteen Rush Pill -->
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
+            </div>
+
+            <div class="nav-right">
+                <span class="staff-role-badge">
+                    Authorized Staff
+                </span>
+                <button class="nav-back-btn" onclick="goDashboard()" type="button" title="Back to Staff Dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Dashboard</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Content in Canopy -->
+        <div class="food-hero-content">
+            <div class="canteen-tag-pill">
+                <span class="tag-dot"></span>
+                <span>CUSTOMER SATISFACTION DESK</span>
+            </div>
+            <h1 class="food-hero-title">Student Feedback &amp; Reviews</h1>
+            <p class="food-hero-subtitle">Monitor student meal ratings, review service suggestions, and track canteen satisfaction levels</p>
+        </div>
+    </header>
+
+    <!-- Bottom Sweeping White Floor Wave -->
+    <div class="food-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+            <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- Main Floor Section (Clean White) -->
+    <main class="food-floor-section">
+        <div class="food-floor-container">
+
+            <!-- KPI METRICS SUMMARY GRID -->
+            <section class="kpi-grid">
+
+                <!-- TOTAL FEEDBACK -->
+                <div class="kpi-card" title="Total Reviews Received">
+                    <div class="kpi-icon icon-orange">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-label">Total Feedbacks</span>
+                        <h2 class="kpi-val" id="statTotalFeedback">0</h2>
+                    </div>
+                </div>
+
+                <!-- AVERAGE RATING -->
+                <div class="kpi-card" title="Average Star Rating">
+                    <div class="kpi-icon icon-gold">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-label">Average Rating</span>
+                        <h2 class="kpi-val" id="statAvgRating">0.0</h2>
+                    </div>
+                </div>
+
+                <!-- 5-STAR REVIEWS -->
+                <div class="kpi-card" title="Five Star Reviews">
+                    <div class="kpi-icon icon-green">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-label">5-Star Ratings</span>
+                        <h2 class="kpi-val" id="statStar5">0</h2>
+                    </div>
+                </div>
+
+                <!-- PENDING REVIEW -->
+                <div class="kpi-card" title="New Unreviewed Feedbacks">
+                    <div class="kpi-icon icon-blue">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-label">Pending Review</span>
+                        <h2 class="kpi-val" id="statNewFeedback">0</h2>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- CONTROLS & FILTER SECTION -->
+            <section class="feedback-controls-card">
+                <div class="controls-header">
+                    <div>
+                        <span class="controls-tag">FEEDBACK DIRECTORY</span>
+                        <h2 class="controls-title">Student Reviews &amp; Suggestions</h2>
+                    </div>
+                    <button class="btn-refresh" onclick="loadFeedbackData()" type="button" title="Refresh List">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                        <span>Refresh</span>
+                    </button>
+                </div>
+
+                <!-- FILTER ROW 1: RATING -->
+                <div class="filter-row">
+                    <span class="filter-row-label">Rating:</span>
+                    <div class="filter-pills-wrap" id="ratingFilterWrap">
+                        <button type="button" class="f-pill active" onclick="setRatingFilter('All')">All Ratings</button>
+                        <button type="button" class="f-pill" onclick="setRatingFilter('5')">5 Stars</button>
+                        <button type="button" class="f-pill" onclick="setRatingFilter('4')">4 Stars</button>
+                        <button type="button" class="f-pill" onclick="setRatingFilter('3')">3 Stars</button>
+                        <button type="button" class="f-pill" onclick="setRatingFilter('2')">2 Stars</button>
+                        <button type="button" class="f-pill" onclick="setRatingFilter('1')">1 Star</button>
+                    </div>
+                </div>
+
+                <!-- FILTER ROW 2: CATEGORY -->
+                <div class="filter-row">
+                    <span class="filter-row-label">Category:</span>
+                    <div class="filter-pills-wrap" id="categoryFilterWrap">
+                        <button type="button" class="f-pill active" onclick="setCategoryFilter('All')">All Categories</button>
+                        <button type="button" class="f-pill" onclick="setCategoryFilter('Food Quality')">Food Quality</button>
+                        <button type="button" class="f-pill" onclick="setCategoryFilter('Service Speed')">Service Speed</button>
+                        <button type="button" class="f-pill" onclick="setCategoryFilter('Canteen Cleanliness')">Cleanliness</button>
+                        <button type="button" class="f-pill" onclick="setCategoryFilter('Stationery Store')">Stationery Store</button>
+                        <button type="button" class="f-pill" onclick="setCategoryFilter('App / System')">App Experience</button>
+                        <button type="button" class="f-pill" onclick="setCategoryFilter('General')">General</button>
+                    </div>
+                </div>
+
+                <!-- FILTER ROW 3: STATUS -->
+                <div class="filter-row">
+                    <span class="filter-row-label">Status:</span>
+                    <div class="filter-pills-wrap" id="statusFilterWrap">
+                        <button type="button" class="f-pill active" onclick="setStatusFilter('All')">All Status</button>
+                        <button type="button" class="f-pill" onclick="setStatusFilter('New')">New Only</button>
+                        <button type="button" class="f-pill" onclick="setStatusFilter('Reviewed')">Reviewed Only</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FEEDBACKS LIST CONTAINER -->
+            <section id="feedbackListContainer" class="feedback-items-container">
+                <div class="feedback-loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading student feedbacks...</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon" style="width: 28px; height: 28px; font-size: 16px;">W</div>
+                <span>&copy; 2026 <strong>WAYACANTEEN</strong> - Staff Management Console</span>
+            </div>
+            <div class="footer-links">
+                <a href="staff-dashboard.html">Dashboard</a>
+                <a href="pending-orders.html">Orders</a>
+                <a href="staff-food.html">Food Menu</a>
+                <a href="staff-stationery.html">Stationery</a>
+                <a href="staff-help-center.html">Help Desk</a>
+                <a href="staff-feedback.html">Feedbacks</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="canteen-queue-live.js"></script>
+    <script src="staff-feedback.js?v=20261121"></script>
+</body>
+</html>
