@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* === TYPOGRAPHY HIERARCHY === */
+h1, h2, .brand-name, .logo, .brand, .order-code {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+h3, h4, .card-content h3, .food-card h3, .action-card h3, .stationery-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+p, span, label, input, select, textarea, .desc, .details {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Custom styles for Register page */
+.register-container {
+    max-width: 1100px;
+    min-height: 720px;
+}
+
+.register-box {
+    padding: 35px 40px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.register-box .input-group {
+    margin-bottom: 16px;
+}
+
+.register-box .input-group label {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.register-box .input-group input {
+    padding: 10px 14px;
+    font-size: 13px;
+    border: 1px solid #ffdeac;
+}
+
+.register-box .input-group input:focus {
+    border-color: #FFA500;
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+}
+
+.register-box .login-button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #FFA500;
+    box-shadow: 0 4px 14px rgba(255, 165, 0, 0.35);
+}
+
+.register-box .login-button:hover {
+    background: #e69500;
+}
+
+.register-box .account-switch {
+    margin-top: 18px;
+}

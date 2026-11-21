@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Staff Anonymous Help Management</title>
+    <link rel="stylesheet" href="staff-help-center.css?v=20261101_v1">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            <div>
+                <span class="brand-name">WAYACANTEEN</span>
+                <small class="brand-sub">Staff Panel</small>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <button class="back-btn" onclick="window.location.href='staff-dashboard.html'">
+                ← Dashboard
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="main-container">
+
+        <!-- PAGE TITLE -->
+        <section class="page-heading">
+            <p>SOLIDARITY FUND MANAGEMENT</p>
+            <h1>Anonymous Help Center Requests</h1>
+            <span>
+                Review incoming student assistance requests, approve them to the community board, and record cash contributions made at the counter.
+            </span>
+        </section>
+
+        <!-- SUMMARY CARDS -->
+        <section class="summary-grid">
+            <div class="summary-card">
+                <div class="card-icon" style="background:#fffbeb; color:#b45309;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                <div>
+                    <span>Pending Approvals</span>
+                    <h2 id="metricPending">0</h2>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon" style="background:#eff6ff; color:#1d4ed8;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                <div>
+                    <span>Active Support Posts</span>
+                    <h2 id="metricActive">0</h2>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon" style="background:#ecfdf5; color:#059669;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></div>
+                <div>
+                    <span>Total Funds Raised</span>
+                    <h2 id="metricTotal">Rs. 0.00</h2>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-icon" style="background:#fdf4ff; color:#a21caf;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                <div>
+                    <span>Fully Funded Items</span>
+                    <h2 id="metricFunded">0</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABS BAR -->
+        <div class="tabs-bar">
+            <button class="tab-btn active" id="tabStaffPending" onclick="switchStaffTab('Pending')">
+                Pending Review <span class="badge" id="tabBadgePending">0</span>
+            </button>
+            <button class="tab-btn" id="tabStaffActive" onclick="switchStaffTab('Approved')">
+                Active on Board <span class="badge" id="tabBadgeActive">0</span>
+            </button>
+            <button class="tab-btn" id="tabStaffFunded" onclick="switchStaffTab('Funded')">
+                Fully Funded <span class="badge" id="tabBadgeFunded">0</span>
+            </button>
+            <button class="tab-btn" id="tabStaffAll" onclick="switchStaffTab('All')">
+                All Requests
+            </button>
+        </div>
+
+        <!-- REQUESTS CONTAINER -->
+        <div class="staff-requests-list" id="staffRequestsList">
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading help requests...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- RECORD DONATION MODAL -->
+    <div class="modal-overlay" id="donationModal" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Record Counter Cash Contribution</h3>
+                <button class="modal-close-btn" onclick="closeDonationModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="target-item-summary">
+                    <span class="modal-ref" id="modalRefCode">REQ-XXXX</span>
+                    <h4 id="modalItemTitle">120 Page CR Exercise Book</h4>
+                    <div class="modal-progress-row">
+                        <span id="modalRaisedText">Raised: Rs. 20.00 / Rs. 100.00</span>
+                        <strong id="modalRemainingText" style="color: #059669;">Remaining: Rs. 80.00</strong>
+                    </div>
+                </div>
+
+                <form id="recordDonationForm" onsubmit="submitDonationRecord(event)">
+                    <input type="hidden" id="modalHelpId">
+
+                    <div class="form-group">
+                        <label for="donationAmount">Amount Handed Over by Customer / Student (Rs.) *</label>
+                        <div class="input-prefix-box">
+                            <span class="prefix">Rs.</span>
+                            <input type="number" id="donationAmount" placeholder="e.g. 20" min="1" step="1" required>
+                        </div>
+                        <small>Any amount given towards this specific request.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorNote">Donor Note (Optional)</label>
+                        <input type="text" id="donorNote" placeholder="e.g. Counter cash from student, Anonymous visitor">
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeDonationModal()">Cancel</button>
+                        <button type="submit" class="btn-confirm" id="btnSubmitDonation">
+                            Record & Update Progress
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="staff-help-center.js?v=20261101_v1"></script>
+</body>
+</html>

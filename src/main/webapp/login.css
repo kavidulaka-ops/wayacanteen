@@ -1,0 +1,828 @@
+/* ==========================================================================
+   WAYACANTEEN - STUDENT LOGIN STYLESHEET
+   Signature Vibrant Orange Gradient with Centered White Card & Floating Props
+   Strict Constraints: 3 font sizes (24px, 16px, 13px), 0 emojis
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-orange: #ea580c;
+    --primary-dark: #c2410c;
+    --primary-deep: #9a3412;
+    --primary-soft: #fff7ed;
+    --text-charcoal: #1e293b;
+    --text-muted: #64748b;
+    --text-subtle: #94a3b8;
+    --border-subtle: #e2e8f0;
+    --card-bg: #ffffff;
+    --card-shadow: 0 24px 60px rgba(0, 0, 0, 0.28), 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #d95100 0%, #ea580c 45%, #ea580c 60%, #c2410c 100%);
+    color: var(--text-charcoal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 20px 16px 36px;
+}
+
+/* Background Subtle Striped Pattern */
+.login-bg-pattern {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.035),
+        rgba(255, 255, 255, 0.035) 24px,
+        transparent 24px,
+        transparent 48px
+    );
+}
+
+/* Bottom Sweeping White Floor Arc */
+.login-bottom-wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 140px;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.login-bottom-wave svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= LIVE QUEUE STATUS BANNER ================= */
+.canteen-live-banner {
+    width: 100%;
+    max-width: 960px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 999px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.16);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: relative;
+    z-index: 30;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.live-banner-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.live-pulse-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ea580c;
+    color: #ffffff;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.4);
+    flex-shrink: 0;
+}
+
+.live-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    animation: livePulseGlow 1.8s infinite;
+}
+
+@keyframes livePulseGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+    }
+    70% {
+        box-shadow: 0 0 0 7px rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+.live-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.live-header-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.live-canteen-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.live-badge.level-low {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.live-badge.level-medium {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+}
+
+.live-badge.level-high {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.live-subnote {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+.live-banner-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.live-metric-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    border-radius: 10px;
+    background: rgba(241, 245, 249, 0.65);
+}
+
+.metric-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ea580c;
+}
+
+.metric-data {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.metric-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.metric-label {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.live-refresh-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid #e2e8f0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.live-refresh-btn:hover {
+    color: #ea580c;
+    border-color: #ea580c;
+    transform: rotate(45deg);
+}
+
+.live-refresh-btn.spinning svg {
+    animation: spinRefresh 0.6s linear infinite;
+}
+
+@keyframes spinRefresh {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ================= MAIN CONTAINER ================= */
+.login-main-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1240px;
+    position: relative;
+    z-index: 10;
+    padding: 10px 0 20px;
+}
+
+/* ================= CENTERED WHITE LOGIN CARD ================= */
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--card-bg);
+    border-radius: 28px;
+    padding: 38px 36px 32px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    z-index: 15;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.login-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ea580c;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+}
+
+.login-subtitle {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Status / Alert Message */
+.message {
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.message.error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.message.success {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+/* Form Styles */
+.input-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    height: 46px;
+    padding: 0 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 13px;
+    font-family: inherit;
+    color: #1e293b;
+    background: #fafafa;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="password"]:focus {
+    border-color: #ea580c;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+.password-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-box input {
+    padding-right: 44px !important;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 6px;
+    transition: color 0.2s ease;
+}
+
+#togglePassword:hover {
+    color: #ea580c;
+}
+
+.input-error {
+    font-size: 13px;
+    color: #dc2626;
+    min-height: 16px;
+    margin-top: 2px;
+}
+
+/* Login Options Row */
+.login-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 13px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #475569;
+    font-size: 13px;
+    user-select: none;
+}
+
+.remember input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #ea580c;
+    cursor: pointer;
+}
+
+.forgot-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: #ea580c;
+    text-decoration: underline;
+}
+
+/* Submit Button */
+.login-button {
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(234, 88, 12, 0.35);
+    transition: all 0.25s ease;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(234, 88, 12, 0.45);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 22px 0 16px;
+    color: #94a3b8;
+    font-size: 13px;
+    width: 100%;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    min-width: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.divider span {
+    padding: 0 8px;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #94a3b8;
+    line-height: 1.3;
+}
+
+/* Footer Links */
+.account-switch {
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 8px;
+}
+
+.account-switch a {
+    color: #ea580c;
+    font-weight: 600;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+}
+
+.account-switch a:hover {
+    text-decoration: underline;
+}
+
+.account-switch.back-home {
+    margin-top: 14px;
+}
+
+.account-switch.back-home a {
+    color: #ea580c;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ================= FLOATING PROPS LAYER (FOOD & STATIONERY) ================= */
+.login-props-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.float-prop {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.36));
+    will-change: transform;
+}
+
+/* --- LEFT SIDE PROPS --- */
+
+/* 1. Spiral Student Notebook (Top-Left) */
+.prop-notebook {
+    top: 13%;
+    left: 4%;
+    width: 155px;
+    animation: floatDrift1 7.4s ease-in-out infinite;
+}
+
+/* 2. Samosa (Upper-Left Closer to Card) */
+.prop-samosa {
+    top: 22%;
+    left: 19%;
+    width: 125px;
+    animation: floatDrift2 6.6s ease-in-out infinite;
+}
+
+/* 3. Ulundu Vadai (Middle Left) */
+.prop-ulundu {
+    top: 52%;
+    left: 5%;
+    width: 120px;
+    animation: floatDrift3 8.0s ease-in-out infinite;
+}
+
+/* 4. Sausage Bun (Bottom-Left) */
+.prop-sausage-bun {
+    bottom: 12%;
+    left: 14%;
+    width: 140px;
+    animation: floatDrift1 8.8s ease-in-out infinite;
+}
+
+/* --- RIGHT SIDE PROPS --- */
+
+/* 5. Pen & Neon Highlighter (Top-Right) */
+.prop-pen {
+    top: 14%;
+    right: 5%;
+    width: 150px;
+    animation: floatDrift2 7.0s ease-in-out infinite;
+}
+
+/* 6. Parippu Vadai (Upper-Right Closer to Card) */
+.prop-parippu {
+    top: 24%;
+    right: 19%;
+    width: 125px;
+    animation: floatDrift1 7.8s ease-in-out infinite;
+}
+
+/* 7. Student Calculator (Middle-Right) */
+.prop-calculator {
+    top: 50%;
+    right: 5%;
+    width: 135px;
+    animation: floatDrift3 8.2s ease-in-out infinite;
+}
+
+/* 8. Vegetable Roti (Bottom-Right) */
+.prop-roti {
+    bottom: 12%;
+    right: 14%;
+    width: 135px;
+    animation: floatDrift2 8.4s ease-in-out infinite;
+}
+
+/* --- GARNISH ACCENTS (Leaves, Chili, Tomato) --- */
+.garnish-prop {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.28));
+    will-change: transform;
+}
+
+.garnish-leaf-left {
+    top: 36%;
+    left: 14%;
+    animation: floatDrift3 6.0s ease-in-out infinite;
+}
+
+.garnish-tomato-left {
+    top: 42%;
+    left: 23%;
+    animation: floatDrift1 7.2s ease-in-out infinite;
+}
+
+.garnish-chili-left {
+    bottom: 28%;
+    left: 8%;
+    animation: floatDrift2 6.8s ease-in-out infinite;
+}
+
+.garnish-leaf-right {
+    top: 38%;
+    right: 15%;
+    animation: floatDrift2 6.2s ease-in-out infinite;
+}
+
+.garnish-chili-right {
+    bottom: 28%;
+    right: 7%;
+    animation: floatDrift1 7.5s ease-in-out infinite;
+}
+
+/* Smooth Fluid Floating Keyframes */
+@keyframes floatDrift1 {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-14px) rotate(2deg);
+    }
+}
+
+@keyframes floatDrift2 {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-18px) rotate(-3deg);
+    }
+}
+
+@keyframes floatDrift3 {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(2.5deg);
+    }
+}
+
+/* ================= RESPONSIVE ADJUSTMENTS ================= */
+@media (max-width: 1100px) {
+    .prop-samosa {
+        left: 14%;
+        width: 110px;
+    }
+    .prop-parippu {
+        right: 14%;
+        width: 110px;
+    }
+    .prop-sausage-bun {
+        left: 8%;
+        width: 125px;
+    }
+    .prop-roti {
+        right: 8%;
+        width: 120px;
+    }
+}
+
+@media (max-width: 900px) {
+    .canteen-live-banner {
+        border-radius: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 18px;
+        gap: 10px;
+        max-width: 440px;
+    }
+    .live-banner-left {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    .live-banner-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .login-card {
+        padding: 30px 24px 26px;
+        max-width: 420px;
+    }
+    /* Subtle scaling for props on mobile/tablet */
+    .prop-notebook {
+        top: 6%;
+        left: 1%;
+        width: 90px;
+        opacity: 0.50;
+    }
+    .prop-pen {
+        top: 6%;
+        right: 1%;
+        width: 90px;
+        opacity: 0.50;
+    }
+    .prop-ulundu {
+        top: 50%;
+        left: 0%;
+        width: 80px;
+        opacity: 0.45;
+    }
+    .prop-calculator {
+        top: 50%;
+        right: 0%;
+        width: 85px;
+        opacity: 0.45;
+    }
+    .prop-sausage-bun {
+        bottom: 4%;
+        left: 2%;
+        width: 95px;
+        opacity: 0.50;
+    }
+    .prop-roti {
+        bottom: 4%;
+        right: 2%;
+        width: 90px;
+        opacity: 0.50;
+    }
+    .prop-samosa,
+    .prop-parippu,
+    .garnish-prop {
+        display: none;
+    }
+}
+
+@media (max-width: 540px) {
+    body {
+        padding: 12px 12px 24px;
+    }
+    .canteen-live-banner {
+        max-width: 100%;
+        padding: 10px 14px;
+        margin-bottom: 14px;
+    }
+    .live-banner-left {
+        gap: 8px;
+    }
+    .live-header-row {
+        gap: 6px;
+    }
+    .live-canteen-title {
+        font-size: 13px;
+    }
+    .live-badge {
+        padding: 2px 8px;
+        font-size: 13px;
+    }
+    .live-subnote {
+        font-size: 13px;
+    }
+    .live-metric-card {
+        padding: 3px 6px;
+        gap: 6px;
+    }
+    .login-main-wrapper {
+        padding: 4px 0 14px;
+        width: 100%;
+    }
+    .login-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 22px 16px 18px;
+        border-radius: 20px;
+    }
+    .login-options {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .divider span {
+        font-size: 13px;
+        letter-spacing: 0.2px;
+        padding: 0 4px;
+    }
+    .prop-notebook,
+    .prop-pen,
+    .prop-ulundu,
+    .prop-calculator,
+    .prop-sausage-bun,
+    .prop-roti {
+        display: none;
+    }
+}

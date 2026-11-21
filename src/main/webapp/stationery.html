@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Stationery Items</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="stationery.css?v=20261121_orange">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Background Subtle Diagonal Stripes Texture -->
+    <div class="stationery-bg-pattern" aria-hidden="true"></div>
+
+    <!-- ================= FLOATING STATIONERY PROPS LAYER (ALL AROUND) ================= -->
+    <div class="stationery-props-layer" aria-hidden="true">
+        <!-- Left: 3D Spiral Student Notebook (Top-Left) -->
+        <img src="images/stationery-notebook-3d.png" class="stationery-float-prop prop-stationery-notebook" alt="Notebook">
+
+        <!-- Left: 3D Classic Yellow HB Pencil (Mid-Left) -->
+        <img src="images/stationery-pencil-3d.png" class="stationery-float-prop prop-stationery-pencil" alt="Pencil">
+
+        <!-- Left: 3D Clear Straight Ruler (Lower-Left) -->
+        <img src="images/stationery-straight-ruler-3d.png" class="stationery-float-prop prop-stationery-straight-ruler" alt="Ruler">
+
+        <!-- Right: 3D Student Calculator (Top-Right) -->
+        <img src="images/stationery-calculator-3d.png" class="stationery-float-prop prop-stationery-calculator" alt="Calculator">
+
+        <!-- Right: 3D Blue Gel Pen & Neon Highlighter (Mid-Right) -->
+        <img src="images/stationery-pen-highlighter-3d.png" class="stationery-float-prop prop-stationery-pen" alt="Pen and Highlighter">
+
+        <!-- Right: 3D Student Set Square Triangle Ruler (Mid-Lower Right) -->
+        <img src="images/stationery-triangle-ruler-3d.png" class="stationery-float-prop prop-stationery-triangle-ruler" alt="Triangle Ruler">
+
+        <!-- Right: 3D Block Eraser (Bottom-Right) -->
+        <img src="images/stationery-eraser-3d.png" class="stationery-float-prop prop-stationery-eraser" alt="Eraser">
+
+        <!-- Floating Wire Paper Clip Accents -->
+        <svg class="stationery-clip-prop clip-top-left" width="28" height="48" viewBox="0 0 28 48" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V36C7 40.4 10.6 44 15 44C19.4 44 23 40.4 23 36V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V38"></path>
+        </svg>
+
+        <svg class="stationery-clip-prop clip-mid-right" width="26" height="44" viewBox="0 0 28 48" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V36C7 40.4 10.6 44 15 44C19.4 44 23 40.4 23 36V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V38"></path>
+        </svg>
+
+        <svg class="stationery-clip-prop clip-bottom-right" width="24" height="40" viewBox="0 0 28 48" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V36C7 40.4 10.6 44 15 44C19.4 44 23 40.4 23 36V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V38"></path>
+        </svg>
+    </div>
+
+    <!-- ================= HERO CANOPY (SIGNATURE ORANGE) ================= -->
+    <header class="stationery-hero-canopy">
+
+        <!-- TOP NAVBAR -->
+        <nav class="stationery-navbar">
+            <div class="brand" onclick="goHome()" role="button" tabindex="0" title="WAYACANTEEN Home">
+                <div class="brand-icon">W</div>
+                <span>WAYACANTEEN</span>
+            </div>
+
+            <!-- Center Floating Live Canteen Rush Badge -->
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
+            </div>
+
+            <!-- Navbar Right Actions -->
+            <div class="nav-right">
+                <button class="nav-back-btn" onclick="goHome()" type="button" title="Back to Home Dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Home</span>
+                </button>
+
+                <div class="nav-cart-btn" onclick="viewCart()" role="button" tabindex="0" title="View Cart">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <span class="cart-label">Cart</span>
+                    <span class="cart-badge-pill" id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HERO CONTENT -->
+        <div class="stationery-hero-content">
+            <div class="canteen-tag-pill">
+                <span class="tag-dot"></span>
+                <span>University Store</span>
+            </div>
+
+            <h1 class="stationery-hero-title">Stationery Items</h1>
+            <p class="stationery-hero-subtitle">Choose the essential academic supplies, notebooks and writing tools you need.</p>
+
+            <!-- CATEGORY FILTER BUTTONS -->
+            <div class="stationery-category-bar" id="categoryBar">
+                <button class="category-pill active" data-category="All" type="button">All Supplies</button>
+                <button class="category-pill" data-category="Books" type="button">Books & Pads</button>
+                <button class="category-pill" data-category="Writing" type="button">Pens & Pencils</button>
+                <button class="category-pill" data-category="Other" type="button">Erasers & Tools</button>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- ================= BOTTOM SWEEPING WHITE FLOOR WAVE ================= -->
+    <div class="stationery-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+            <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- ================= MAIN CONTENT FLOOR (WHITE BACKGROUND) ================= -->
+    <main class="stationery-floor-section">
+        <div class="stationery-floor-container">
+
+            <div class="stationery-results-header">
+                <div>
+                    <h2 class="section-title" id="currentCategoryTitle">All Academic Supplies</h2>
+                    <p class="section-subtitle">Stocked fresh at WAYACANTEEN stationery counter</p>
+                </div>
+                <div class="stationery-count-indicator">
+                    <span id="stationeryItemTotal">Loading available items...</span>
+                </div>
+            </div>
+
+            <!-- STATIONERY GRID -->
+            <section class="stationery-grid" id="stationeryGrid">
+                <!-- Stationery cards loaded dynamically from MySQL by stationery.js -->
+                <div class="stationery-loading-state">
+                    <div class="stationery-loading-spinner"></div>
+                    <p>Fetching stationery items...</p>
+                </div>
+            </section>
+
+            <!-- CART SUMMARY DOCKED / FLOATING BAR -->
+            <section class="cart-summary-bar" id="cartSummaryBar">
+                <div class="summary-left-group">
+                    <div class="summary-info-col">
+                        <span class="summary-label">Items in cart</span>
+                        <strong class="summary-val" id="summaryCount">0</strong>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-info-col">
+                        <span class="summary-label">Total Amount</span>
+                        <strong class="summary-val total-price" id="summaryTotal">Rs. 0.00</strong>
+                    </div>
+                </div>
+
+                <button class="cart-checkout-btn" onclick="viewCart()" type="button">
+                    <span>View Cart & Checkout</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- LIVE QUEUE UPDATER & STATIONERY LOGIC SCRIPTS -->
+    <script src="canteen-queue-live.js"></script>
+    <script src="stationery.js"></script>
+
+</body>
+
+</html>

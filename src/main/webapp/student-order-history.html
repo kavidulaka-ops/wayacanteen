@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>WAYACANTEEN - My Orders</title>
+
+    <link rel="stylesheet"
+          href="student-order-history.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                C
+            </div>
+
+            <span>
+                Cantin
+            </span>
+
+        </div>
+
+        <button class="back-btn"
+                onclick="goHome()">
+
+            ← Home
+
+        </button>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="main-container">
+
+        <!-- PAGE HEADING -->
+        <section class="page-heading">
+
+            <p>
+                Student
+            </p>
+
+            <h1>
+                My Orders
+            </h1>
+
+            <span>
+                View your previous and current orders.
+            </span>
+
+        </section>
+
+
+        <!-- FILTERS -->
+        <div class="filters">
+
+            <button class="filter-btn active"
+                    onclick="filterOrders('All')">
+
+                All
+
+            </button>
+
+            <button class="filter-btn"
+                    onclick="filterOrders('Pending')">
+
+                Pending
+
+            </button>
+
+            <button class="filter-btn"
+                    onclick="filterOrders('Accepted')">
+
+                Accepted
+
+            </button>
+
+        </div>
+
+
+        <!-- ORDERS -->
+        <section id="ordersContainer"
+                 class="orders-container">
+
+            <div class="loading">
+
+                Loading your orders...
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="student-order-history.js?v=20261101_v3"></script>
+
+</body>
+
+</html>

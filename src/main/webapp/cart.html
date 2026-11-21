@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>WAYACANTEEN - Cart</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                C
+            </div>
+
+            <span>
+                Cantin
+            </span>
+
+        </div>
+
+
+        <button
+            class="back-btn"
+            onclick="goFood()">
+
+            ← Back to Food
+
+        </button>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main-container">
+
+
+        <div class="page-heading">
+
+            <p>
+                Food & Canteen
+            </p>
+
+            <h1>
+                Your Cart
+            </h1>
+
+            <span>
+                Review your selected items before placing your pre-order.
+            </span>
+
+        </div>
+
+
+
+        <!-- CART CONTENT -->
+
+        <section class="cart-container">
+
+
+            <!-- ITEMS -->
+
+            <div class="cart-items">
+
+                <div id="cartItems">
+
+                    <!-- JavaScript will add items here -->
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SUMMARY -->
+
+            <aside class="order-summary">
+
+                <h2>
+                    Order Summary
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <strong id="totalItems">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="subtotal">
+                        Rs. 0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-line"></div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="total">
+                        Rs. 0.00
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="order-btn"
+                    onclick="placePreOrder()">
+
+                    Place Pre-Order →
+
+                </button>
+
+
+                <button
+                    class="continue-btn"
+                    onclick="goFood()">
+
+                    Continue Shopping
+
+                </button>
+
+            </aside>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script src="cart.js"></script>
+
+</body>
+
+</html>

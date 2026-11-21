@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WAYACANTEEN - Home</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="home.css?v=20261121_orange">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Background Subtle Diagonal Stripes Pattern -->
+    <div class="home-bg-pattern" aria-hidden="true"></div>
+
+    <!-- ================= FLOATING FOOD & STATIONERY PROPS LAYER ================= -->
+    <div class="home-props-layer" aria-hidden="true">
+        <!-- Stationery: 3D Spiral Student Notebook (Top-Left) -->
+        <img src="images/stationery-notebook-3d.png" class="home-float-prop prop-home-notebook" alt="Spiral Notebook">
+
+        <!-- Food: 3D Samosa (Mid-Upper Left) -->
+        <img src="images/samosa-3d.png" class="home-float-prop prop-home-samosa" alt="Samosa">
+
+        <!-- Stationery: 3D Gel Pen & Neon Highlighter (Mid-Lower Left) -->
+        <img src="images/stationery-pen-highlighter-3d.png" class="home-float-prop prop-home-pen" alt="Pen and Highlighter">
+
+        <!-- Food: 3D Sausage Bun (Bottom-Left Corner) -->
+        <img src="images/sausage-bun-3d.png" class="home-float-prop prop-home-sausage-bun" alt="Sausage Bun">
+
+        <!-- Food: 3D Parippu Vadai (Top-Right) -->
+        <img src="images/parippu-vadai-3d.png" class="home-float-prop prop-home-parippu" alt="Parippu Vadai">
+
+        <!-- Stationery: 3D Student Calculator (Mid-Upper Right) -->
+        <img src="images/stationery-calculator-3d.png" class="home-float-prop prop-home-calculator" alt="Student Calculator">
+
+        <!-- Food: 3D Ulundu Vadai (Mid-Lower Right) -->
+        <img src="images/ulundu-vadai-3d.png" class="home-float-prop prop-home-ulundu" alt="Ulundu Vadai">
+
+        <!-- Food: 3D Vegetable Roti (Bottom-Right Corner) -->
+        <img src="images/vegetable-roti-3d.png" class="home-float-prop prop-home-roti" alt="Vegetable Roti">
+
+        <!-- Floating Garnish Accents (Fresh Basil Leaves, Red Chilies, Tomato) -->
+        <svg class="home-garnish-prop garnish-home-leaf-left" width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <path d="M8 32C8 32 10 12 28 6C34 16 32 30 18 34C13 35 8 32 8 32Z" fill="#65a30d"/>
+            <path d="M12 28C15 22 22 14 28 6" stroke="#4d7c0f" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="home-garnish-prop garnish-home-tomato-left" width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="16" fill="#ef4444"/>
+            <circle cx="20" cy="20" r="11" fill="#dc2626"/>
+            <circle cx="16" cy="16" r="3" fill="#fca5a5"/>
+            <circle cx="24" cy="22" r="2.5" fill="#fca5a5"/>
+        </svg>
+
+        <svg class="home-garnish-prop garnish-home-chili-left" width="38" height="38" viewBox="0 0 50 50" fill="none">
+            <path d="M12 40C20 40 38 28 42 12C42 12 36 10 32 16C28 22 18 28 10 32C8 33 10 39 12 40Z" fill="#dc2626"/>
+            <path d="M42 12C44 8 48 6 48 6" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="home-garnish-prop garnish-home-leaf-right" width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <path d="M32 32C32 32 30 14 12 8C6 18 8 30 22 34C27 35 32 32 32 32Z" fill="#84cc16"/>
+            <path d="M28 28C25 22 18 14 12 8" stroke="#4d7c0f" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="home-garnish-prop garnish-home-chili-right" width="36" height="36" viewBox="0 0 50 50" fill="none">
+            <path d="M38 12C30 12 14 24 10 38C10 38 16 40 20 34C24 28 34 22 40 18C42 17 40 12 38 12Z" fill="#dc2626"/>
+            <path d="M10 38C8 42 4 44 4 44" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="home-header">
+
+        <div class="brand">
+            <div class="brand-icon">W</div>
+            <span>WAYACANTEEN</span>
+        </div>
+
+        <!-- Center Floating Live Canteen Rush Badge -->
+        <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+            <span class="pill-live-tag">LIVE</span>
+            <span class="pill-dot"></span>
+            <span class="pill-status-text">Moderate Crowd</span>
+            <span class="pill-clock-svg">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </span>
+            <span class="pill-wait-text">Wait: ~12 mins</span>
+        </div>
+
+        <div class="header-right">
+
+            <!-- Notifications Button & Dropdown Box -->
+            <div class="notification-wrapper">
+                <button class="notification-btn" id="notificationBtn" type="button" aria-label="Notifications" title="Notifications">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                </button>
+
+                <div class="notification-box" id="notificationBox">
+                    <div class="notification-box-header">
+                        <div class="notif-header-title">
+                            <h4>Notifications</h4>
+                            <span class="notif-count-pill" id="notifCountPill">0 Updates</span>
+                        </div>
+                        <button class="notif-close-btn" id="notifCloseBtn" type="button" title="Close">&times;</button>
+                    </div>
+
+                    <div class="notification-box-body" id="notificationList">
+                        <div class="notif-loading">Checking notifications...</div>
+                    </div>
+
+                    <div class="notification-box-footer">
+                        <a href="student-order-history.html" class="notif-view-all">View All Orders & Active Queue →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Profile Pill -->
+            <div class="student-profile" id="studentProfile" title="Student Profile">
+                <div class="profile-circle" id="profileAvatar">K</div>
+                <div class="student-info">
+                    <strong id="headerStudentEmail">kavidulakauni@gmail.com</strong>
+                    <small id="headerStudentIndex">Index No: 242117</small>
+                </div>
+            </div>
+
+            <!-- Logout Link Button -->
+            <a href="logout" class="logout-link-btn" title="Logout" aria-label="Logout">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="home-main">
+
+        <!-- ================= SERVICES STAGE ================= -->
+        <section class="home-services-stage">
+
+            <div class="services-container">
+
+                <h1 class="services-main-title">What would you like to do?</h1>
+                <span id="welcomeUserHeading" style="display: none;"></span>
+
+                <div class="service-grid">
+
+                    <!-- FOOD CARD -->
+                    <div class="service-card food-card"
+                         onclick="openFood()"
+                         role="button"
+                         tabindex="0"
+                         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openFood(); }">
+
+                        <div class="card-top-row">
+                            <div class="card-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                            </div>
+                            <span class="service-pill-badge">Food</span>
+                        </div>
+
+                        <div class="card-content">
+                            <p class="service-desc">
+                                Browse food items and place your pre-orders.
+                            </p>
+                            <span class="card-link">
+                                Explore →
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- STATIONERY CARD -->
+                    <div class="service-card stationery-card"
+                         onclick="openStationery()"
+                         role="button"
+                         tabindex="0"
+                         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openStationery(); }">
+
+                        <div class="card-top-row">
+                            <div class="card-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            </div>
+                            <span class="service-pill-badge">Stationery</span>
+                        </div>
+
+                        <div class="card-content">
+                            <p class="service-desc">
+                                Find stationery items and place your orders.
+                            </p>
+                            <span class="card-link">
+                                Explore →
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- FINANCIAL MANAGEMENT CARD -->
+                    <div class="service-card finance-card"
+                         onclick="openFinance()"
+                         role="button"
+                         tabindex="0"
+                         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openFinance(); }">
+
+                        <div class="card-top-row">
+                            <div class="card-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            </div>
+                            <span class="service-pill-badge">Financial Management</span>
+                        </div>
+
+                        <div class="card-content">
+                            <p class="service-desc">
+                                View your monthly spending and expenses.
+                            </p>
+                            <span class="card-link">
+                                View Finance →
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- ANONYMOUS HELP CENTER CARD -->
+                    <div class="service-card help-card"
+                         onclick="openHelp()"
+                         role="button"
+                         tabindex="0"
+                         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openHelp(); }">
+
+                        <div class="card-top-row">
+                            <div class="card-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <span class="service-pill-badge">Anonymous Help Center</span>
+                        </div>
+
+                        <div class="card-content">
+                            <p class="service-desc">
+                                Submit your concerns anonymously.
+                            </p>
+                            <span class="card-link">
+                                Get Help →
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= BOTTOM SWEEPING WHITE FLOOR WAVE ================= -->
+        <div class="home-bottom-wave" aria-hidden="true">
+            <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+                <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+            </svg>
+        </div>
+
+        <!-- ================= FLOOR SECTION (WHITE BACKGROUND) ================= -->
+        <div class="home-floor-section">
+
+            <div class="floor-container">
+
+                <!-- COMMUNITY HELP REQUESTS -->
+                <section class="home-help-section">
+                    <div class="home-section-header">
+                        <div>
+                            <h2>Community Help Requests</h2>
+                            <p class="section-subtitle">
+                                Fellow students in need of stationery, books, or meals. You can contribute any amount at the canteen counter.
+                            </p>
+                        </div>
+                        <button class="view-all-help-btn" onclick="openHelp()" type="button">
+                            View All & Request Help →
+                        </button>
+                    </div>
+
+                    <div class="home-help-grid" id="homeHelpGrid">
+                        <div class="home-help-loading">
+                            <div class="home-help-spinner"></div>
+                            <p>Loading community requests...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- QUICK OVERVIEW -->
+                <section class="quick-section">
+
+                    <h2>Quick Overview</h2>
+
+                    <div class="quick-grid">
+
+                        <!-- MY ORDERS -->
+                        <div class="quick-card clickable"
+                             onclick="openOrderHistory()"
+                             role="button"
+                             tabindex="0"
+                             onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openOrderHistory(); }">
+
+                            <div class="quick-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                            </div>
+
+                            <div class="quick-info">
+                                <span>My Orders</span>
+                                <strong id="orderCount">0</strong>
+                            </div>
+
+                        </div>
+
+                        <!-- THIS MONTH -->
+                        <div class="quick-card">
+
+                            <div class="quick-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            </div>
+
+                            <div class="quick-info">
+                                <span>This Month</span>
+                                <strong id="thisMonthAmount">Rs. 0.00</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <!-- FOOTER -->
+            <footer>
+                <p>© 2026 WAYACANTEEN | University Student Management System</p>
+            </footer>
+
+        </div>
+
+    </main>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="home.js?v=20261101_notif"></script>
+
+    <script>
+    (function () {
+        const studentEmailEl = document.getElementById("headerStudentEmail");
+        const studentIndexEl = document.getElementById("headerStudentIndex");
+        const avatarEl = document.getElementById("profileAvatar");
+        const welcomeHeadingEl = document.getElementById("welcomeUserHeading");
+
+        function renderStudent(name, index, email) {
+            if (welcomeHeadingEl && name) {
+                welcomeHeadingEl.textContent = "Hello, " + name + "!";
+            }
+            if (studentEmailEl && (email || name)) {
+                studentEmailEl.textContent = email || name;
+                studentEmailEl.title = email || name;
+            }
+            if (studentIndexEl && index) {
+                studentIndexEl.textContent = "Index No: " + index;
+            }
+            if (avatarEl && (name || email)) {
+                const letter = (name || email).trim().charAt(0).toUpperCase();
+                avatarEl.textContent = letter;
+            }
+        }
+
+        // 1. Try to load cached values immediately
+        const cachedName = sessionStorage.getItem("studentName");
+        const cachedIndex = sessionStorage.getItem("studentIndex");
+        const cachedEmail = sessionStorage.getItem("studentEmail");
+        if (cachedName || cachedIndex || cachedEmail) {
+            renderStudent(cachedName, cachedIndex, cachedEmail);
+        }
+
+        // 2. Fetch live data from CurrentStudentServlet
+        const endpoint = "/CantinWeb/current-student?_t=" + Date.now();
+        fetch(endpoint)
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.loggedIn) {
+                    const name = data.fullName || "Student";
+                    const index = data.indexNumber || "-";
+                    const email = data.email || (name ? name.toLowerCase().replace(/\s+/g, "") + "@gmail.com" : "student@gmail.com");
+
+                    renderStudent(name, index, email);
+
+                    sessionStorage.setItem("studentName", name);
+                    sessionStorage.setItem("studentIndex", index);
+                    sessionStorage.setItem("studentEmail", email);
+                }
+            })
+            .catch(err => {
+                console.warn("Could not fetch current student:", err);
+            });
+    })();
+    </script>
+
+    <script src="canteen-queue-live.js"></script>
+</body>
+
+</html>

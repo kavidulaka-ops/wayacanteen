@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Anonymous Help Center</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="help-center.css?v=20261121_orange">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Background Subtle Diagonal Stripes Texture -->
+    <div class="help-bg-pattern" aria-hidden="true"></div>
+
+    <!-- ================= FLOATING PROPS LAYER ================= -->
+    <div class="help-props-layer" aria-hidden="true">
+        <!-- Left: 3D Spiral Student Notebook (Top-Left) -->
+        <img src="images/stationery-notebook-3d.png" class="help-float-prop prop-help-notebook" alt="Notebook">
+
+        <!-- Left: 3D Yellow HB Pencil (Mid-Left) -->
+        <img src="images/stationery-pencil-3d.png" class="help-float-prop prop-help-pencil" alt="Pencil">
+
+        <!-- Left: 3D Samosa (Bottom-Left) -->
+        <img src="images/samosa-3d.png" class="help-float-prop prop-help-samosa" alt="Samosa">
+
+        <!-- Right: 3D Student Calculator (Top-Right) -->
+        <img src="images/stationery-calculator-3d.png" class="help-float-prop prop-help-calculator" alt="Calculator">
+
+        <!-- Right: 3D Blue Pen & Neon Highlighter (Mid-Right) -->
+        <img src="images/stationery-pen-highlighter-3d.png" class="help-float-prop prop-help-pen" alt="Pen and Highlighter">
+
+        <!-- Right: 3D Yellow Rice Plate (Bottom-Right) -->
+        <img src="images/yellow-rice-plate-3d.png" class="help-float-prop prop-help-rice" alt="Rice Plate">
+
+        <!-- Floating Wire Paper Clip Accents -->
+        <svg class="help-clip-prop clip-top-left" width="28" height="48" viewBox="0 0 28 48" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V36C7 40.4 10.6 44 15 44C19.4 44 23 40.4 23 36V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V38"></path>
+        </svg>
+
+        <svg class="help-clip-prop clip-mid-right" width="26" height="44" viewBox="0 0 28 48" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V36C7 40.4 10.6 44 15 44C19.4 44 23 40.4 23 36V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V38"></path>
+        </svg>
+    </div>
+
+    <!-- ================= HERO CANOPY (SIGNATURE ORANGE) ================= -->
+    <header class="help-hero-canopy">
+
+        <!-- TOP NAVBAR -->
+        <nav class="help-navbar">
+            <div class="brand" onclick="window.location.href='home.html'" role="button" tabindex="0" title="WAYACANTEEN Home">
+                <div class="brand-icon">W</div>
+                <span>WAYACANTEEN</span>
+            </div>
+
+            <!-- Center Floating Live Canteen Rush Badge -->
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
+            </div>
+
+            <!-- Navbar Right Actions -->
+            <div class="nav-right">
+                <button class="nav-back-btn" onclick="window.location.href='home.html'" type="button" title="Back to Dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Dashboard</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- HERO CONTENT -->
+        <div class="help-hero-content">
+            <div class="canteen-tag-pill">
+                <span class="tag-dot"></span>
+                <span>100% Anonymous & Confidential</span>
+            </div>
+
+            <h1 class="help-hero-title">Anonymous Help Center</h1>
+            <p class="help-hero-subtitle">
+                A university solidarity fund where students in need of essential stationery, books, or meals can request assistance without revealing their identity.
+            </p>
+
+            <!-- TABS BAR -->
+            <div class="tabs-nav">
+                <button class="tab-nav-btn active" id="tabBtnBoard" onclick="switchHelpTab('board')" type="button">
+                    <span>Community Help Board</span>
+                    <span class="tab-badge" id="boardCountBadge">0</span>
+                </button>
+                <button class="tab-nav-btn" id="tabBtnSubmit" onclick="switchHelpTab('submit')" type="button">
+                    <span>Request Help (Anonymous)</span>
+                </button>
+                <button class="tab-nav-btn" id="tabBtnTrack" onclick="switchHelpTab('track')" type="button">
+                    <span>Track Request Progress</span>
+                </button>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- ================= BOTTOM SWEEPING WHITE FLOOR WAVE ================= -->
+    <div class="help-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+            <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- ================= MAIN CONTENT FLOOR (WHITE BACKGROUND) ================= -->
+    <main class="help-floor-section">
+        <div class="help-floor-container">
+
+            <!-- ================= TAB 1: COMMUNITY HELP BOARD ================= -->
+            <section class="tab-content" id="tabContentBoard">
+
+                <!-- How to contribute instruction box -->
+                <div class="canteen-info-box">
+                    <span class="canteen-info-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    </span>
+                    <div class="canteen-info-text">
+                        <strong>How to contribute:</strong>
+                        <span>
+                            See a request you'd like to support? Simply visit the Canteen Counter, mention the <strong>Request Reference Code</strong> (e.g. <code>#REQ-...</code>), and hand over any amount (Rs. 10, Rs. 20, Rs. 50, or full cost). Staff will instantly update the progress bar!
+                        </span>
+                    </div>
+                </div>
+
+                <!-- CATEGORY FILTERS -->
+                <div class="category-filters-row">
+                    <div class="category-filters">
+                        <button class="cat-pill active" onclick="filterBoardCategory('All')" type="button">All Needs</button>
+                        <button class="cat-pill" onclick="filterBoardCategory('Stationery')" type="button">Books & Stationery</button>
+                        <button class="cat-pill" onclick="filterBoardCategory('Food')" type="button">Meals & Food</button>
+                        <button class="cat-pill" onclick="filterBoardCategory('Study Materials')" type="button">Study Materials</button>
+                        <button class="cat-pill" onclick="filterBoardCategory('Other')" type="button">Other Needs</button>
+                    </div>
+                </div>
+
+                <!-- REQUESTS GRID -->
+                <div class="requests-grid" id="requestsGrid">
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <p>Loading community requests...</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ================= TAB 2: REQUEST HELP (ANONYMOUS FORM) ================= -->
+            <section class="tab-content" id="tabContentSubmit" style="display: none;">
+
+                <div class="form-wrapper">
+                    <div class="form-header">
+                        <div class="form-tag-pill">
+                            <span class="tag-dot"></span>
+                            <span>100% Anonymous & Confidential</span>
+                        </div>
+                        <h2 class="form-title">Submit an Anonymous Request</h2>
+                        <p class="form-subtitle">
+                            Let the canteen community know what you need. Your name and student index will <strong>NEVER</strong> be shown publicly.
+                        </p>
+                    </div>
+
+                    <form id="helpRequestForm" onsubmit="submitHelpRequest(event)">
+                        <div class="form-group">
+                            <label for="reqCategory">
+                                <span class="label-icon-wrap">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                                </span>
+                                <span>What category of assistance do you need?</span>
+                                <span class="req-star">*</span>
+                            </label>
+                            <select id="reqCategory" required>
+                                <option value="">Select a category...</option>
+                                <option value="Stationery">Books & Stationery (Exercise books, pens, etc.)</option>
+                                <option value="Food">Meals & Food (Lunch, breakfast, nutrition)</option>
+                                <option value="Study Materials">Study Materials (Drawing instruments, calculators, lab items)</option>
+                                <option value="Other">Other Essential Needs</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reqSubject">
+                                <span class="label-icon-wrap">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                </span>
+                                <span>Item / Need Title</span>
+                                <span class="req-star">*</span>
+                            </label>
+                            <input type="text" id="reqSubject" placeholder="e.g. 120-Page CR Science Exercise Book, Drawing Instruments Box" maxlength="150" required>
+                            <small>Be specific about what item or meal is needed.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reqAmount">
+                                <span class="label-icon-wrap">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="6" x2="12" y2="18"></line></svg>
+                                </span>
+                                <span>Total Target Amount Needed (Rs.)</span>
+                                <span class="req-star">*</span>
+                            </label>
+                            <div class="input-prefix-box">
+                                <span class="prefix">Rs.</span>
+                                <input type="number" id="reqAmount" placeholder="e.g. 100" min="10" step="1" required>
+                            </div>
+                            <small>The estimated cost of the item at the canteen/stationery store.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reqMessage">
+                                <span class="label-icon-wrap">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                </span>
+                                <span>Reason / Note</span>
+                                <span class="req-star">*</span>
+                            </label>
+                            <textarea id="reqMessage" rows="4" placeholder="Briefly explain your situation (e.g. Need this book for practical classes next Monday, currently having financial difficulty)..." required></textarea>
+                        </div>
+
+                        <div class="form-privacy-card">
+                            <span class="lock-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            </span>
+                            <div>
+                                <strong>Privacy Guarantee:</strong>
+                                <p>This request is posted completely anonymously as <em>"Anonymous Student"</em>. Only authorized canteen staff can verify your index number to arrange the handover once funded.</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-request-btn" id="submitBtn">
+                            <span>Submit Anonymous Request</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </form>
+
+                    <!-- SUCCESS CARD -->
+                    <div class="success-card" id="requestSuccessCard" style="display: none;">
+                        <div class="success-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h3>Request Submitted Successfully!</h3>
+                        <p>Your request has been sent for staff review. Once approved, it will appear on the Community Help Board with a live progress bar.</p>
+
+                        <div class="ref-code-box">
+                            <span>Your Anonymous Reference Code:</span>
+                            <strong id="createdRefCode">REQ-XXXX</strong>
+                            <button type="button" class="copy-btn" onclick="copyRefCode()">Copy Code</button>
+                        </div>
+
+                        <p class="ref-note">Keep this reference code to check your collection progress at any time!</p>
+
+                        <button type="button" class="view-board-btn" onclick="switchHelpTab('board')">
+                            View Community Help Board
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ================= TAB 3: TRACK PROGRESS ================= -->
+            <section class="tab-content" id="tabContentTrack" style="display: none;">
+
+                <div class="track-wrapper">
+                    <div class="track-header">
+                        <div class="form-tag-pill">
+                            <span class="tag-dot"></span>
+                            <span>Live Progress Tracker</span>
+                        </div>
+                        <h2 class="form-title">Track Your Request Progress</h2>
+                        <p class="form-subtitle">Enter the Reference Code you received when submitting your request to see how much has been raised.</p>
+                    </div>
+
+                    <div class="track-input-bar">
+                        <input type="text" id="trackCodeInput" placeholder="e.g. REQ-20261101-763" autocomplete="off">
+                        <button type="button" class="track-search-btn" onclick="trackRequest()">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <span>Check Progress</span>
+                        </button>
+                    </div>
+
+                    <div id="trackResultBox" class="track-result-box" style="display: none;"></div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- LIVE QUEUE UPDATER & HELP LOGIC SCRIPTS -->
+    <script src="canteen-queue-live.js"></script>
+    <script src="help-center.js?v=20261121_orange"></script>
+
+</body>
+
+</html>

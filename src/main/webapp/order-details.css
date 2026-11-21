@@ -1,0 +1,516 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* === TYPOGRAPHY HIERARCHY === */
+h1, h2, .brand-name, .logo, .brand, .order-code {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+h3, h4, .card-content h3, .food-card h3, .action-card h3, .stationery-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+p, span, label, input, select, textarea, .desc, .details {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* =====================================
+   CANTIN ORDER DETAILS
+   ===================================== */
+
+@font-face {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    src: local("FZShuTi");
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    background: #f6f7fb;
+
+    color: #111827;
+}
+
+
+/* =====================================
+   HEADER
+   ===================================== */
+
+.header {
+    height: 75px;
+
+    background: white;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 50px;
+}
+
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    background: #FFA500;
+
+    color: white;
+
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+.brand-name {
+    display: block;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+.brand small {
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+.back-btn {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+
+.back-btn:hover {
+    background: #f3f4f6;
+}
+
+
+/* =====================================
+   MAIN
+   ===================================== */
+
+.main-container {
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 45px 30px 60px;
+}
+
+
+/* =====================================
+   HEADING
+   ===================================== */
+
+.page-heading {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.page-heading p {
+    color: #6b7280;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+}
+
+
+.page-heading h1 {
+    font-size: 24px;
+
+    margin-bottom: 8px;
+}
+
+
+.page-heading span {
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* =====================================
+   CARD
+   ===================================== */
+
+.order-card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 22px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.05);
+}
+
+
+/* =====================================
+   TOP
+   ===================================== */
+
+.order-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+.label {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+
+.order-top h2 {
+    font-size: 24px;
+}
+
+
+.status {
+    padding: 8px 16px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+}
+
+
+.status.pending {
+    background: #fff7ed;
+
+    color: #c2410c;
+}
+
+
+.status.accepted {
+    background: #ecfdf5;
+
+    color: #047857;
+}
+
+
+/* =====================================
+   INFO
+   ===================================== */
+
+.order-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    padding: 25px 0;
+}
+
+
+.info-box {
+    background: #f9fafb;
+
+    border-radius: 12px;
+
+    padding: 16px;
+}
+
+
+.info-box span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    margin-bottom: 6px;
+}
+
+
+.info-box strong {
+    font-size: 13px;
+}
+
+
+/* =====================================
+   ITEMS
+   ===================================== */
+
+.items-section {
+    padding-top: 10px;
+}
+
+
+.items-section h2 {
+    font-size: 16px;
+
+    margin-bottom: 15px;
+}
+
+
+.order-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px 0;
+
+    border-top: 1px solid #f0f0f0;
+}
+
+
+.item-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.item-icon {
+    width: 42px;
+    height: 42px;
+
+    background: #f3f4f6;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 24px;
+}
+
+
+.item-name {
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+.item-quantity {
+    color: #6b7280;
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+
+.item-price {
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================
+   TOTAL
+   ===================================== */
+
+.total-section {
+    margin-top: 15px;
+
+    padding: 20px 0;
+
+    border-top: 1px solid #e5e7eb;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.total-section span {
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+.total-section strong {
+    font-size: 24px;
+}
+
+
+/* =====================================
+   ACTIONS
+   ===================================== */
+
+.actions {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 15px;
+}
+
+
+.cancel-btn {
+    flex: 1;
+
+    padding: 13px;
+
+    border: 1px solid #e5e7eb;
+
+    background: white;
+
+    border-radius: 11px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+
+.cancel-btn:hover {
+    background: #ffdeac;
+    color: #8a4b00;
+}
+
+
+.accept-btn {
+    flex: 1;
+
+    padding: 13px;
+
+    border: none;
+
+    background: #FFA500;
+
+    color: white;
+
+    font-weight: bold;
+
+    box-shadow: 0 4px 14px rgba(255, 165, 0, 0.35);
+
+    border-radius: 11px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+
+.accept-btn:hover {
+    background: #e69500;
+}
+
+
+.accept-btn.accepted {
+    background: #047857;
+
+    cursor: default;
+}
+
+
+/* =====================================
+   RESPONSIVE
+   ===================================== */
+
+@media (max-width: 650px) {
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .main-container {
+        padding: 30px 18px;
+    }
+
+    .order-card {
+        padding: 22px;
+    }
+
+    .order-info {
+        grid-template-columns: 1fr;
+    }
+
+    .order-top {
+        align-items: flex-start;
+
+        gap: 15px;
+
+        flex-direction: column;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+}

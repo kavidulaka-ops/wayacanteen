@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Orders Management & Queue</title>
+    <link rel="stylesheet" href="pending-orders.css">
+    <style>
+        .tabs-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            border: 1px solid #e5e7eb;
+            background: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .tab-btn.active {
+            background: #111827;
+            color: white;
+            border-color: #111827;
+        }
+
+        .tab-btn .badge {
+            background: #e2e8f0;
+            color: #1e293b;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .tab-btn.active .badge {
+            background: #334155;
+            color: white;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .reject-btn {
+            border: 1px solid #fca5a5;
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reject-btn:hover {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+
+        .accept-btn {
+            border: none;
+            background: #111827;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .accept-btn:hover {
+            background: #000000;
+        }
+
+        .pay-btn {
+            border: none;
+            background: #16a34a;
+            color: white;
+            padding: 11px 24px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
+        }
+
+        .pay-btn:hover {
+            background: #15803d;
+            transform: translateY(-1px);
+        }
+
+        .status-badge-queue {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        /* Live Canteen Rush Bar */
+        .pending-queue-bar {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+        .pq-left { display: flex; align-items: center; gap: 10px; }
+        .pq-title { font-size: 13px; font-weight: 700; color: #0f172a; }
+        .pq-current { font-size: 13px; font-weight: 600; color: #059669; background: #ecfdf5; padding: 4px 12px; border-radius: 999px; border: 1px solid #a7f3d0; transition: all 0.2s ease; }
+        .pq-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .pq-adjust-lbl { font-size: 13px; color: #64748b; font-weight: 600; }
+        .pq-btn { border: 1px solid #e2e8f0; background: #f8fafc; color: #334155; padding: 7px 14px; border-radius: 10px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        .pq-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .pq-btn.active#pqBtnLow { background: #10b981; color: #ffffff; border-color: #10b981; }
+        .pq-btn.active#pqBtnMedium { background: #f59e0b; color: #ffffff; border-color: #f59e0b; }
+        .pq-btn.active#pqBtnHigh { background: #ef4444; color: #ffffff; border-color: #ef4444; }
+        .pq-toast { font-size: 13px; font-weight: 700; color: #059669; margin-left: 8px; }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            <div>
+                <span class="brand-name">WAYACANTEEN</span>
+                <small>Staff Panel</small>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="back-btn" style="background:#FFA500;color:white;border:none;font-weight:600;display:flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(255,165,0,0.3);" onclick="window.location.href='qr-scanner.html'">
+                Scan Student QR
+            </button>
+            <button class="back-btn" onclick="goDashboard()">
+                ← Dashboard
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-container">
+
+        <!-- PAGE HEADING -->
+        <section class="page-heading">
+            <p>ORDER MANAGEMENT</p>
+            <h1>Orders Management & Queue</h1>
+            <span>
+                Review pending orders to Accept/Reject, and manage the active pickup queue to collect payment.
+            </span>
+        </section>
+
+        <!-- LIVE CANTEEN RUSH / QUEUE QUICK SWITCHER -->
+        <div class="pending-queue-bar" id="pendingQueueBar">
+            <div class="pq-left">
+                <span class="pq-indicator-dot" id="pqDot">●</span>
+                <span class="pq-title">Live Canteen Rush:</span>
+                <span class="pq-current" id="pqCurrentText">Low Queue (~5m wait)</span>
+            </div>
+            <div class="pq-actions">
+                <span class="pq-adjust-lbl">Adjust Status:</span>
+                <button type="button" class="pq-btn active" id="pqBtnLow" onclick="updateStaffQueue('Low')">
+                    Low (~5m)
+                </button>
+                <button type="button" class="pq-btn" id="pqBtnMedium" onclick="updateStaffQueue('Medium')">
+                    Moderate (~12m)
+                </button>
+                <button type="button" class="pq-btn" id="pqBtnHigh" onclick="updateStaffQueue('High')">
+                    High Rush (~25m)
+                </button>
+                <span class="pq-toast" id="pqToast"></span>
+            </div>
+        </div>
+
+        <!-- TABS: PENDING vs ACTIVE QUEUE -->
+        <div class="tabs-bar">
+            <button class="tab-btn active" id="tabPending" onclick="switchTab('Pending')">
+                Pending Orders <span class="badge" id="pendingCountBadge">0</span>
+            </button>
+            <button class="tab-btn" id="tabAccepted" onclick="switchTab('Accepted')">
+                Active Queue / Ready for Pickup <span class="badge" id="acceptedCountBadge">0</span>
+            </button>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterOrders('All')">
+                All Orders
+            </button>
+            <button class="filter-btn" onclick="filterOrders('Food')">
+                Food
+            </button>
+            <button class="filter-btn" onclick="filterOrders('Stationery')">
+                Stationery
+            </button>
+        </div>
+
+        <!-- ORDERS -->
+        <section id="ordersContainer" class="orders-container">
+            <!-- JavaScript dynamically loads orders here -->
+        </section>
+
+    </main>
+
+    <script src="pending-orders.js?v=20261101_5"></script>
+
+</body>
+
+</html>

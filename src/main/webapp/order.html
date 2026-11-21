@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>WAYACANTEEN - Order Confirmation</title>
+
+    <link rel="stylesheet"
+          href="order.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                C
+            </div>
+
+            <span>
+                Cantin
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main-container">
+
+
+        <div class="page-heading">
+
+            <p>
+                Food & Canteen
+            </p>
+
+            <h1>
+                Order Confirmation
+            </h1>
+
+            <span>
+                Your pre-order details
+            </span>
+
+        </div>
+
+
+
+        <section class="order-box">
+
+
+            <!-- SUCCESS -->
+
+            <div class="success">
+
+                Pre-Order Confirmed
+
+            </div>
+
+
+
+            <!-- ORDER INFO -->
+
+            <div class="order-info">
+
+
+                <div class="info-row">
+
+                    <span>
+                        Order ID
+                    </span>
+
+                    <strong id="orderId">
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Order Date
+                    </span>
+
+                    <strong id="orderDate">
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Order Time
+                    </span>
+
+                    <strong id="orderTime">
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong class="status"
+                            id="orderStatus">
+
+                        Pending
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ORDER ITEMS -->
+
+            <div class="items-section">
+
+
+                <h2>
+                    Order Items
+                </h2>
+
+
+                <div id="orderItems">
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- TOTAL -->
+
+            <div class="total-section">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+
+                    Rs.
+                    <span id="orderTotal">
+                        0.00
+                    </span>
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- QR CODE -->
+
+            <div class="qr-section">
+
+
+                <h2>
+                    Order QR Code
+                </h2>
+
+
+                <img id="qrCode"
+                     src=""
+                     alt="QR Code">
+
+
+                <p>
+                    Show this QR code at the canteen
+                    to confirm your order.
+                </p>
+
+
+            </div>
+
+
+
+            <!-- HOME BUTTON -->
+
+            <button onclick="goHome()">
+
+                Back to Home
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <script src="order.js"></script>
+
+</body>
+
+</html>

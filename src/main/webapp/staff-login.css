@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* === TYPOGRAPHY HIERARCHY === */
+h1, h2, .brand-name, .logo, .brand, .order-code {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+h3, h4, .card-content h3, .food-card h3, .action-card h3, .stationery-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+p, span, label, input, select, textarea, .desc, .details {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* =====================================
+   CANTIN STAFF LOGIN & AUTH STYLES
+   ===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fffaf2 0%, #ffdeac 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #1e293b;
+}
+
+/* CONTAINER */
+.login-container {
+    width: 100%;
+    max-width: 440px;
+}
+
+/* CARD */
+.login-card {
+    background: #ffffff;
+    padding: 44px 38px;
+    border-radius: 24px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    text-align: left;
+}
+
+/* BRAND HEADER */
+.brand-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.brand-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 14px;
+    border-radius: 16px;
+    background: #FFA500;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    box-shadow: 0 8px 18px rgba(255, 165, 0, 0.35);
+}
+
+.brand-badge {
+    display: inline-block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #b45309;
+    background: #ffdeac;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.brand-header h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.brand-header .subtitle {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ALERT MESSAGES */
+.alert-banner {
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.4;
+}
+
+.alert-banner.error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+.alert-banner.success {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #047857;
+}
+
+/* FORM GROUPS */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 7px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #0f172a;
+    background: #f8fafc;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-wrapper input:focus {
+    background: #ffffff;
+    border-color: #FFA500;
+    box-shadow: 0 0 0 4px rgba(255, 165, 0, 0.2);
+}
+
+.input-wrapper.has-toggle input {
+    padding-right: 48px;
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s;
+}
+
+.toggle-password-btn:hover {
+    color: #0f172a;
+}
+
+/* ROW WITH FORGOT PASSWORD */
+.form-row-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.forgot-link {
+    font-size: 13px;
+    color: #d97706;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s;
+}
+
+.forgot-link:hover {
+    color: #b45309;
+    text-decoration: underline;
+}
+
+/* SUBMIT BUTTON */
+.btn-submit {
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 12px;
+    background: #FFA500;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 16px rgba(255, 165, 0, 0.3);
+}
+
+.btn-submit:hover {
+    background: #e69500;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(255, 165, 0, 0.4);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* FOOTER ACTIONS */
+.card-footer {
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s;
+}
+
+.back-link:hover {
+    color: #0f172a;
+}

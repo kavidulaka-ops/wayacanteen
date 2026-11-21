@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>WAYACANTEEN - Order Details</title>
+
+    <link rel="stylesheet"
+          href="order-details.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                C
+            </div>
+
+            <div>
+                <span class="brand-name">
+                    Cantin
+                </span>
+
+                <small>
+                    Staff Panel
+                </small>
+            </div>
+
+        </div>
+
+
+        <button
+            class="back-btn"
+            onclick="goBack()">
+
+            ← Back
+
+        </button>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main-container">
+
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading">
+
+            <p>
+                ORDER MANAGEMENT
+            </p>
+
+            <h1>
+                Order Details
+            </h1>
+
+            <span>
+                Review the order before accepting it.
+            </span>
+
+        </section>
+
+
+
+        <!-- ORDER CARD -->
+
+        <section class="order-card">
+
+
+            <!-- TOP -->
+
+            <div class="order-top">
+
+                <div>
+
+                    <span class="label">
+                        Order ID
+                    </span>
+
+                    <h2 id="orderId">
+                        CNT-20260926-245
+                    </h2>
+
+                </div>
+
+
+                <span
+                    id="orderStatus"
+                    class="status pending">
+
+                    Pending
+
+                </span>
+
+            </div>
+
+
+
+            <!-- INFO -->
+
+            <div class="order-info">
+
+
+                <div class="info-box">
+
+                    <span>
+                        Student Index
+                    </span>
+
+                    <strong id="studentIndex">
+                        2024001
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Order Date
+                    </span>
+
+                    <strong id="orderDate">
+                        26 September 2026
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Order Time
+                    </span>
+
+                    <strong id="orderTime">
+                        10:15 AM
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ITEMS -->
+
+            <div class="items-section">
+
+                <h2>
+                    Order Items
+                </h2>
+
+
+                <div id="orderItems">
+
+                    <!-- JavaScript adds items -->
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL -->
+
+            <div class="total-section">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <strong>
+                    Rs. <span id="orderTotal">550.00</span>
+                </strong>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                <button
+                    class="cancel-btn"
+                    onclick="goBack()">
+
+                    ← Back to Orders
+
+                </button>
+
+
+               <button
+    class="accept-btn"
+    onclick="acceptOrder()">
+
+    Accept Order
+
+</button>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script src="order-details.js"></script>
+
+</body>
+
+</html>

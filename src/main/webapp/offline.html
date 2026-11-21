@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Offline</title>
+
+    <meta name="theme-color" content="#ea580c">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #d95100 0%, #ea580c 45%, #ea580c 60%, #c2410c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: #1e293b;
+        }
+
+        .offline-card {
+            background: #ffffff;
+            border: 2px solid #fed7aa;
+            border-radius: 28px;
+            padding: 44px 36px;
+            max-width: 460px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offline-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ea580c 0%, #f97316 50%, #ea580c 100%);
+        }
+
+        .offline-icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #fff7ed;
+            border: 2px solid #fed7aa;
+            color: #ea580c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(234, 88, 12, 0.15);
+        }
+
+        .offline-tag {
+            background: #fff7ed;
+            border: 1.5px solid #fed7aa;
+            color: #ea580c;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .tag-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ea580c;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ea580c;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .actions-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .retry-btn {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(234, 88, 12, 0.35);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(234, 88, 12, 0.45);
+        }
+
+        .home-btn {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            color: #475569;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-btn:hover {
+            border-color: #fed7aa;
+            background: #fff7ed;
+            color: #ea580c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="offline-card">
+        <div class="offline-icon-circle">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+        </div>
+
+        <div class="offline-tag">
+            <span class="tag-dot"></span>
+            <span>Connection Unavailable</span>
+        </div>
+
+        <h1>You Are Currently Offline</h1>
+        <p>
+            WAYACANTEEN requires an active network connection to display live queue wait times and real-time menu availability. Please check your Wi-Fi or mobile data and try again.
+        </p>
+
+        <div class="actions-group">
+            <button class="retry-btn" onclick="window.location.reload()" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                <span>Retry Connection</span>
+            </button>
+            <a href="home.html" class="home-btn">Try Returning to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

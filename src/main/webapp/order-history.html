@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>WAYACANTEEN - Order History</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="order-history.css">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                C
+            </div>
+
+            <span>
+                Cantin
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <span class="staff-label">
+                Staff Panel
+            </span>
+
+            <button
+                class="back-btn"
+                onclick="goDashboard()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main-container">
+
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading">
+
+            <p>
+                Staff Panel
+            </p>
+
+            <h1>
+                Order History
+            </h1>
+
+            <span>
+                View all accepted orders from the canteen.
+            </span>
+
+        </section>
+
+
+
+        <!-- FILTERS -->
+
+        <div class="filters">
+
+            <button
+                class="filter-btn active"
+                onclick="filterOrders('All')">
+
+                All Orders
+
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterOrders('Food')">
+
+                Food
+
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterOrders('Stationery')">
+
+                Stationery
+
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterOrders('Both')">
+
+                Both
+
+            </button>
+	       <button
+    class="clear-history-btn"
+    onclick="clearHistory()">
+
+    Clear History
+
+</button>
+
+        </div>
+
+
+
+        <!-- ORDER HISTORY -->
+
+        <section
+            id="historyContainer"
+            class="history-container">
+
+            <!-- JavaScript will add orders here -->
+
+        </section>
+
+
+    </main>
+
+
+    <script src="order-history.js"></script>
+
+</body>
+
+</html>
