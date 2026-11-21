@@ -9,50 +9,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WAYACANTEEN - Staff Login</title>
-    <link rel="stylesheet" href="staff-login.css">
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
 </head>
+
 <body>
 
-    <main class="login-container">
+    <!-- Background Diagonal Subtle Pattern -->
+    <div class="login-bg-pattern" aria-hidden="true"></div>
+
+    <!-- Bottom Sweeping White Floor Wave -->
+    <div class="login-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+            <path d="M0,80 C360,20 720,130 1080,60 C1260,25 1380,70 1440,80 L1440,160 L0,160 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- Floating Food & Stationery Props Layer -->
+    <div class="login-props-layer" aria-hidden="true">
+        <img src="images/stationery-notebook-3d.png" class="float-prop prop-notebook" alt="Spiral Notebook">
+        <img src="images/samosa-3d.png" class="float-prop prop-samosa" alt="Crispy Samosa">
+        <img src="images/ulundu-vadai-3d.png" class="float-prop prop-ulundu" alt="Ulundu Vadai">
+        <img src="images/sausage-bun-3d.png" class="float-prop prop-sausage-bun" alt="Sausage Bun">
+        <img src="images/stationery-pen-highlighter-3d.png" class="float-prop prop-pen" alt="Pen and Highlighter">
+        <img src="images/parippu-vadai-3d.png" class="float-prop prop-parippu" alt="Parippu Vadai">
+        <img src="images/stationery-calculator-3d.png" class="float-prop prop-calculator" alt="Student Calculator">
+        <img src="images/vegetable-roti-3d.png" class="float-prop prop-roti" alt="Vegetable Roti">
+
+        <svg class="garnish-prop garnish-leaf-left" width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <path d="M8 32C8 32 10 12 28 6C34 16 32 30 18 34C13 35 8 32 8 32Z" fill="#65a30d"/>
+            <path d="M12 28C15 22 22 14 28 6" stroke="#4d7c0f" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <svg class="garnish-prop garnish-tomato-left" width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="16" fill="#ef4444"/>
+            <circle cx="20" cy="20" r="11" fill="#dc2626"/>
+            <circle cx="16" cy="16" r="3" fill="#fca5a5"/>
+            <circle cx="24" cy="22" r="2.5" fill="#fca5a5"/>
+        </svg>
+    </div>
+
+    <!-- Live Canteen Queue / Rush Status Banner -->
+    <div class="canteen-live-banner" id="canteenLiveBanner" role="region" aria-label="Live Canteen Queue Status">
+        <div class="live-banner-left">
+            <div class="live-pulse-container" title="Real-time canteen rush update">
+                <span class="live-pulse-dot" id="liveDot"></span>
+                <span>LIVE</span>
+            </div>
+            <div class="live-info-block">
+                <div class="live-header-row">
+                    <span class="live-canteen-title">Canteen Queue Status:</span>
+                    <span class="live-badge level-low" id="liveLevelBadge">
+                        <span id="badgeIcon">•</span>
+                        <span id="badgeText">Low Queue</span>
+                    </span>
+                </div>
+                <p class="live-subnote" id="liveNote">Few or no line at the counter · Fast counter service</p>
+            </div>
+        </div>
+
+        <div class="live-banner-right">
+            <div class="live-metric-card" title="Estimated wait time at the counter">
+                <span class="metric-emoji"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+                <div class="metric-data">
+                    <span class="metric-value" id="metricWait">~5 mins</span>
+                    <span class="metric-label">Est. Wait</span>
+                </div>
+            </div>
+            <button class="live-refresh-btn" id="liveRefreshBtn" type="button" title="Refresh live status" aria-label="Refresh live status">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Centered Main Content Wrapper -->
+    <main class="login-main-wrapper">
+
         <div class="login-card">
 
-            <!-- BRAND HEADER -->
-            <div class="brand-header">
-                <div class="brand-icon">W</div>
-                <span class="brand-badge">Authorized Personnel</span>
-                <h1>Staff Login</h1>
-                <p class="subtitle">Enter your credentials to access the canteen management dashboard.</p>
+            <div class="login-header">
+                <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+                    <span style="background: #ea580c; color: #fff; width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700;">W</span>
+                    <span style="font-size: 13px; font-weight: 700; color: #ea580c; text-transform: uppercase; letter-spacing: 0.5px;">Staff Portal</span>
+                </div>
+                <h2 class="login-title">Staff Login</h2>
+                <p class="login-subtitle">Enter your authorized staff credentials to continue</p>
             </div>
 
-            <!-- ALERT / ERROR NOTIFICATION -->
-            <div id="errorMessage" class="alert-banner error" style="display: none;"></div>
+            <div id="errorMessage" class="message error" role="alert" style="display: none;"></div>
 
-            <!-- LOGIN FORM -->
             <form action="staff-login" method="post" id="staffLoginForm">
 
-                <!-- STAFF USERNAME -->
-                <div class="form-group">
+                <div class="input-group">
                     <label for="staffId">Staff Username / ID</label>
-                    <div class="input-wrapper">
-                        <input
-                            type="text"
-                            id="staffId"
-                            name="staffId"
-                            placeholder="e.g. STAFF001"
-                            autocomplete="username"
-                            required
-                            autofocus
-                        >
-                    </div>
+                    <input
+                        type="text"
+                        id="staffId"
+                        name="staffId"
+                        placeholder="e.g. staff1"
+                        autocomplete="username"
+                        required
+                        autofocus
+                    >
                 </div>
 
-                <!-- PASSWORD -->
-                <div class="form-group">
-                    <div class="form-row-between">
-                        <label for="password">Password</label>
-                        <a href="staff-forgot-password.html" class="forgot-link">Forgot Password?</a>
-                    </div>
-                    <div class="input-wrapper has-toggle">
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="password-box">
                         <input
                             type="password"
                             id="password"
@@ -63,39 +142,45 @@
                         >
                         <button
                             type="button"
-                            class="toggle-password-btn"
                             id="togglePassword"
                             aria-label="Show or hide password"
-                            title="Show/Hide Password"
                         >
-                            <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                         </button>
                     </div>
                 </div>
 
-                <!-- SUBMIT BUTTON -->
-                <button type="submit" class="btn-submit" id="loginBtn">
+                <div class="login-options">
+                    <span></span>
+                    <a href="staff-forgot-password.html" class="forgot-link">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="login-button" id="loginBtn">
                     Login to Staff Panel
                 </button>
 
             </form>
 
-            <!-- FOOTER -->
-            <div class="card-footer" style="display: flex; flex-direction: column; gap: 8px;">
-                <a href="login.html" class="back-link">
-                    &larr; Back to Student Login
-                </a>
-                <a href="index.html" class="back-link" style="color: #64748b;">
-                    &larr; Back to Portal Home
-                </a>
+            <div class="divider">
+                <span>Authorized Personnel Only</span>
             </div>
 
+            <p class="account-switch">
+                Are you a student?
+                <a href="login.html"><strong>Student Login</strong></a>
+            </p>
+
+            <p class="account-switch back-home">
+                <a href="index.html">&larr; Back to Portal Home</a>
+            </p>
+
         </div>
+
     </main>
 
+    <script src="canteen-queue-live.js"></script>
     <script src="staff-login.js"></script>
 </body>
 </html>

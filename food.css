@@ -45,20 +45,25 @@ body {
 
 /* ================= FLOATING PROPS LAYER ================= */
 .food-props-layer {
-    position: absolute;
-    top: 70px;
+    position: fixed;
+    top: 0;
     left: 0;
-    right: 0;
-    height: 380px;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
-    z-index: 4;
+    z-index: 1;
     overflow: hidden;
 }
 
 .food-float-prop {
-    position: absolute;
+    position: fixed;
     pointer-events: none;
     user-select: none;
+    max-width: 120px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.35));
     will-change: transform;
 }
@@ -87,10 +92,10 @@ body {
     animation: floatDrift1 7.2s ease-in-out infinite;
 }
 
-.prop-food-sausage-bun {
+.prop-food-sausage-bun, .prop-food-sausage {
     top: 54%;
     left: 3%;
-    width: 125px;
+    width: 120px;
     animation: floatDrift2 8.0s ease-in-out infinite;
 }
 
@@ -108,11 +113,46 @@ body {
     animation: floatDrift3 7.5s ease-in-out infinite;
 }
 
-.prop-food-roti {
-    bottom: 4%;
-    right: 8%;
+.prop-food-roti, .prop-food-bun {
+    bottom: 6%;
+    right: 4%;
     width: 110px;
     animation: floatDrift1 8.4s ease-in-out infinite;
+}
+
+.prop-food-notebook, .prop-stationery-notebook {
+    top: 12%;
+    left: 2%;
+    width: 115px;
+    animation: floatDrift1 8.8s ease-in-out infinite;
+}
+
+.prop-food-calculator, .prop-stationery-calculator {
+    top: 58%;
+    right: 2%;
+    width: 110px;
+    animation: floatDrift2 7.8s ease-in-out infinite;
+}
+
+.prop-food-pen, .prop-stationery-pen {
+    top: 40%;
+    right: 2%;
+    width: 105px;
+    animation: floatDrift1 8.2s ease-in-out infinite;
+}
+
+.prop-food-pencil, .prop-stationery-pencil {
+    bottom: 8%;
+    left: 3%;
+    width: 95px;
+    animation: floatDrift2 7.2s ease-in-out infinite;
+}
+
+.prop-food-egg {
+    bottom: 6%;
+    left: 4%;
+    width: 115px;
+    animation: floatDrift3 8.2s ease-in-out infinite;
 }
 
 /* Garnish Accents */
@@ -840,5 +880,41 @@ body {
     .cart-checkout-btn {
         width: 100%;
         justify-content: center;
+    }
+}
+
+@media (max-width: 540px) {
+    .food-navbar {
+        padding: 10px 14px;
+        gap: 8px;
+    }
+    .nav-right {
+        gap: 6px;
+    }
+    .nav-right .nav-back-btn span,
+    .nav-right button span {
+        display: none;
+    }
+    .nav-right .nav-back-btn,
+    .nav-right button {
+        padding: 8px 10px;
+    }
+    .home-queue-pill {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        font-size: 13px !important;
+        padding: 6px 14px !important;
+        gap: 8px !important;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+    .home-queue-pill .pill-clock-svg,
+    .home-queue-pill .pill-wait-text {
+        display: none !important;
+    }
+    .home-queue-pill .pill-live-tag {
+        font-size: 13px !important;
+        padding: 2px 6px !important;
     }
 }

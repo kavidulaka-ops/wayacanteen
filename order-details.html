@@ -1,238 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Google Fonts: Poppins & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WAYACANTEEN - Order Details</title>
 
-    <link rel="stylesheet"
-          href="order-details.css">
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
 
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="food.css">
+    <link rel="stylesheet" href="order-details.css">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
 </head>
 
+<body class="food-page-body">
 
-<body>
+    <!-- Diagonal Subtle Overlay -->
+    <div class="food-bg-pattern" aria-hidden="true"></div>
 
+    <!-- Outer Decorative Props Layer -->
+    <div class="food-props-layer" aria-hidden="true">
+        <img src="images/samosa-3d.png" class="food-float-prop prop-food-samosa" alt="Samosa">
+        <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
+        <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
+        <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
+    </div>
 
-    <!-- HEADER -->
-
-    <header class="header">
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                C
+    <!-- Top Canopy Header -->
+    <header class="food-hero-canopy">
+        <nav class="food-navbar">
+            <div class="brand" onclick="window.location.href='staff-dashboard.html'" role="button" tabindex="0" title="Staff Dashboard">
+                <div class="brand-icon">W</div>
+                <div>
+                    <span style="font-size: 16px; font-weight: 700; color: #1e293b;">WAYACANTEEN</span>
+                    <small style="display: block; font-size: 13px; color: #ea580c; font-weight: 600;">Staff Management</small>
+                </div>
             </div>
 
-            <div>
-                <span class="brand-name">
-                    Cantin
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </span>
-
-                <small>
-                    Staff Panel
-                </small>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
             </div>
 
-        </div>
-
-
-        <button
-            class="back-btn"
-            onclick="goBack()">
-
-            ← Back
-
-        </button>
-
+            <div class="nav-right">
+                <button class="nav-back-btn" onclick="goBack()" type="button" title="Back to Orders">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Back to Orders</span>
+                </button>
+            </div>
+        </nav>
     </header>
 
+    <!-- Main Container Card -->
+    <main class="food-main-stage" style="max-width: 820px; margin: 0 auto;">
 
+        <div class="food-section-header">
+            <div>
+                <span class="section-tag">STAFF ORDER REVIEW</span>
+                <h1 class="section-title">Order Details</h1>
+                <p class="section-subtitle">Verify student items and accept for kitchen / counter preparation</p>
+            </div>
+        </div>
 
-    <!-- MAIN -->
+        <section class="order-detail-card" style="background:#ffffff; border: 2px solid #fed7aa; border-radius: 24px; padding: 32px 36px; box-shadow: 0 12px 32px rgba(234, 88, 12, 0.08);">
 
-    <main class="main-container">
-
-
-        <!-- PAGE HEADING -->
-
-        <section class="page-heading">
-
-            <p>
-                ORDER MANAGEMENT
-            </p>
-
-            <h1>
-                Order Details
-            </h1>
-
-            <span>
-                Review the order before accepting it.
-            </span>
-
-        </section>
-
-
-
-        <!-- ORDER CARD -->
-
-        <section class="order-card">
-
-
-            <!-- TOP -->
-
-            <div class="order-top">
-
+            <!-- Top Header Row -->
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ffedd5; padding-bottom: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
                 <div>
-
-                    <span class="label">
-                        Order ID
-                    </span>
-
-                    <h2 id="orderId">
-                        CNT-20260926-245
-                    </h2>
-
+                    <span style="font-size: 13px; color: #64748b; font-weight: 500;">Order ID</span>
+                    <h2 id="orderId" style="font-size: 24px; font-weight: 800; color: #1e293b; margin-top: 2px;">CNT-XXXXXX</h2>
                 </div>
-
-
-                <span
-                    id="orderStatus"
-                    class="status pending">
-
+                <span id="orderStatus" class="status pending" style="padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 700; background: #fef3c7; color: #b45309;">
                     Pending
-
                 </span>
-
             </div>
 
-
-
-            <!-- INFO -->
-
-            <div class="order-info">
-
-
-                <div class="info-box">
-
-                    <span>
-                        Student Index
-                    </span>
-
-                    <strong id="studentIndex">
-                        2024001
-                    </strong>
-
+            <!-- Info Grid -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; background: #fffaf5; border: 1px solid #ffedd5; border-radius: 16px; padding: 18px 20px; margin-bottom: 24px;">
+                <div>
+                    <span style="font-size: 13px; color: #64748b; display: block; margin-bottom: 4px;">Student Index</span>
+                    <strong id="studentIndex" style="font-size: 16px; color: #1e293b;">---</strong>
                 </div>
-
-
-                <div class="info-box">
-
-                    <span>
-                        Order Date
-                    </span>
-
-                    <strong id="orderDate">
-                        26 September 2026
-                    </strong>
-
+                <div>
+                    <span style="font-size: 13px; color: #64748b; display: block; margin-bottom: 4px;">Order Date</span>
+                    <strong id="orderDate" style="font-size: 16px; color: #1e293b;">---</strong>
                 </div>
-
-
-                <div class="info-box">
-
-                    <span>
-                        Order Time
-                    </span>
-
-                    <strong id="orderTime">
-                        10:15 AM
-                    </strong>
-
+                <div>
+                    <span style="font-size: 13px; color: #64748b; display: block; margin-bottom: 4px;">Order Time</span>
+                    <strong id="orderTime" style="font-size: 16px; color: #1e293b;">---</strong>
                 </div>
-
-
             </div>
 
-
-
-            <!-- ITEMS -->
-
-            <div class="items-section">
-
-                <h2>
-                    Order Items
-                </h2>
-
-
-                <div id="orderItems">
-
-                    <!-- JavaScript adds items -->
-
+            <!-- Items -->
+            <div style="margin-bottom: 24px;">
+                <h2 style="font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1.5px solid #ffedd5;">Order Items List</h2>
+                <div id="orderItems" style="display: flex; flex-direction: column; gap: 10px;">
+                    <!-- JS renders order items -->
                 </div>
-
             </div>
 
-
-
-            <!-- TOTAL -->
-
-            <div class="total-section">
-
-                <span>
-                    Total Amount
-                </span>
-
-                <strong>
-                    Rs. <span id="orderTotal">550.00</span>
-                </strong>
-
+            <!-- Total -->
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #fffaf5; border: 2px solid #fed7aa; border-radius: 14px; padding: 16px 20px; margin-bottom: 28px;">
+                <span style="font-size: 16px; font-weight: 600; color: #1e293b;">Total Amount</span>
+                <strong style="font-size: 24px; font-weight: 800; color: #ea580c;">Rs. <span id="orderTotal">0.00</span></strong>
             </div>
 
-
-
-            <!-- ACTIONS -->
-
-            <div class="actions">
-
-                <button
-                    class="cancel-btn"
-                    onclick="goBack()">
-
-                    ← Back to Orders
-
+            <!-- Actions -->
+            <div style="display: flex; gap: 16px;">
+                <button class="nav-back-btn" onclick="goBack()" type="button" style="flex: 1; height: 48px; justify-content: center; font-size: 16px;">
+                    &larr; Back to Orders
                 </button>
-
-
-               <button
-    class="accept-btn"
-    onclick="acceptOrder()">
-
-    Accept Order
-
-</button>
-
+                <button class="order-btn" onclick="acceptOrder()" type="button" style="flex: 2; height: 48px; margin: 0;">
+                    Accept Order
+                </button>
             </div>
-
 
         </section>
-
 
     </main>
 
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon" style="width: 28px; height: 28px; font-size: 16px;">W</div>
+                <span>&copy; 2026 <strong>WAYACANTEEN</strong> - Staff Management Panel</span>
+            </div>
+        </div>
+    </footer>
 
+    <script src="canteen-queue-live.js"></script>
     <script src="order-details.js"></script>
-
 </body>
-
 </html>

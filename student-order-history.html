@@ -1,118 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Google Fonts: Poppins & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WAYACANTEEN - My Orders</title>
 
-    <link rel="stylesheet"
-          href="student-order-history.css">
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
 
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="food.css">
+    <link rel="stylesheet" href="student-order-history.css">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
 </head>
 
-<body>
+<body class="food-page-body">
 
-    <!-- HEADER -->
-    <header class="header">
+    <!-- Diagonal Subtle Overlay -->
+    <div class="food-bg-pattern" aria-hidden="true"></div>
 
-        <div class="brand">
+    <!-- Outer Decorative Props Layer -->
+    <div class="food-props-layer" aria-hidden="true">
+        <img src="images/samosa-3d.png" class="food-float-prop prop-food-samosa" alt="Samosa">
+        <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
+        <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
+        <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
+    </div>
 
-            <div class="brand-icon">
-                C
+    <!-- Top Canopy Header -->
+    <header class="food-hero-canopy">
+        <nav class="food-navbar">
+            <div class="brand" onclick="goHome()" role="button" tabindex="0" title="WAYACANTEEN Home">
+                <div class="brand-icon">W</div>
+                <span>WAYACANTEEN</span>
             </div>
 
-            <span>
-                Cantin
-            </span>
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
+            </div>
 
-        </div>
-
-        <button class="back-btn"
-                onclick="goHome()">
-
-            ← Home
-
-        </button>
-
+            <div class="nav-right">
+                <button class="nav-back-btn" onclick="goHome()" type="button" title="Back to Home Dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Dashboard</span>
+                </button>
+            </div>
+        </nav>
     </header>
 
+    <!-- Main Container Card -->
+    <main class="food-main-stage">
 
-    <!-- MAIN -->
-    <main class="main-container">
-
-        <!-- PAGE HEADING -->
-        <section class="page-heading">
-
-            <p>
-                Student
-            </p>
-
-            <h1>
-                My Orders
-            </h1>
-
-            <span>
-                View your previous and current orders.
-            </span>
-
-        </section>
-
-
-        <!-- FILTERS -->
-        <div class="filters">
-
-            <button class="filter-btn active"
-                    onclick="filterOrders('All')">
-
-                All
-
-            </button>
-
-            <button class="filter-btn"
-                    onclick="filterOrders('Pending')">
-
-                Pending
-
-            </button>
-
-            <button class="filter-btn"
-                    onclick="filterOrders('Accepted')">
-
-                Accepted
-
-            </button>
-
+        <div class="food-section-header">
+            <div>
+                <span class="section-tag">PRE-ORDERS TRACKING</span>
+                <h1 class="section-title">My Orders History</h1>
+                <p class="section-subtitle">Track your live meal preparation status and past completed canteen orders</p>
+            </div>
         </div>
 
+        <!-- Filter Pills Bar -->
+        <div class="order-filter-bar">
+            <button class="order-filter-pill active" onclick="filterOrders('All')" type="button">
+                All Orders
+            </button>
+            <button class="order-filter-pill" onclick="filterOrders('Pending')" type="button">
+                Pending Preparation
+            </button>
+            <button class="order-filter-pill" onclick="filterOrders('Accepted')" type="button">
+                Ready / Accepted
+            </button>
+        </div>
 
-        <!-- ORDERS -->
-        <section id="ordersContainer"
-                 class="orders-container">
-
-            <div class="loading">
-
+        <!-- Orders Container -->
+        <section id="ordersContainer" class="student-orders-container">
+            <div class="loading-state">
                 Loading your orders...
-
             </div>
-
         </section>
-
 
     </main>
 
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon" style="width: 28px; height: 28px; font-size: 16px;">W</div>
+                <span>&copy; 2026 <strong>WAYACANTEEN</strong> - University Canteen Management System</span>
+            </div>
+            <div class="footer-links">
+                <a href="home.html">Dashboard</a>
+                <a href="food.html">Food Menu</a>
+                <a href="cart.html">Cart</a>
+                <a href="help-center.html">Help Center</a>
+            </div>
+        </div>
+    </footer>
 
+    <script src="canteen-queue-live.js"></script>
     <script src="student-order-history.js?v=20261101_v3"></script>
-
+    <script>
+        function goHome() {
+            window.location.href = "home.html";
+        }
+    </script>
 </body>
-
 </html>
