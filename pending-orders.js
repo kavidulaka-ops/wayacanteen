@@ -6,18 +6,19 @@ let pendingOrders = [];
 let acceptedOrders = [];
 let currentTab = "Pending"; // "Pending" or "Accepted"
 let currentFilter = "All";  // "All", "Food", "Stationery"
+let currentSlotFilter = "All"; // "All", "Morning", "Noon", "Night"
 
 // On Load
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
-    if (params.get("tab") === "Accepted") {
+    if (params.get("tab") && params.get("tab").toLowerCase() === "accepted") {
         currentTab = "Accepted";
     }
     const filterParam = params.get("filter");
     if (filterParam && (filterParam === "Food" || filterParam === "Stationery")) {
         currentFilter = filterParam;
-        document.querySelectorAll(".filter-btn").forEach(btn => {
-            if (btn.textContent.includes(filterParam)) {
+        document.querySelectorAll(".category-filter-btn").forEach(btn => {
+            if (btn.getAttribute("data-type") === filterParam) {
                 btn.classList.add("active");
             } else {
                 btn.classList.remove("active");
@@ -43,8 +44,8 @@ function loadAllOrders() {
         acceptedOrders = Array.isArray(acceptedData) ? acceptedData : [];
 
         // Update badge counts
-        const pendingBadge = document.getElementById("pendingCountBadge");
-        const acceptedBadge = document.getElementById("acceptedCountBadge");
+        const pendingBadge = document.getElementById("pendingTabCount") || document.getElementById("pendingCountBadge");
+        const acceptedBadge = document.getElementById("acceptedTabCount") || document.getElementById("acceptedCountBadge");
         if (pendingBadge) pendingBadge.textContent = pendingOrders.length;
         if (acceptedBadge) acceptedBadge.textContent = acceptedOrders.length;
 
@@ -56,13 +57,21 @@ function loadAllOrders() {
 }
 
 // =====================================
-// SWITCH TABS
+// SWITCH TABS (Pending / Active Queue)
 // =====================================
 
-function switchTab(tab) {
-    currentTab = tab;
+function switchMainTab(tab) {
+    if (tab && tab.toLowerCase() === "accepted") {
+        currentTab = "Accepted";
+    } else {
+        currentTab = "Pending";
+    }
     updateTabButtons();
     displayOrders();
+}
+
+function switchTab(tab) {
+    switchMainTab(tab);
 }
 
 function updateTabButtons() {
@@ -80,19 +89,43 @@ function updateTabButtons() {
 }
 
 // =====================================
-// FILTER BY TYPE
+// FILTER BY TYPE & SLOT
 // =====================================
 
 function filterOrders(type) {
     currentFilter = type;
-    document.querySelectorAll(".filter-btn").forEach(btn => {
-        if (btn.textContent.includes(type) || (type === "All" && btn.textContent.includes("All"))) {
+    document.querySelectorAll(".category-filter-btn").forEach(btn => {
+        if (btn.getAttribute("data-type") === type) {
             btn.classList.add("active");
         } else {
             btn.classList.remove("active");
         }
     });
     displayOrders();
+}
+
+function filterSlot(slot) {
+    currentSlotFilter = slot;
+    document.querySelectorAll(".slot-filter-btn").forEach(btn => {
+        if (btn.getAttribute("data-slot") === slot) {
+            btn.classList.add("active");
+        } else {
+            btn.classList.remove("active");
+        }
+    });
+    displayOrders();
+}
+
+function formatPickupTime12(timeStr) {
+    if (!timeStr) return "";
+    const parts = timeStr.split(":");
+    let h = parseInt(parts[0], 10);
+    const m = parts[1] || "00";
+    const ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12;
+    if (h === 0) h = 12;
+    const hStr = h < 10 ? "0" + h : "" + h;
+    return `${hStr}:${m} ${ampm}`;
 }
 
 // =====================================
@@ -107,8 +140,10 @@ function displayOrders() {
     const sourceList = (currentTab === "Pending") ? pendingOrders : acceptedOrders;
 
     let filtered = sourceList.filter(order => {
-        if (currentFilter === "All") return true;
-        return order.orderType === currentFilter;
+        const matchesType = (currentFilter === "All") || (order.orderType === currentFilter);
+        const orderSlot = order.pickupSlot || "Morning";
+        const matchesSlot = (currentSlotFilter === "All") || (orderSlot.toLowerCase() === currentSlotFilter.toLowerCase());
+        return matchesType && matchesSlot;
     });
 
     if (filtered.length === 0) {
@@ -116,7 +151,7 @@ function displayOrders() {
             ? "No Pending Orders"
             : "No Orders in Active Queue";
         const emptyMsg = (currentTab === "Pending")
-            ? "There are no pending orders waiting for review."
+            ? "There are no pending orders waiting for review in this filter."
             : "All accepted orders have been completed and picked up!";
 
         container.innerHTML = `
@@ -148,6 +183,8 @@ function displayOrders() {
 
         const dateFormatted = formatDate(order.orderDate);
         const timeFormatted = formatTime(order.orderTime);
+        const pickupSlot = order.pickupSlot || "Morning";
+        const pickupTimeFormatted = formatPickupTime12(order.pickupTime || "08:30");
 
         let actionButtonsHTML = "";
         if (currentTab === "Pending") {
@@ -175,12 +212,20 @@ function displayOrders() {
             ? `<div class="status-badge-queue">In Queue / Ready for Pickup</div>`
             : "";
 
+        const slotClass = pickupSlot.toLowerCase();
+
         card.innerHTML = `
             <div class="order-header">
                 <div>
                     <h2>${escapeHTML(order.orderCode)}</h2>
                     <span>Student: <strong>${escapeHTML(order.fullName || "")}</strong> (Index: ${escapeHTML(order.indexNumber || "")})</span>
-                    ${queueBadge}
+                    <div class="order-badges-row">
+                        ${queueBadge}
+                        <div class="pickup-schedule-pill pill-${slotClass}">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Pickup: <strong>${escapeHTML(pickupSlot)} (${pickupTimeFormatted})</strong></span>
+                        </div>
+                    </div>
                 </div>
                 <span class="order-type">${escapeHTML(order.orderType)}</span>
             </div>
@@ -195,8 +240,12 @@ function displayOrders() {
                     <strong>${dateFormatted}</strong>
                 </div>
                 <div>
-                    <span>Time</span>
+                    <span>Placed Time</span>
                     <strong>${timeFormatted}</strong>
+                </div>
+                <div class="pickup-target-col">
+                    <span>Scheduled Pickup</span>
+                    <strong style="color: #ea580c;">${escapeHTML(pickupSlot)} &bull; ${pickupTimeFormatted}</strong>
                 </div>
             </div>
 

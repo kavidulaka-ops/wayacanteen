@@ -145,6 +145,13 @@ function displayOrder() {
         .textContent =
         order.status;
 
+    const elPickup = document.getElementById("orderPickup");
+    if (elPickup) {
+        const slot = order.pickupSlot || "Morning";
+        const time = order.pickupTime ? formatTime(order.pickupTime) : "08:30 AM";
+        elPickup.textContent = `${slot} (${time})`;
+    }
+
 
     // =================================
     // DISPLAY ITEMS

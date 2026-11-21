@@ -169,13 +169,39 @@ document.getElementById(
 
 
 // =====================================
-// ORDER STATUS
+// ORDER STATUS & PICKUP DETAILS
 // =====================================
 
 document.getElementById(
     "orderStatus"
 ).textContent =
     "Pending";
+
+let pickupSlot = localStorage.getItem("cantinPickupSlot") || "Morning";
+let pickupTime = localStorage.getItem("cantinPickupTime") || "08:30";
+
+function formatTime12(time24) {
+    if (!time24) return "";
+    const parts = time24.split(":");
+    let h = parseInt(parts[0], 10);
+    const m = parts[1] || "00";
+    const ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12;
+    if (h === 0) h = 12;
+    const hStr = h < 10 ? "0" + h : "" + h;
+    return `${hStr}:${m} ${ampm}`;
+}
+
+const slotRangeMap = {
+    Morning: "Morning (07:00 AM – 11:00 AM)",
+    Noon: "Noon (11:00 AM – 03:00 PM)",
+    Night: "Night (03:00 PM – 08:00 PM)"
+};
+
+const elSlot = document.getElementById("orderPickupSlot");
+const elTime = document.getElementById("orderPickupTime");
+if (elSlot) elSlot.textContent = slotRangeMap[pickupSlot] || `${pickupSlot} Window`;
+if (elTime) elTime.textContent = formatTime12(pickupTime);
 
 
 // =====================================
@@ -360,6 +386,18 @@ function saveOrderToDatabase() {
     );
 
 
+    formData.append(
+        "pickupSlot",
+        pickupSlot
+    );
+
+
+    formData.append(
+        "pickupTime",
+        pickupTime
+    );
+
+
     // ---------------------------------
     // CART ITEMS
     // ---------------------------------
@@ -478,8 +516,12 @@ saveOrderToDatabase()
 let qrData =
     "Cantin Order ID: "
     + orderId
-    + " | Total: Rs."
-    + total;
+    + " | Pickup: "
+    + pickupSlot
+    + " ("
+    + formatTime12(pickupTime)
+    + ") | Total: Rs."
+    + total.toFixed(2);
 
 
 let qrUrl =

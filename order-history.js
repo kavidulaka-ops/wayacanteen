@@ -297,6 +297,19 @@ function displayHistory(type = "All") {
                 </div>
 
 
+                <div class="info-box">
+
+                    <span>
+                        Pickup Schedule
+                    </span>
+
+                    <strong style="color: #ea580c;">
+                        ${order.pickupSlot || "Morning"} (${order.pickupTime ? formatTime(order.pickupTime) : "08:30"})
+                    </strong>
+
+                </div>
+
+
             </div>
 
 

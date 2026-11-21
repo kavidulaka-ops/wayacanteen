@@ -104,11 +104,78 @@ body.food-page-body {
 /* ==========================================================================
    FILTER SUB-TABS (All, Food, Stationery, Combined)
    ========================================================================== */
+.filters-row-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
 .filters {
     display: flex;
     gap: 10px;
-    margin-bottom: 24px;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.slot-filters .filter-btn {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+.slot-filters .filter-btn:hover {
+    background: #dcfce7;
+    border-color: #86efac;
+}
+
+.slot-filters .filter-btn.active {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.order-badges-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.pickup-schedule-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pickup-schedule-pill.pill-morning {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+}
+
+.pickup-schedule-pill.pill-noon {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.pickup-schedule-pill.pill-night {
+    background: #fdf4ff;
+    color: #86198f;
+    border: 1px solid #f5d0fe;
+}
+
+.pickup-target-col {
+    background: #fff7ed;
+    border-radius: 8px;
+    padding: 4px 10px;
 }
 
 .filter-btn {

@@ -24,8 +24,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
 
-    <link rel="stylesheet" href="food.css">
-    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="food.css?v=20261121">
+    <link rel="stylesheet" href="cart.css?v=20261121_v2">
     <link rel="stylesheet" href="pwa.css">
 
     <script src="pwa-install.js" defer></script>
@@ -36,38 +36,24 @@
     <!-- Diagonal Subtle Overlay -->
     <div class="food-bg-pattern" aria-hidden="true"></div>
 
-    <!-- Outer Decorative Props Layer -->
-    <div class="food-props-layer" aria-hidden="true">
-        <img src="images/samosa-3d.png" class="food-float-prop prop-food-samosa" alt="Samosa">
-        <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
-        <img src="images/sausage-bun-3d.png" class="food-float-prop prop-food-sausage" alt="Sausage Bun">
-        <img src="images/ulundu-vadai-3d.png" class="food-float-prop prop-food-ulundu" alt="Ulundu Vadai">
-        <img src="images/vegetable-roti-3d.png" class="food-float-prop prop-food-roti" alt="Vegetable Roti">
-        <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
-        <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
-
-        <svg class="food-garnish-prop garnish-food-leaf-left" width="34" height="34" viewBox="0 0 40 40" fill="none">
-            <path d="M8 32C8 32 10 12 28 6C34 16 32 30 18 34C13 35 8 32 8 32Z" fill="#65a30d"/>
-            <path d="M12 28C15 22 22 14 28 6" stroke="#4d7c0f" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <svg class="food-garnish-prop garnish-food-tomato-left" width="32" height="32" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="16" fill="#ef4444"/>
-            <circle cx="20" cy="20" r="11" fill="#dc2626"/>
-            <circle cx="16" cy="16" r="3" fill="#fca5a5"/>
-            <circle cx="24" cy="22" r="2.5" fill="#fca5a5"/>
-        </svg>
-        <svg class="food-garnish-prop garnish-food-chili-right" width="36" height="36" viewBox="0 0 50 50" fill="none">
-            <path d="M38 12C30 12 14 24 10 38C10 38 16 40 20 34C24 28 34 22 40 18C42 17 40 12 38 12Z" fill="#dc2626"/>
-            <path d="M10 38C8 42 4 44 4 44" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-    </div>
-
-    <!-- Top Canopy Header -->
+    <!-- Top Canopy Header (Signature Orange) -->
     <header class="food-hero-canopy">
+
+        <!-- Outer Decorative Props Layer inside canopy -->
+        <div class="food-props-layer" aria-hidden="true">
+            <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
+            <img src="images/samosa-3d.png" class="food-float-prop prop-food-sausage" alt="Samosa">
+            <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
+            <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
+        </div>
+
         <nav class="food-navbar">
             <div class="brand" onclick="goHome()" role="button" tabindex="0" title="WAYACANTEEN Home">
                 <div class="brand-icon">W</div>
-                <span>WAYACANTEEN</span>
+                <div>
+                    <span style="font-size: 16px; font-weight: 700; color: #ffffff;">WAYACANTEEN</span>
+                    <small style="display: block; font-size: 13px; color: rgba(255, 255, 255, 0.85); font-weight: 500;">Checkout Desk</small>
+                </div>
             </div>
 
             <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
@@ -86,67 +72,192 @@
                     <span>Food Menu</span>
                 </button>
                 <button class="nav-back-btn" onclick="goStationery()" type="button" title="Stationery Store">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                     <span>Stationery</span>
                 </button>
             </div>
         </nav>
+
+        <!-- Hero Content in Canopy -->
+        <div class="food-hero-content">
+            <div class="canteen-tag-pill">
+                <span class="tag-dot"></span>
+                <span>PRE-ORDER CHECKOUT</span>
+            </div>
+            <h1 class="food-hero-title">Your Shopping Cart</h1>
+            <p class="food-hero-subtitle">Review your selected meals &amp; stationery supplies, choose your meal pickup slot, and schedule your counter collection.</p>
+        </div>
     </header>
 
-    <!-- Main Container Card -->
-    <main class="food-main-stage">
+    <!-- Bottom Sweeping White Floor Wave -->
+    <div class="food-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+            <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
 
-        <div class="food-section-header">
-            <div>
-                <span class="section-tag">PRE-ORDER CHECKOUT</span>
-                <h1 class="section-title">Your Shopping Cart</h1>
-                <p class="section-subtitle">Review your selected meal &amp; stationery items before placing your order</p>
+    <!-- Main Floor Section (Clean White) -->
+    <main class="food-floor-section">
+        <div class="food-floor-container">
+
+            <div class="cart-layout-grid">
+
+                <!-- LEFT COLUMN: Cart Items & Pickup Time Schedule -->
+                <div class="cart-main-col">
+
+                    <!-- Cart Items Box -->
+                    <section class="cart-items-card">
+                        <div class="card-title-bar">
+                            <h2 style="font-size: 24px; font-weight: 700; color: #0f172a;">Selected Items</h2>
+                            <span class="items-badge" id="cartCountBadge">0 items</span>
+                        </div>
+
+                        <div id="cartItems" class="cart-items-list">
+                            <!-- Populated dynamically by cart.js -->
+                        </div>
+                    </section>
+
+                    <!-- PICKUP SCHEDULE CARD (NEW REQUIREMENT) -->
+                    <section class="pickup-schedule-card" id="pickupScheduleSection">
+                        <div class="pickup-card-header">
+                            <div class="pickup-icon-bubble">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin: 0;">Order Pickup Time Window</h3>
+                                <p style="font-size: 13px; color: #64748b; margin: 4px 0 0;">Select when you will arrive at the canteen counter so your meal is fresh and hot.</p>
+                            </div>
+                        </div>
+
+                        <!-- 3 MEAL SLOTS SELECTOR -->
+                        <div class="pickup-slots-grid">
+
+                            <!-- Morning Slot: 7:00 AM - 11:00 AM -->
+                            <div class="pickup-slot-btn active" id="slotMorning" onclick="selectPickupSlot('Morning')">
+                                <div class="slot-top-row">
+                                    <div class="slot-badge">Breakfast &amp; Tea</div>
+                                    <div class="slot-check-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                </div>
+                                <h4 class="slot-title">Morning (උදේ)</h4>
+                                <span class="slot-time-range">07:00 AM &ndash; 11:00 AM</span>
+                            </div>
+
+                            <!-- Noon Slot: 11:00 AM - 3:00 PM -->
+                            <div class="pickup-slot-btn" id="slotNoon" onclick="selectPickupSlot('Noon')">
+                                <div class="slot-top-row">
+                                    <div class="slot-badge">Lunch Meals</div>
+                                    <div class="slot-check-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                </div>
+                                <h4 class="slot-title">Noon (දවල්)</h4>
+                                <span class="slot-time-range">11:00 AM &ndash; 03:00 PM</span>
+                            </div>
+
+                            <!-- Night Slot: 3:00 PM - 8:00 PM -->
+                            <div class="pickup-slot-btn" id="slotNight" onclick="selectPickupSlot('Night')">
+                                <div class="slot-top-row">
+                                    <div class="slot-badge">Dinner &amp; Short Eats</div>
+                                    <div class="slot-check-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                </div>
+                                <h4 class="slot-title">Night (රෑ / හවස)</h4>
+                                <span class="slot-time-range">03:00 PM &ndash; 08:00 PM</span>
+                            </div>
+
+                        </div>
+
+                        <!-- SPECIFIC TIME PICKER & PRESET CHIPS -->
+                        <div class="pickup-time-picker-box">
+                            <div class="time-picker-label-row">
+                                <label for="pickupTimeInput" style="font-size: 13px; font-weight: 700; color: #334155;">
+                                    Exact Counter Collection Time:
+                                </label>
+                                <span class="slot-allowed-hint" id="slotAllowedHint">
+                                    Allowed: 07:00 AM &ndash; 11:00 AM
+                                </span>
+                            </div>
+
+                            <div class="time-input-wrap">
+                                <div class="time-icon-prefix">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                </div>
+                                <input type="time" id="pickupTimeInput" min="07:00" max="11:00" value="08:30" step="300" onchange="onPickupTimeInputChanged(event)">
+                                <div class="time-status-pill" id="pickupTimeValidationPill">
+                                    <span>Morning Slot</span>
+                                </div>
+                            </div>
+
+                            <!-- Preset Quick Chips -->
+                            <div class="quick-chips-row">
+                                <span class="chips-label">Quick select:</span>
+                                <div class="chips-list" id="pickupQuickChips">
+                                    <!-- Populated by JS based on selected slot -->
+                                </div>
+                            </div>
+
+                            <div class="time-feedback-msg" id="pickupTimeFeedback">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                <span id="feedbackText">Scheduled for Morning counter pickup between 7:00 AM and 11:00 AM.</span>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Order Summary -->
+                <aside class="cart-sidebar-col">
+                    <div class="order-summary-box">
+                        <h2 class="summary-title" style="font-size: 24px; font-weight: 700; color: #0f172a;">Order Summary</h2>
+
+                        <div class="summary-row">
+                            <span>Total Items</span>
+                            <strong id="totalItems">0</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <strong id="subtotal">Rs. 0.00</strong>
+                        </div>
+
+                        <!-- Scheduled Pickup Summary Row -->
+                        <div class="summary-pickup-preview">
+                            <div class="pickup-preview-title">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>Counter Pickup Window:</span>
+                            </div>
+                            <div class="pickup-preview-val" id="summaryPickupBadge">
+                                Morning &bull; 08:30 AM
+                            </div>
+                        </div>
+
+                        <div class="summary-line"></div>
+
+                        <div class="total-row">
+                            <span>Estimated Total</span>
+                            <strong id="total">Rs. 0.00</strong>
+                        </div>
+
+                        <button class="order-btn" onclick="placePreOrder()" type="button" id="btnPlaceOrder">
+                            <span>Place Pre-Order</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                        <button class="continue-btn" onclick="goFood()" type="button">
+                            Continue Shopping
+                        </button>
+                    </div>
+                </aside>
+
             </div>
+
         </div>
-
-        <section class="cart-container">
-
-            <!-- Cart Items List -->
-            <div class="cart-items">
-                <div id="cartItems">
-                    <!-- JavaScript will render items here -->
-                </div>
-            </div>
-
-            <!-- Order Summary Aside -->
-            <aside class="order-summary">
-                <h2 class="summary-title">Order Summary</h2>
-
-                <div class="summary-row">
-                    <span>Total Items</span>
-                    <strong id="totalItems">0</strong>
-                </div>
-
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <strong id="subtotal">Rs. 0.00</strong>
-                </div>
-
-                <div class="summary-line"></div>
-
-                <div class="total-row">
-                    <span>Estimated Total</span>
-                    <strong id="total">Rs. 0.00</strong>
-                </div>
-
-                <button class="order-btn" onclick="placePreOrder()" type="button">
-                    <span>Place Pre-Order</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-
-                <button class="continue-btn" onclick="goFood()" type="button">
-                    Continue Shopping
-                </button>
-            </aside>
-
-        </section>
-
     </main>
 
+    <!-- App Footer -->
     <footer class="app-footer">
         <div class="footer-inner">
             <div class="footer-brand">
@@ -157,14 +268,14 @@
                 <a href="home.html">Dashboard</a>
                 <a href="food.html">Food Menu</a>
                 <a href="stationery.html">Stationery</a>
-                <a href="finance.html">Finance</a>
+                <a href="student-order-history.html">Order History</a>
                 <a href="help-center.html">Help Center</a>
             </div>
         </div>
     </footer>
 
     <script src="canteen-queue-live.js"></script>
-    <script src="cart.js"></script>
+    <script src="cart.js?v=20261121_v2"></script>
     <script>
         function goHome() {
             window.location.href = "home.html";
