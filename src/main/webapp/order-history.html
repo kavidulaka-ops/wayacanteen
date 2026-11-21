@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Google Fonts: Poppins & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>WAYACANTEEN - Order History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Staff Order History</title>
 
     <!-- PWA Configuration & Theme Color -->
     <meta name="theme-color" content="#ea580c">
@@ -29,141 +24,107 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
 
+    <link rel="stylesheet" href="food.css">
+    <link rel="stylesheet" href="student-order-history.css">
     <link rel="stylesheet" href="order-history.css">
     <link rel="stylesheet" href="pwa.css">
 
     <script src="pwa-install.js" defer></script>
 </head>
 
+<body class="food-page-body">
 
-<body>
+    <!-- Diagonal Subtle Overlay -->
+    <div class="food-bg-pattern" aria-hidden="true"></div>
 
+    <!-- Outer Decorative Props Layer -->
+    <div class="food-props-layer" aria-hidden="true">
+        <img src="images/samosa-3d.png" class="food-float-prop prop-food-samosa" alt="Samosa">
+        <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
+        <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
+        <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
+    </div>
 
-    <!-- HEADER -->
-
-    <header class="header">
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                C
+    <!-- Top Canopy Header -->
+    <header class="food-hero-canopy">
+        <nav class="food-navbar">
+            <div class="brand" onclick="goDashboard()" role="button" tabindex="0" title="Staff Dashboard">
+                <div class="brand-icon">W</div>
+                <div>
+                    <span style="font-size: 16px; font-weight: 700; color: #1e293b;">WAYACANTEEN</span>
+                    <small style="display: block; font-size: 13px; color: #ea580c; font-weight: 600;">Staff Panel</small>
+                </div>
             </div>
 
-            <span>
-                Cantin
-            </span>
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
+            </div>
 
-        </div>
-
-
-        <div class="header-right">
-
-            <span class="staff-label">
-                Staff Panel
-            </span>
-
-            <button
-                class="back-btn"
-                onclick="goDashboard()">
-
-                ← Dashboard
-
-            </button>
-
-        </div>
-
+            <div class="nav-right">
+                <button class="nav-back-btn" onclick="goDashboard()" type="button" title="Back to Dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Dashboard</span>
+                </button>
+            </div>
+        </nav>
     </header>
 
+    <!-- Main Container Card -->
+    <main class="food-main-stage">
 
-
-    <!-- MAIN -->
-
-    <main class="main-container">
-
-
-        <!-- PAGE HEADING -->
-
-        <section class="page-heading">
-
-            <p>
-                Staff Panel
-            </p>
-
-            <h1>
-                Order History
-            </h1>
-
-            <span>
-                View all accepted orders from the canteen.
-            </span>
-
-        </section>
-
-
-
-        <!-- FILTERS -->
-
-        <div class="filters">
-
-            <button
-                class="filter-btn active"
-                onclick="filterOrders('All')">
-
-                All Orders
-
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterOrders('Food')">
-
-                Food
-
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterOrders('Stationery')">
-
-                Stationery
-
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterOrders('Both')">
-
-                Both
-
-            </button>
-	       <button
-    class="clear-history-btn"
-    onclick="clearHistory()">
-
-    Clear History
-
-</button>
-
+        <div class="food-section-header">
+            <div>
+                <span class="section-tag">ACCEPTED &amp; COMPLETED ORDERS</span>
+                <h1 class="section-title">Staff Order History</h1>
+                <p class="section-subtitle">View all accepted, fulfilled, and completed student orders</p>
+            </div>
         </div>
 
+        <!-- Filter & Action Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+            <div class="order-filter-bar" style="margin-bottom: 0;">
+                <button class="order-filter-pill active" onclick="filterOrders('All')" type="button">
+                    All Orders
+                </button>
+                <button class="order-filter-pill" onclick="filterOrders('Food')" type="button">
+                    Food Items
+                </button>
+                <button class="order-filter-pill" onclick="filterOrders('Stationery')" type="button">
+                    Stationery Items
+                </button>
+                <button class="order-filter-pill" onclick="filterOrders('Both')" type="button">
+                    Combined Orders
+                </button>
+            </div>
 
+            <button class="nav-back-btn" onclick="clearHistory()" type="button" style="color: #dc2626; border-color: #fecaca; background: #fff5f5;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>Clear History</span>
+            </button>
+        </div>
 
-        <!-- ORDER HISTORY -->
-
-        <section
-            id="historyContainer"
-            class="history-container">
-
-            <!-- JavaScript will add orders here -->
-
+        <section id="historyContainer" class="student-orders-container">
+            <!-- JavaScript will render orders here -->
         </section>
-
 
     </main>
 
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon" style="width: 28px; height: 28px; font-size: 16px;">W</div>
+                <span>&copy; 2026 <strong>WAYACANTEEN</strong> - Staff Management Panel</span>
+            </div>
+        </div>
+    </footer>
 
+    <script src="canteen-queue-live.js"></script>
     <script src="order-history.js"></script>
-
 </body>
-
 </html>

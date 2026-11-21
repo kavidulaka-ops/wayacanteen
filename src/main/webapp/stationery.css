@@ -847,3 +847,39 @@ body {
         justify-content: center;
     }
 }
+
+@media (max-width: 540px) {
+    .stationery-navbar {
+        padding: 10px 14px;
+        gap: 8px;
+    }
+    .nav-right {
+        gap: 6px;
+    }
+    .nav-right .nav-back-btn span,
+    .nav-right button span {
+        display: none;
+    }
+    .nav-right .nav-back-btn,
+    .nav-right button {
+        padding: 8px 10px;
+    }
+    .home-queue-pill {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        font-size: 13px !important;
+        padding: 6px 14px !important;
+        gap: 8px !important;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+    .home-queue-pill .pill-clock-svg,
+    .home-queue-pill .pill-wait-text {
+        display: none !important;
+    }
+    .home-queue-pill .pill-live-tag {
+        font-size: 13px !important;
+        padding: 2px 6px !important;
+    }
+}
