@@ -210,7 +210,10 @@ function openAddModal() {
     document.getElementById("btnSubmitStationery").textContent = "Add Stationery Item";
 
     const modal = document.getElementById("stationeryModal");
-    if (modal) modal.classList.add("active");
+    if (modal) {
+        modal.classList.add("open");
+        modal.classList.add("active");
+    }
 }
 
 function openEditModal(stationeryId) {
@@ -229,12 +232,18 @@ function openEditModal(stationeryId) {
     document.getElementById("btnSubmitStationery").textContent = "Save Changes";
 
     const modal = document.getElementById("stationeryModal");
-    if (modal) modal.classList.add("active");
+    if (modal) {
+        modal.classList.add("open");
+        modal.classList.add("active");
+    }
 }
 
 function closeModal() {
     const modal = document.getElementById("stationeryModal");
-    if (modal) modal.classList.remove("active");
+    if (modal) {
+        modal.classList.remove("open");
+        modal.classList.remove("active");
+    }
 }
 
 // Close modal on click outside card

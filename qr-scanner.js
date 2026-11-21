@@ -160,10 +160,10 @@ function previewOrderBeforeComplete(orderCode) {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                if (data.status === "Pending") {
-                    displayCompletedResult(data, "pending");
-                } else if (data.status === "Completed") {
+                if (data.status === "Completed") {
                     displayCompletedResult(data, "already-done");
+                } else if (data.status === "Rejected") {
+                    displayCompletedResult(data, "rejected");
                 } else {
                     displayPreviewCard(data);
                 }
