@@ -88,15 +88,28 @@
 
         <!-- Filter Pills Bar -->
         <div class="order-filter-bar">
-            <button class="order-filter-pill active" onclick="filterOrders('All')" type="button">
-                All Orders
-            </button>
-            <button class="order-filter-pill" onclick="filterOrders('Pending')" type="button">
-                Pending Preparation
-            </button>
-            <button class="order-filter-pill" onclick="filterOrders('Accepted')" type="button">
-                Ready / Accepted
-            </button>
+            <div class="filter-pills-group">
+                <button class="order-filter-pill active" onclick="filterOrders('Active')" type="button" id="tabActive">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>Active Pre-Orders</span>
+                    <span class="pill-count" id="activeCount">0</span>
+                </button>
+                <button class="order-filter-pill" onclick="filterOrders('Completed')" type="button" id="tabCompleted">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <span>Completed</span>
+                    <span class="pill-count" id="completedCount">0</span>
+                </button>
+                <button class="order-filter-pill" onclick="filterOrders('All')" type="button" id="tabAll">
+                    <span>All Orders</span>
+                    <span class="pill-count" id="allCount">0</span>
+                </button>
+            </div>
+            <div class="filter-actions-group">
+                <button class="btn-clear-history" onclick="clearCompletedHistory()" type="button" title="Dismiss all completed orders from history">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <span>Clear Completed</span>
+                </button>
+            </div>
         </div>
 
         <!-- Orders Container -->
