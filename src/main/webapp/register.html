@@ -9,160 +9,281 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WAYACANTEEN - Student Registration</title>
-    <link rel="stylesheet" href="style.css">
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
 </head>
+
 <body>
-    <!-- Background Floating Coffee Beans (Soft Blurred Atmosphere) -->
-    <div class="bg-bean bean-top-left" aria-hidden="true"></div>
-    <div class="bg-bean bean-top-left-2" aria-hidden="true"></div>
-    <div class="bg-bean bean-top-right" aria-hidden="true"></div>
-    <div class="bg-bean bean-bottom-left" aria-hidden="true"></div>
-    <div class="bg-bean bean-bottom-right" aria-hidden="true"></div>
 
-    <div class="login-container register-container">
+    <!-- Background Diagonal Subtle Pattern -->
+    <div class="login-bg-pattern" aria-hidden="true"></div>
 
-        <!-- Left Side -->
-        <div class="login-left">
-            <div class="logo">
-                <div class="logo-icon">W</div>
-                <span>WAYACANTEEN</span>
-            </div>
-
-            <div class="welcome-text">
-                <h1>Join Us Today!</h1>
-                <p>
-                    Create your student account to order canteen meals,
-                    buy stationery, track your orders, and manage campus
-                    services in one place.
-                </p>
-            </div>
-        </div>
-
-        <!-- Right Side -->
-        <div class="login-right register-box">
-            <div class="login-box">
-
-                <h2>Student Registration</h2>
-                <p class="login-subtitle">
-                    Fill in your details to create a new account
-                </p>
-
-                <div id="registerMessage" class="message" role="alert" hidden></div>
-
-                <form id="registerForm" action="register" method="POST" novalidate>
-
-                    <div class="input-group">
-                        <label for="indexNumber">Index Number <span style="color:#dc2626;">*</span></label>
-                        <input
-                            type="text"
-                            id="indexNumber"
-                            name="indexNumber"
-                            placeholder="e.g. 242118"
-                            autocomplete="username"
-                            required
-                        >
-                        <small id="indexError"></small>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="fullName">Full Name <span style="color:#dc2626;">*</span></label>
-                        <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            placeholder="Enter your full name"
-                            autocomplete="name"
-                            required
-                        >
-                        <small id="nameError"></small>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="email">Email Address <span style="color:#64748b; font-weight:normal;">(For password reset)</span></label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="e.g. student@gmail.com"
-                            autocomplete="email"
-                        >
-                        <small id="emailError"></small>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="password">Password <span style="color:#dc2626;">*</span></label>
-                        <div class="password-box">
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="At least 6 characters"
-                                autocomplete="new-password"
-                                required
-                            >
-                            <button
-                                type="button"
-                                id="togglePassword"
-                                aria-label="Show or hide password"
-                            >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                            </button>
-                        </div>
-                        <small id="passwordError"></small>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="confirmPassword">Confirm Password <span style="color:#dc2626;">*</span></label>
-                        <div class="password-box">
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                placeholder="Re-enter your password"
-                                autocomplete="new-password"
-                                required
-                            >
-                            <button
-                                type="button"
-                                id="toggleConfirmPassword"
-                                aria-label="Show or hide confirm password"
-                            >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                            </button>
-                        </div>
-                        <small id="confirmPasswordError"></small>
-                    </div>
-
-                    <button type="submit" class="login-button">
-                        Create Account
-                    </button>
-
-                </form>
-
-                <div class="divider">
-                    <span>Already have an account?</span>
-                </div>
-
-                <p class="account-switch">
-                    Already registered?
-                    <a href="login.html"><strong>Login here</strong></a>
-                </p>
-
-                <p class="account-switch" style="margin-top: 10px;">
-                    Are you a staff member?
-                    <a href="staff-login.html">Staff Login</a>
-                </p>
-
-                <p class="account-switch" style="margin-top: 10px;">
-                    <a href="index.html">← Back to Portal Home</a>
-                </p>
-
-            </div>
-        </div>
-
+    <!-- Bottom Sweeping White Floor Wave -->
+    <div class="login-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+            <path d="M0,80 C360,20 720,130 1080,60 C1260,25 1380,70 1440,80 L1440,160 L0,160 Z" fill="#ffffff"></path>
+        </svg>
     </div>
 
+    <!-- Floating Food & Stationery Props Layer -->
+    <div class="login-props-layer" aria-hidden="true">
+        <!-- Stationery: 3D Spiral Notebook (Top-Left) -->
+        <img src="images/stationery-notebook-3d.png" class="float-prop prop-notebook" alt="Spiral Notebook">
+
+        <!-- Food: 3D Crispy Samosa (Upper-Left) -->
+        <img src="images/samosa-3d.png" class="float-prop prop-samosa" alt="Crispy Samosa">
+
+        <!-- Food: 3D Ulundu Vadai (Middle-Left) -->
+        <img src="images/ulundu-vadai-3d.png" class="float-prop prop-ulundu" alt="Ulundu Vadai">
+
+        <!-- Food: 3D Sri Lankan Sausage Bun (Bottom-Left) -->
+        <img src="images/sausage-bun-3d.png" class="float-prop prop-sausage-bun" alt="Sausage Bun">
+
+        <!-- Stationery: 3D Pen & Neon Highlighter (Top-Right) -->
+        <img src="images/stationery-pen-highlighter-3d.png" class="float-prop prop-pen" alt="Pen and Highlighter">
+
+        <!-- Food: 3D Parippu Vadai (Upper-Right) -->
+        <img src="images/parippu-vadai-3d.png" class="float-prop prop-parippu" alt="Parippu Vadai">
+
+        <!-- Stationery: 3D Student Calculator (Middle-Right) -->
+        <img src="images/stationery-calculator-3d.png" class="float-prop prop-calculator" alt="Student Calculator">
+
+        <!-- Food: 3D Vegetable Roti (Bottom-Right) -->
+        <img src="images/vegetable-roti-3d.png" class="float-prop prop-roti" alt="Vegetable Roti">
+
+        <!-- Floating Garnish Accents -->
+        <svg class="garnish-prop garnish-leaf-left" width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <path d="M8 32C8 32 10 12 28 6C34 16 32 30 18 34C13 35 8 32 8 32Z" fill="#65a30d"/>
+            <path d="M12 28C15 22 22 14 28 6" stroke="#4d7c0f" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="garnish-prop garnish-tomato-left" width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="16" fill="#ef4444"/>
+            <circle cx="20" cy="20" r="11" fill="#dc2626"/>
+            <circle cx="16" cy="16" r="3" fill="#fca5a5"/>
+            <circle cx="24" cy="22" r="2.5" fill="#fca5a5"/>
+        </svg>
+
+        <svg class="garnish-prop garnish-chili-left" width="40" height="40" viewBox="0 0 50 50" fill="none">
+            <path d="M12 40C20 40 38 28 42 12C42 12 36 10 32 16C28 22 18 28 10 32C8 33 10 39 12 40Z" fill="#dc2626"/>
+            <path d="M42 12C44 8 48 6 48 6" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="garnish-prop garnish-leaf-right" width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <path d="M32 32C32 32 30 14 12 8C6 18 8 30 22 34C27 35 32 32 32 32Z" fill="#84cc16"/>
+            <path d="M28 28C25 22 18 14 12 8" stroke="#4d7c0f" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="garnish-prop garnish-chili-right" width="38" height="38" viewBox="0 0 50 50" fill="none">
+            <path d="M38 12C30 12 14 24 10 38C10 38 16 40 20 34C24 28 34 22 40 18C42 17 40 12 38 12Z" fill="#dc2626"/>
+            <path d="M10 38C8 42 4 44 4 44" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- Live Canteen Queue / Rush Status Banner -->
+    <div class="canteen-live-banner" id="canteenLiveBanner" role="region" aria-label="Live Canteen Queue Status">
+        <div class="live-banner-left">
+            <div class="live-pulse-container" title="Real-time canteen rush update">
+                <span class="live-pulse-dot" id="liveDot"></span>
+                <span>LIVE</span>
+            </div>
+            <div class="live-info-block">
+                <div class="live-header-row">
+                    <span class="live-canteen-title">Canteen Queue Status:</span>
+                    <span class="live-badge level-low" id="liveLevelBadge">
+                        <span id="badgeIcon">•</span>
+                        <span id="badgeText">Low Queue</span>
+                    </span>
+                </div>
+                <p class="live-subnote" id="liveNote">Few or no line at the counter · Fast counter service</p>
+            </div>
+        </div>
+
+        <div class="live-banner-right">
+            <div class="live-metric-card" title="Estimated wait time at the counter">
+                <span class="metric-emoji"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+                <div class="metric-data">
+                    <span class="metric-value" id="metricWait">~5 mins</span>
+                    <span class="metric-label">Est. Wait</span>
+                </div>
+            </div>
+            <div class="live-metric-card" title="Active orders being prepared right now">
+                <span class="metric-emoji"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></span>
+                <div class="metric-data">
+                    <span class="metric-value" id="metricOrders">0</span>
+                    <span class="metric-label">In Queue</span>
+                </div>
+            </div>
+            <button class="live-refresh-btn" id="liveRefreshBtn" type="button" title="Refresh live status" aria-label="Refresh live status">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Centered Main Content Wrapper -->
+    <main class="login-main-wrapper">
+
+        <!-- Centered White Register Card -->
+        <div class="login-card register-card">
+
+            <div class="login-header">
+                <h2 class="login-title">Student Registration</h2>
+                <p class="login-subtitle">Fill in your details to create a new account</p>
+            </div>
+
+            <div id="registerMessage" class="message" role="alert" hidden></div>
+
+            <form id="registerForm" action="register" method="POST" novalidate>
+
+                <div class="input-group">
+                    <label for="indexNumber">
+                        <span>Index Number</span>
+                        <span class="req-star">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="indexNumber"
+                        name="indexNumber"
+                        placeholder="e.g. 242118"
+                        autocomplete="username"
+                        required
+                    >
+                    <small id="indexError" class="input-error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="fullName">
+                        <span>Full Name</span>
+                        <span class="req-star">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+                    <small id="nameError" class="input-error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">
+                        <span>Email Address</span>
+                        <span class="optional-tag">(Optional - for password reset)</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="e.g. student@gmail.com"
+                        autocomplete="email"
+                    >
+                    <small id="emailError" class="input-error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">
+                        <span>Password</span>
+                        <span class="req-star">*</span>
+                    </label>
+                    <div class="password-box">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="At least 6 characters"
+                            autocomplete="new-password"
+                            required
+                        >
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            aria-label="Show or hide password"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    <small id="passwordError" class="input-error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword">
+                        <span>Confirm Password</span>
+                        <span class="req-star">*</span>
+                    </label>
+                    <div class="password-box">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Re-enter your password"
+                            autocomplete="new-password"
+                            required
+                        >
+                        <button
+                            type="button"
+                            id="toggleConfirmPassword"
+                            aria-label="Show or hide confirm password"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    <small id="confirmPasswordError" class="input-error"></small>
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="submitRegisterBtn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+            <div class="divider">
+                <span>University Canteen Management System</span>
+            </div>
+
+            <p class="account-switch">
+                Already registered?
+                <a href="login.html"><strong>Login here</strong></a>
+            </p>
+
+            <p class="account-switch">
+                Are you a staff member?
+                <a href="staff-login.html">Staff Login</a>
+            </p>
+
+            <p class="account-switch back-home">
+                <a href="index.html">&larr; Back to Portal Home</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- JavaScript Controllers -->
+    <script src="canteen-queue-live.js"></script>
     <script src="register.js"></script>
 </body>
 </html>
