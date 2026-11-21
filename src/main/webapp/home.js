@@ -22,6 +22,11 @@ function openHelp() {
     window.location.href = "help-center.html";
 }
 
+// Student Feedback
+function openFeedback() {
+    window.location.href = "feedback.html";
+}
+
 // =========================================
 // NOTIFICATIONS CONTROLLER
 // =========================================

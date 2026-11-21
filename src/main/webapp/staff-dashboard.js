@@ -206,3 +206,7 @@ function openFoodManagement() {
 function openStationeryManagement() {
     window.location.href = "staff-stationery.html";
 }
+
+function openFeedback() {
+    window.location.href = "staff-feedback.html";
+}

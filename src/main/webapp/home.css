@@ -1107,3 +1107,43 @@ footer {
         align-items: flex-start;
     }
 }
+
+/* Nav Feedback Pill Button */
+.nav-feedback-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffffff;
+    border: 1px solid #fed7aa;
+    color: #ea580c;
+    padding: 7px 14px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.nav-feedback-btn:hover {
+    background: #ea580c;
+    color: #ffffff;
+    border-color: #ea580c;
+    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.25);
+}
+
+/* 5th Service Card: Feedback Card Center Span */
+.service-card.feedback-card {
+    grid-column: 1 / -1;
+    max-width: 580px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .service-card.feedback-card {
+        grid-column: auto;
+        max-width: 100%;
+    }
+}
+

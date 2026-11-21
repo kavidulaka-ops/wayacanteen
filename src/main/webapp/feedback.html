@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAYACANTEEN - Student Feedback</title>
+
+    <!-- PWA Configuration & Theme Color -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAYACANTEEN">
+    <meta name="application-name" content="WAYACANTEEN">
+    <meta name="msapplication-TileColor" content="#ea580c">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="food.css?v=20261121">
+    <link rel="stylesheet" href="feedback.css?v=20261121">
+    <link rel="stylesheet" href="pwa.css">
+
+    <script src="pwa-install.js" defer></script>
+</head>
+
+<body class="food-page-body">
+
+    <!-- Diagonal Subtle Overlay -->
+    <div class="food-bg-pattern" aria-hidden="true"></div>
+
+    <!-- Outer Decorative Props Layer -->
+    <div class="food-props-layer" aria-hidden="true">
+        <img src="images/samosa-3d.png" class="food-float-prop prop-food-samosa" alt="Samosa">
+        <img src="images/stationery-notebook-3d.png" class="food-float-prop prop-food-notebook" alt="Notebook">
+        <img src="images/parippu-vadai-3d.png" class="food-float-prop prop-food-parippu" alt="Parippu Vadai">
+        <img src="images/stationery-calculator-3d.png" class="food-float-prop prop-food-calculator" alt="Calculator">
+    </div>
+
+    <!-- Top Canopy Header -->
+    <header class="food-hero-canopy">
+        <nav class="food-navbar">
+            <div class="brand" onclick="goHome()" role="button" tabindex="0" title="WAYACANTEEN Home">
+                <div class="brand-icon">W</div>
+                <div class="brand-text-col">
+                    <span class="brand-title">WAYACANTEEN</span>
+                    <small class="brand-sub">University Canteen &amp; Store</small>
+                </div>
+            </div>
+
+            <!-- Live Canteen Rush Pill -->
+            <div class="home-queue-pill home-queue-medium" id="homeQueuePill" title="Live Canteen Rush Status">
+                <span class="pill-live-tag">LIVE</span>
+                <span class="pill-dot"></span>
+                <span class="pill-status-text">Moderate Crowd</span>
+                <span class="pill-clock-svg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+                <span class="pill-wait-text">Wait: ~12 mins</span>
+            </div>
+
+            <div class="nav-right">
+                <button class="nav-back-btn" onclick="goHome()" type="button" title="Back to Home Dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>Dashboard</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Content in Canopy -->
+        <div class="food-hero-content">
+            <div class="canteen-tag-pill">
+                <span class="tag-dot"></span>
+                <span>STUDENT VOICE &amp; REVIEWS</span>
+            </div>
+            <h1 class="food-hero-title">Share Your Canteen Feedback</h1>
+            <p class="food-hero-subtitle">Help us improve meal quality, counter speed, and canteen facilities for all students</p>
+        </div>
+    </header>
+
+    <!-- Bottom Sweeping White Floor Wave -->
+    <div class="food-bottom-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+            <path d="M0,60 C360,10 720,110 1080,45 C1260,20 1380,55 1440,60 L1440,140 L0,140 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- Main Floor Section (Clean White) -->
+    <main class="food-floor-section">
+        <div class="food-floor-container" style="max-width: 760px; margin: 0 auto;">
+
+            <!-- SUCCESS NOTIFICATION BOX (HIDDEN INITIALLY) -->
+            <div id="feedbackSuccessCard" class="feedback-success-card" style="display: none;">
+                <div class="success-icon-wrap">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <h2 class="success-title">Feedback Submitted Successfully!</h2>
+                <p class="success-desc">Thank you for helping us maintain top canteen standards. Your feedback has been shared with canteen administration.</p>
+                <div class="success-actions">
+                    <button class="btn-success-reset" onclick="resetFeedbackForm()" type="button">
+                        Submit Another Feedback
+                    </button>
+                    <button class="btn-success-home" onclick="goHome()" type="button">
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- MAIN FEEDBACK FORM CARD -->
+            <div id="feedbackFormCard" class="feedback-main-card">
+
+                <div class="form-header-badge">
+                    <span class="badge-label">STUDENT REVIEW FORM</span>
+                </div>
+
+                <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)">
+
+                    <!-- 1. STAR RATING SELECTOR -->
+                    <div class="form-group-star">
+                        <label class="group-title">How would you rate your overall experience?</label>
+                        <div class="star-rating-container" id="starRatingGroup" role="radiogroup" aria-label="Rating">
+                            <button type="button" class="star-btn" data-value="1" onclick="setRating(1)" aria-label="1 star">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </button>
+                            <button type="button" class="star-btn" data-value="2" onclick="setRating(2)" aria-label="2 stars">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </button>
+                            <button type="button" class="star-btn" data-value="3" onclick="setRating(3)" aria-label="3 stars">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </button>
+                            <button type="button" class="star-btn" data-value="4" onclick="setRating(4)" aria-label="4 stars">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </button>
+                            <button type="button" class="star-btn active" data-value="5" onclick="setRating(5)" aria-label="5 stars">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </button>
+                        </div>
+                        <span class="rating-verbal-label" id="ratingVerbalLabel">5 Stars — Excellent Experience!</span>
+                        <input type="hidden" id="selectedRating" value="5">
+                    </div>
+
+                    <!-- 2. CATEGORY PILL SELECTOR -->
+                    <div class="form-group-cat">
+                        <label class="group-title">Select Feedback Category</label>
+                        <div class="category-pills-row" id="categoryPillRow">
+                            <button type="button" class="cat-pill active" onclick="selectCategory('Food Quality')">
+                                Food Quality
+                            </button>
+                            <button type="button" class="cat-pill" onclick="selectCategory('Service Speed')">
+                                Service Speed
+                            </button>
+                            <button type="button" class="cat-pill" onclick="selectCategory('Canteen Cleanliness')">
+                                Cleanliness
+                            </button>
+                            <button type="button" class="cat-pill" onclick="selectCategory('Stationery Store')">
+                                Stationery Store
+                            </button>
+                            <button type="button" class="cat-pill" onclick="selectCategory('App / System')">
+                                App Experience
+                            </button>
+                            <button type="button" class="cat-pill" onclick="selectCategory('General')">
+                                General Suggestion
+                            </button>
+                        </div>
+                        <input type="hidden" id="selectedCategory" value="Food Quality">
+                    </div>
+
+                    <!-- 3. STUDENT IDENTITY ROW (WITH ANONYMOUS TOGGLE) -->
+                    <div class="form-group-identity">
+                        <div class="identity-header-row">
+                            <label class="group-title">Your Details</label>
+                            <label class="anon-toggle-label">
+                                <input type="checkbox" id="anonCheckbox" onchange="toggleAnonymous(this.checked)">
+                                <span>Submit Anonymously</span>
+                            </label>
+                        </div>
+
+                        <div class="identity-inputs-grid" id="identityInputsGrid">
+                            <div class="input-col">
+                                <label class="input-caption" for="studentNameInput">Your Name</label>
+                                <input type="text" id="studentNameInput" class="custom-input" placeholder="e.g. Kavidu Lakshan" required>
+                            </div>
+                            <div class="input-col">
+                                <label class="input-caption" for="indexNumberInput">Index Number</label>
+                                <input type="text" id="indexNumberInput" class="custom-input" placeholder="e.g. 242117">
+                            </div>
+                        </div>
+
+                        <div class="anon-notice" id="anonNotice" style="display: none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <span>Your name and student index will be hidden. Your review will display as "Anonymous Student".</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. OPTIONAL ORDER CODE -->
+                    <div class="form-group-order">
+                        <label class="input-caption" for="orderCodeInput">Related Order Code (Optional)</label>
+                        <input type="text" id="orderCodeInput" class="custom-input" placeholder="e.g. CNT-20261121-897">
+                        <small class="field-hint">Leave blank if your feedback is general or not tied to a specific pre-order.</small>
+                    </div>
+
+                    <!-- 5. FEEDBACK COMMENTS TEXTAREA -->
+                    <div class="form-group-comments">
+                        <label class="group-title" for="feedbackTextInput">Your Feedback &amp; Suggestions <span class="required-star">*</span></label>
+                        <textarea id="feedbackTextInput" class="custom-textarea" rows="4" placeholder="Describe your experience, food taste, waiting time, or ideas to make Wayacanteen better..." required></textarea>
+
+                        <!-- Quick Compliments / Chips -->
+                        <div class="quick-tags-container">
+                            <span class="tags-label">Quick Suggestions:</span>
+                            <div class="tags-flex">
+                                <button type="button" class="quick-tag-chip" onclick="appendTag('Food was fresh and delicious!')">+ Fresh Food</button>
+                                <button type="button" class="quick-tag-chip" onclick="appendTag('Quick counter pickup!')">+ Fast Pickup</button>
+                                <button type="button" class="quick-tag-chip" onclick="appendTag('Clean dining area and friendly staff.')">+ Friendly &amp; Clean</button>
+                                <button type="button" class="quick-tag-chip" onclick="appendTag('Wait time was a bit long during peak rush.')">+ Long Queue</button>
+                                <button type="button" class="quick-tag-chip" onclick="appendTag('Please add more meal varieties in the morning.')">+ More Varieties</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. SUBMIT BUTTON -->
+                    <div class="form-actions">
+                        <button type="submit" id="submitFeedbackBtn" class="btn-submit-feedback">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            <span>Submit Feedback</span>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon" style="width: 28px; height: 28px; font-size: 16px;">W</div>
+                <span>&copy; 2026 <strong>WAYACANTEEN</strong> - Student Management System</span>
+            </div>
+            <div class="footer-links">
+                <a href="home.html">Home</a>
+                <a href="food.html">Food Menu</a>
+                <a href="stationery.html">Stationery</a>
+                <a href="student-order-history.html">My Orders</a>
+                <a href="feedback.html">Feedback</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="canteen-queue-live.js"></script>
+    <script src="feedback.js?v=20261121"></script>
+</body>
+</html>
