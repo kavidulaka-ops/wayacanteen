@@ -50,7 +50,7 @@ public class StudentOrderHistoryServlet extends HttpServlet {
                 "accepted_date, accepted_time, completed_date, completed_time, pickup_slot, pickup_time " +
                 "FROM orders " +
                 "WHERE student_id = ? " +
-                "ORDER BY order_id DESC";
+                "ORDER BY (CASE WHEN status IN ('Pending', 'Accepted') THEN 0 ELSE 1 END) ASC, order_id DESC";
 
         try (Connection connection = DBConnection.getConnection()) {
 
@@ -184,7 +184,29 @@ public class StudentOrderHistoryServlet extends HttpServlet {
 
                         json.append("\"completedTime\":\"")
                                 .append(escapeJson(completedTime))
-                                .append("\"");
+                                .append("\",");
+
+                        // Items for this order
+                        json.append("\"items\":[");
+                        String itemSql = "SELECT item_type, item_name, quantity, unit_price, subtotal FROM order_items WHERE order_id = ?";
+                        try (PreparedStatement itemStmt = connection.prepareStatement(itemSql)) {
+                            itemStmt.setInt(1, orderId);
+                            try (ResultSet irs = itemStmt.executeQuery()) {
+                                boolean firstItem = true;
+                                while (irs.next()) {
+                                    if (!firstItem) json.append(",");
+                                    json.append("{")
+                                            .append("\"itemType\":\"").append(escapeJson(irs.getString("item_type"))).append("\",")
+                                            .append("\"name\":\"").append(escapeJson(irs.getString("item_name"))).append("\",")
+                                            .append("\"quantity\":").append(irs.getInt("quantity")).append(",")
+                                            .append("\"price\":").append(irs.getDouble("unit_price")).append(",")
+                                            .append("\"subtotal\":").append(irs.getDouble("subtotal"))
+                                            .append("}");
+                                    firstItem = false;
+                                }
+                            }
+                        }
+                        json.append("]");
 
                         json.append("}");
 
