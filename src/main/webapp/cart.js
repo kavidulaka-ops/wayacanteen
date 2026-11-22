@@ -37,7 +37,7 @@ localStorage.setItem("cantinCart", JSON.stringify(cart));
 const SLOT_CONFIG = {
     Morning: {
         name: "Morning",
-        label: "Morning (උදේ)",
+        label: "Morning",
         min: "07:00",
         max: "11:00",
         defaultTime: "08:30",
@@ -46,7 +46,7 @@ const SLOT_CONFIG = {
     },
     Noon: {
         name: "Noon",
-        label: "Noon (දවල්)",
+        label: "Noon",
         min: "11:00",
         max: "15:00",
         defaultTime: "12:30",
@@ -55,7 +55,7 @@ const SLOT_CONFIG = {
     },
     Night: {
         name: "Night",
-        label: "Night (රෑ / හවස)",
+        label: "Night",
         min: "15:00",
         max: "20:00",
         defaultTime: "17:00",
