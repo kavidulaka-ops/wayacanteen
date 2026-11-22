@@ -614,6 +614,109 @@ p, span, label, input, select, textarea, .desc, .details, button {
 }
 
 /* ================= APP FOOTER ================= */
+.card-food-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1.5px solid #fed7aa;
+    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.15);
+}
+
+.photo-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.photo-dropzone {
+    border: 2px dashed #fed7aa;
+    background: #fffaf5;
+    border-radius: 14px;
+    padding: 16px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.photo-dropzone:hover {
+    border-color: #ea580c;
+    background: #fff7ed;
+    transform: translateY(-1px);
+}
+
+.dropzone-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ea580c;
+}
+
+.dropzone-hint {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.photo-preview-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #fffaf5;
+    border: 1.5px solid #fed7aa;
+    border-radius: 14px;
+}
+
+.photo-preview-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1.5px solid #fed7aa;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.12);
+}
+
+.photo-preview-meta {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.photo-preview-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    word-break: break-all;
+}
+
+.btn-remove-photo {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+}
+
+.btn-remove-photo:hover {
+    background: #fee2e2;
+    border-color: #f87171;
+}
+
 .app-footer {
     background: #ffffff;
     border-top: 1px solid #fed7aa;

@@ -89,24 +89,31 @@ function renderStationeryList() {
         card.className = "stationery-card" + (item.available ? "" : " out-of-stock");
         card.id = "stationeryCard_" + item.id;
 
-        // Dynamic SVG Icon based on category
-        let iconSvg;
-        if ((item.category || "").toLowerCase() === "books") {
-            iconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>';
-        } else if ((item.category || "").toLowerCase() === "writing") {
-            iconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="2" x2="22" y2="6"></line><path d="M7.5 20.5 19 9l-4-4L3.5 16.5 2 22z"></path></svg>';
-        } else {
-            iconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>';
-        }
-
         const safeName = escapeHtml(item.name || item.itemName || "");
         const safeDesc = escapeHtml(item.description || "No description provided.");
         const safeCat = escapeHtml(item.category || "Stationery");
 
+        // Dynamic SVG Icon or Custom Image
+        const hasCustomImg = item.imageUrl && item.imageUrl.trim() !== "";
+        let mediaElement;
+        if (hasCustomImg) {
+            mediaElement = `<img src="${escapeHtml(item.imageUrl)}" class="card-stationery-img" alt="${safeName}">`;
+        } else {
+            let iconSvg;
+            if ((item.category || "").toLowerCase() === "books") {
+                iconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>';
+            } else if ((item.category || "").toLowerCase() === "writing") {
+                iconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="2" x2="22" y2="6"></line><path d="M7.5 20.5 19 9l-4-4L3.5 16.5 2 22z"></path></svg>';
+            } else {
+                iconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>';
+            }
+            mediaElement = `<div class="card-stationery-icon">${iconSvg}</div>`;
+        }
+
         card.innerHTML = `
             <div>
                 <div class="card-top">
-                    <div class="card-stationery-icon">${iconSvg}</div>
+                    ${mediaElement}
                     <div class="card-details">
                         <div class="card-meta">
                             <span class="badge-category">${safeCat}</span>
@@ -200,6 +207,69 @@ async function toggleAvailability(stationeryId, checkbox) {
 // =====================================
 let currentEditingId = null;
 
+function resetStationeryPhotoUpload() {
+    const fileInput = document.getElementById("stationeryImage");
+    if (fileInput) fileInput.value = "";
+    const existing = document.getElementById("stationeryExistingImage");
+    if (existing) existing.value = "";
+    const removeImg = document.getElementById("stationeryRemoveImage");
+    if (removeImg) removeImg.value = "0";
+    const preview = document.getElementById("stationeryPhotoPreview");
+    if (preview) preview.src = "";
+    const previewWrap = document.getElementById("stationeryPhotoPreviewWrap");
+    if (previewWrap) previewWrap.style.display = "none";
+    const dropzone = document.getElementById("stationeryPhotoDropzone");
+    if (dropzone) dropzone.style.display = "flex";
+}
+
+function handleStationeryImageSelected(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image file (PNG, JPG, WEBP).");
+        e.target.value = "";
+        return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+        alert("Image file size must be less than 5MB.");
+        e.target.value = "";
+        return;
+    }
+
+    const removeImg = document.getElementById("stationeryRemoveImage");
+    if (removeImg) removeImg.value = "0";
+    const nameLabel = document.getElementById("stationeryPhotoPreviewName");
+    if (nameLabel) nameLabel.textContent = file.name;
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+        const preview = document.getElementById("stationeryPhotoPreview");
+        if (preview) preview.src = evt.target.result;
+        const previewWrap = document.getElementById("stationeryPhotoPreviewWrap");
+        if (previewWrap) previewWrap.style.display = "flex";
+        const dropzone = document.getElementById("stationeryPhotoDropzone");
+        if (dropzone) dropzone.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeStationeryPhoto() {
+    const fileInput = document.getElementById("stationeryImage");
+    if (fileInput) fileInput.value = "";
+    const existing = document.getElementById("stationeryExistingImage");
+    if (existing) existing.value = "";
+    const removeImg = document.getElementById("stationeryRemoveImage");
+    if (removeImg) removeImg.value = "1";
+    const preview = document.getElementById("stationeryPhotoPreview");
+    if (preview) preview.src = "";
+    const previewWrap = document.getElementById("stationeryPhotoPreviewWrap");
+    if (previewWrap) previewWrap.style.display = "none";
+    const dropzone = document.getElementById("stationeryPhotoDropzone");
+    if (dropzone) dropzone.style.display = "flex";
+}
+
 function openAddModal() {
     currentEditingId = null;
     document.getElementById("modalTitle").textContent = "Add New Stationery Item";
@@ -208,6 +278,8 @@ function openAddModal() {
     document.getElementById("stationeryFormAction").value = "add";
     document.getElementById("stationeryFormAvailable").checked = true;
     document.getElementById("btnSubmitStationery").textContent = "Add Stationery Item";
+
+    resetStationeryPhotoUpload();
 
     const modal = document.getElementById("stationeryModal");
     if (modal) {
@@ -230,6 +302,15 @@ function openEditModal(stationeryId) {
     document.getElementById("stationeryDesc").value = item.description || "";
     document.getElementById("stationeryFormAvailable").checked = !!item.available;
     document.getElementById("btnSubmitStationery").textContent = "Save Changes";
+
+    resetStationeryPhotoUpload();
+    if (item.imageUrl && item.imageUrl.trim() !== "") {
+        document.getElementById("stationeryExistingImage").value = item.imageUrl;
+        document.getElementById("stationeryPhotoPreview").src = item.imageUrl;
+        document.getElementById("stationeryPhotoPreviewName").textContent = (item.name || item.itemName) + " photo";
+        document.getElementById("stationeryPhotoPreviewWrap").style.display = "flex";
+        document.getElementById("stationeryPhotoDropzone").style.display = "none";
+    }
 
     const modal = document.getElementById("stationeryModal");
     if (modal) {
@@ -267,6 +348,8 @@ async function handleStationerySubmit(event) {
     const price = document.getElementById("stationeryPrice").value.trim();
     const description = document.getElementById("stationeryDesc").value.trim();
     const available = document.getElementById("stationeryFormAvailable").checked ? "1" : "0";
+    const existingImage = document.getElementById("stationeryExistingImage").value;
+    const removeImage = document.getElementById("stationeryRemoveImage").value;
 
     if (!name) {
         showToast("Please enter item name", true);
@@ -284,22 +367,28 @@ async function handleStationerySubmit(event) {
     btn.disabled = true;
 
     try {
-        const formData = new URLSearchParams();
+        const formData = new FormData();
         formData.append("action", action);
         formData.append("name", name);
         formData.append("category", category);
         formData.append("price", price);
         formData.append("description", description);
         formData.append("available", available);
+        formData.append("existingImage", existingImage);
+        formData.append("removeImage", removeImage);
 
         if (action === "edit" && stationeryId) {
             formData.append("stationeryId", stationeryId);
         }
 
+        const fileInput = document.getElementById("stationeryImage");
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append("imageFile", fileInput.files[0]);
+        }
+
         const res = await fetch("/CantinWeb/staff-stationery", {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: formData.toString()
+            body: formData
         });
 
         const data = await res.json();

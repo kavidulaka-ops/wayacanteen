@@ -172,7 +172,9 @@ function renderFilteredFood() {
     }
 
     filtered.forEach((item, index) => {
-        const imageSrc = getFoodItemImage(item.name, item.category);
+        const imageSrc = (item.imageUrl && item.imageUrl.trim() !== "") 
+            ? item.imageUrl 
+            : getFoodItemImage(item.name, item.category);
         const badgeInfo = getCategoryBadge(item.category, item.name);
         const descText = getItemDescription(item.description, item.name, item.category);
         const safeName = (item.name || "Food Item").replace(/'/g, "\\'");
