@@ -26,7 +26,7 @@ public class StationeryServlet extends HttpServlet {
         );
 
         String sql =
-                "SELECT stationery_id, item_name, description, category, price " +
+                "SELECT stationery_id, item_name, description, category, price, image_url " +
                 "FROM stationery_items " +
                 "WHERE available = TRUE " +
                 "ORDER BY stationery_id ASC";
@@ -64,6 +64,7 @@ public class StationeryServlet extends HttpServlet {
                     String description = result.getString("description");
                     String category = result.getString("category");
                     double price = result.getDouble("price");
+                    String imageUrl = result.getString("image_url");
 
                     if (category == null || category.trim().isEmpty()) {
                         category = "Other";
@@ -74,7 +75,8 @@ public class StationeryServlet extends HttpServlet {
                     json.append("\"name\":\"").append(escapeJson(name)).append("\",");
                     json.append("\"description\":\"").append(escapeJson(description != null ? description : "")).append("\",");
                     json.append("\"price\":").append(price).append(",");
-                    json.append("\"category\":\"").append(escapeJson(category)).append("\"");
+                    json.append("\"category\":\"").append(escapeJson(category)).append("\",");
+                    json.append("\"imageUrl\":\"").append(escapeJson(imageUrl != null ? imageUrl : "")).append("\"");
                     json.append("}");
 
                     first = false;

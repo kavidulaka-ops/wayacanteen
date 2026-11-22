@@ -165,7 +165,9 @@ function renderFilteredStationery() {
     }
 
     filtered.forEach((item, index) => {
-        const imageSrc = getStationeryItemImage(item.name, item.category);
+        const imageSrc = (item.imageUrl && item.imageUrl.trim() !== "") 
+            ? item.imageUrl 
+            : getStationeryItemImage(item.name, item.category);
         const badgeInfo = getCategoryBadge(item.category, item.name);
         const descText = getItemDescription(item.description, item.name, item.category);
         const safeName = (item.name || "Stationery Item").replace(/'/g, "\\'");

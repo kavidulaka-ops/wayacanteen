@@ -87,17 +87,20 @@ function renderFoodList() {
         card.className = "food-card" + (item.available ? "" : " out-of-stock");
         card.id = "foodCard_" + item.id;
 
-        // Icon mapping
-        let iconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>';
-
         const safeName = escapeHtml(item.name);
         const safeDesc = escapeHtml(item.description || "No description provided.");
         const safeCat = escapeHtml(item.category || "Food");
 
+        // Icon / Image mapping
+        const hasCustomImg = item.imageUrl && item.imageUrl.trim() !== "";
+        const imageElement = hasCustomImg 
+            ? `<img src="${escapeHtml(item.imageUrl)}" class="card-food-img" alt="${safeName}">` 
+            : `<div class="card-food-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg></div>`;
+
         card.innerHTML = `
             <div>
                 <div class="card-top">
-                    <div class="card-food-icon">${iconSvg}</div>
+                    ${imageElement}
                     <div class="card-details">
                         <div class="card-meta">
                             <span class="badge-category">${safeCat}</span>
@@ -188,6 +191,69 @@ async function toggleAvailability(foodId, checkbox) {
 // =====================================
 let currentEditingId = null;
 
+function resetFoodPhotoUpload() {
+    const fileInput = document.getElementById("foodImage");
+    if (fileInput) fileInput.value = "";
+    const existing = document.getElementById("foodExistingImage");
+    if (existing) existing.value = "";
+    const removeImg = document.getElementById("foodRemoveImage");
+    if (removeImg) removeImg.value = "0";
+    const preview = document.getElementById("foodPhotoPreview");
+    if (preview) preview.src = "";
+    const previewWrap = document.getElementById("foodPhotoPreviewWrap");
+    if (previewWrap) previewWrap.style.display = "none";
+    const dropzone = document.getElementById("foodPhotoDropzone");
+    if (dropzone) dropzone.style.display = "flex";
+}
+
+function handleFoodImageSelected(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image file (PNG, JPG, WEBP).");
+        e.target.value = "";
+        return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+        alert("Image file size must be less than 5MB.");
+        e.target.value = "";
+        return;
+    }
+
+    const removeImg = document.getElementById("foodRemoveImage");
+    if (removeImg) removeImg.value = "0";
+    const nameLabel = document.getElementById("foodPhotoPreviewName");
+    if (nameLabel) nameLabel.textContent = file.name;
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+        const preview = document.getElementById("foodPhotoPreview");
+        if (preview) preview.src = evt.target.result;
+        const previewWrap = document.getElementById("foodPhotoPreviewWrap");
+        if (previewWrap) previewWrap.style.display = "flex";
+        const dropzone = document.getElementById("foodPhotoDropzone");
+        if (dropzone) dropzone.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeFoodPhoto() {
+    const fileInput = document.getElementById("foodImage");
+    if (fileInput) fileInput.value = "";
+    const existing = document.getElementById("foodExistingImage");
+    if (existing) existing.value = "";
+    const removeImg = document.getElementById("foodRemoveImage");
+    if (removeImg) removeImg.value = "1";
+    const preview = document.getElementById("foodPhotoPreview");
+    if (preview) preview.src = "";
+    const previewWrap = document.getElementById("foodPhotoPreviewWrap");
+    if (previewWrap) previewWrap.style.display = "none";
+    const dropzone = document.getElementById("foodPhotoDropzone");
+    if (dropzone) dropzone.style.display = "flex";
+}
+
 function openAddModal() {
     currentEditingId = null;
     document.getElementById("modalTitle").textContent = "Add New Food Item";
@@ -196,6 +262,8 @@ function openAddModal() {
     document.getElementById("foodFormAction").value = "add";
     document.getElementById("foodFormAvailable").checked = true;
     document.getElementById("btnSubmitFood").textContent = "Add Food Item";
+
+    resetFoodPhotoUpload();
 
     const modal = document.getElementById("foodModal");
     if (modal) {
@@ -218,6 +286,15 @@ function openEditModal(foodId) {
     document.getElementById("foodDesc").value = item.description || "";
     document.getElementById("foodFormAvailable").checked = !!item.available;
     document.getElementById("btnSubmitFood").textContent = "Save Changes";
+
+    resetFoodPhotoUpload();
+    if (item.imageUrl && item.imageUrl.trim() !== "") {
+        document.getElementById("foodExistingImage").value = item.imageUrl;
+        document.getElementById("foodPhotoPreview").src = item.imageUrl;
+        document.getElementById("foodPhotoPreviewName").textContent = item.name + " photo";
+        document.getElementById("foodPhotoPreviewWrap").style.display = "flex";
+        document.getElementById("foodPhotoDropzone").style.display = "none";
+    }
 
     const modal = document.getElementById("foodModal");
     if (modal) {
@@ -255,6 +332,8 @@ async function handleFoodSubmit(e) {
     const price = document.getElementById("foodPrice").value.trim();
     const desc = document.getElementById("foodDesc").value.trim();
     const available = document.getElementById("foodFormAvailable").checked ? "1" : "0";
+    const existingImage = document.getElementById("foodExistingImage").value;
+    const removeImage = document.getElementById("foodRemoveImage").value;
 
     if (!name) {
         alert("Please enter the food item name.");
@@ -265,7 +344,7 @@ async function handleFoodSubmit(e) {
         return;
     }
 
-    const formData = new URLSearchParams();
+    const formData = new FormData();
     formData.append("action", action);
     if (foodId) formData.append("foodId", foodId);
     formData.append("name", name);
@@ -273,6 +352,13 @@ async function handleFoodSubmit(e) {
     formData.append("price", price);
     formData.append("description", desc);
     formData.append("available", available);
+    formData.append("existingImage", existingImage);
+    formData.append("removeImage", removeImage);
+
+    const fileInput = document.getElementById("foodImage");
+    if (fileInput && fileInput.files.length > 0) {
+        formData.append("imageFile", fileInput.files[0]);
+    }
 
     const btn = document.getElementById("btnSubmitFood");
     btn.disabled = true;
@@ -281,8 +367,7 @@ async function handleFoodSubmit(e) {
     try {
         const res = await fetch("/CantinWeb/staff-food", {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: formData.toString()
+            body: formData
         });
 
         const data = await res.json();

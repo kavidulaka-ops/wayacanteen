@@ -24,7 +24,7 @@ public class FoodServlet extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
 
         String sql =
-                "SELECT food_id, food_name, description, category, price " +
+                "SELECT food_id, food_name, description, category, price, image_url " +
                 "FROM food_items " +
                 "WHERE available = TRUE ORDER BY food_id ASC";
 
@@ -57,34 +57,34 @@ public class FoodServlet extends HttpServlet {
                         json.append(",");
                     }
 
-                    String name =
-                            result.getString("food_name");
+                    int id = result.getInt("food_id");
+                    String name = result.getString("food_name");
+                    String description = result.getString("description");
+                    double price = result.getDouble("price");
+                    String category = result.getString("category");
+                    String imageUrl = result.getString("image_url");
 
-                    String description =
-                            result.getString("description");
-
-                    double price =
-                            result.getDouble("price");
-
-                    String category = "Food";
-
-                    if (name.toLowerCase().contains("rice")) {
-                        category = "Rice";
-                    } else if (
-                            name.toLowerCase().contains("kottu")) {
-                        category = "Kottu";
+                    if (category == null || category.trim().isEmpty()) {
+                        category = "Food";
+                        if (name != null && name.toLowerCase().contains("rice")) {
+                            category = "Rice";
+                        } else if (name != null && name.toLowerCase().contains("kottu")) {
+                            category = "Kottu";
+                        }
                     }
 
                     json.append("{");
 
+                    json.append("\"id\":").append(id).append(",");
+
                     json.append("\"name\":\"")
-                            .append(name.replace("\"", "\\\""))
+                            .append(escapeJson(name))
                             .append("\",");
 
                     json.append("\"description\":\"")
                             .append(description == null
                                     ? ""
-                                    : description.replace("\"", "\\\""))
+                                    : escapeJson(description))
                             .append("\",");
 
                     json.append("\"price\":")
@@ -92,7 +92,11 @@ public class FoodServlet extends HttpServlet {
                             .append(",");
 
                     json.append("\"category\":\"")
-                            .append(category)
+                            .append(escapeJson(category))
+                            .append("\",");
+
+                    json.append("\"imageUrl\":\"")
+                            .append(imageUrl != null ? escapeJson(imageUrl) : "")
                             .append("\"");
 
                     json.append("}");
@@ -113,9 +117,14 @@ public class FoodServlet extends HttpServlet {
 
             response.getWriter().println(
                     "{\"error\":\""
-                    + e.getMessage().replace("\"", "\\\"")
+                    + escapeJson(e.getMessage())
                     + "\"}"
             );
         }
+    }
+
+    private String escapeJson(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "\\r");
     }
 }

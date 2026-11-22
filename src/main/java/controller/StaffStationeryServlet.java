@@ -2,18 +2,29 @@ package controller;
 
 import db.DBConnection;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 @WebServlet("/staff-stationery")
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+    maxFileSize = 1024 * 1024 * 10,      // 10 MB
+    maxRequestSize = 1024 * 1024 * 20    // 20 MB
+)
 public class StaffStationeryServlet extends HttpServlet {
 
     // GET: Returns all stationery items for staff management
@@ -25,7 +36,7 @@ public class StaffStationeryServlet extends HttpServlet {
 
         response.setContentType("application/json;charset=UTF-8");
 
-        String sql = "SELECT stationery_id, item_name, description, category, price, available, " +
+        String sql = "SELECT stationery_id, item_name, description, category, price, available, image_url, " +
                 "DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS created_str " +
                 "FROM stationery_items ORDER BY available DESC, stationery_id ASC";
 
@@ -53,6 +64,7 @@ public class StaffStationeryServlet extends HttpServlet {
                     String cat = rs.getString("category");
                     double price = rs.getDouble("price");
                     boolean available = rs.getBoolean("available");
+                    String imageUrl = rs.getString("image_url");
                     String createdAt = rs.getString("created_str");
 
                     if (cat == null || cat.trim().isEmpty()) {
@@ -68,6 +80,7 @@ public class StaffStationeryServlet extends HttpServlet {
                     json.append("\"category\":\"").append(escapeJson(cat)).append("\",");
                     json.append("\"price\":").append(price).append(",");
                     json.append("\"available\":").append(available).append(",");
+                    json.append("\"imageUrl\":\"").append(escapeJson(imageUrl != null ? imageUrl : "")).append("\",");
                     json.append("\"createdAt\":\"").append(escapeJson(createdAt != null ? createdAt : "")).append("\"");
                     json.append("}");
 
@@ -130,6 +143,59 @@ public class StaffStationeryServlet extends HttpServlet {
         }
     }
 
+    // Saves uploaded image file to webapp and project source folders
+    private String saveUploadedImage(HttpServletRequest req, String prefix) {
+        try {
+            Part filePart = req.getPart("imageFile");
+            if (filePart != null && filePart.getSize() > 0) {
+                String submitted = filePart.getSubmittedFileName();
+                String ext = ".png";
+                if (submitted != null && submitted.contains(".")) {
+                    String subExt = submitted.substring(submitted.lastIndexOf(".")).toLowerCase();
+                    if (subExt.equals(".jpg") || subExt.equals(".jpeg") || subExt.equals(".png") || subExt.equals(".webp") || subExt.equals(".gif")) {
+                        ext = subExt;
+                    }
+                }
+                String fileName = prefix + "_" + System.currentTimeMillis() + "_" + (int)(Math.random() * 1000) + ext;
+
+                // 1. Save to deployed webapp uploads directory
+                String webappPath = req.getServletContext().getRealPath("/images/uploads");
+                if (webappPath != null) {
+                    File dir = new File(webappPath);
+                    if (!dir.exists()) dir.mkdirs();
+                    File target = new File(dir, fileName);
+                    try (InputStream is = filePart.getInputStream()) {
+                        Files.copy(is, target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    }
+                }
+
+                // 2. Mirror to source workspace and OOP project target folders
+                String[] targetDirs = new String[] {
+                    "E:/uni/~ PROJECT/antigravity project/src/main/webapp/images/uploads",
+                    "E:/uni/OOP project/CantinWeb/build/web/images/uploads",
+                    "E:/uni/OOP project/CantinWeb/web/images/uploads"
+                };
+                for (String tDir : targetDirs) {
+                    try {
+                        File d = new File(tDir);
+                        if (d.exists() && webappPath != null) {
+                            File sf = new File(webappPath, fileName);
+                            if (sf.exists()) {
+                                File tf = new File(d, fileName);
+                                Files.copy(sf.toPath(), tf.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            }
+                        }
+                    } catch (Exception ignore) {}
+                }
+
+                return "images/uploads/" + fileName;
+            }
+        } catch (Exception e) {
+            System.err.println("Error saving uploaded stationery image: " + e.getMessage());
+        }
+        return null;
+    }
+
     private void handleAddStationery(HttpServletRequest req, HttpServletResponse resp, Connection conn) throws Exception {
         String name = req.getParameter("name");
         if (name == null || name.trim().isEmpty()) {
@@ -171,13 +237,24 @@ public class StaffStationeryServlet extends HttpServlet {
             available = 0;
         }
 
-        String sql = "INSERT INTO stationery_items (item_name, description, category, price, available) VALUES (?, ?, ?, ?, ?)";
+        // Save image if uploaded
+        String uploadedUrl = saveUploadedImage(req, "stationery");
+        String imageUrl = uploadedUrl;
+        if (imageUrl == null) {
+            String existing = req.getParameter("existingImage");
+            if (existing != null && !existing.trim().isEmpty()) {
+                imageUrl = existing.trim();
+            }
+        }
+
+        String sql = "INSERT INTO stationery_items (item_name, description, category, price, available, image_url) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, name.trim());
             ps.setString(2, desc != null ? desc.trim() : "");
             ps.setString(3, cat.trim());
             ps.setDouble(4, price);
             ps.setInt(5, available);
+            ps.setString(6, imageUrl);
 
             int rows = ps.executeUpdate();
             if (rows > 0) {
@@ -187,7 +264,7 @@ public class StaffStationeryServlet extends HttpServlet {
                         newId = gk.getInt(1);
                     }
                 }
-                resp.getWriter().println("{\"success\":true,\"message\":\"Stationery item added successfully!\",\"stationeryId\":" + newId + ",\"id\":" + newId + "}");
+                resp.getWriter().println("{\"success\":true,\"message\":\"Stationery item added successfully!\",\"stationeryId\":" + newId + ",\"id\":" + newId + ",\"imageUrl\":\"" + (imageUrl != null ? escapeJson(imageUrl) : "") + "\"}");
             } else {
                 resp.getWriter().println("{\"success\":false,\"message\":\"Could not insert stationery item\"}");
             }
@@ -222,7 +299,6 @@ public class StaffStationeryServlet extends HttpServlet {
                 }
             }
         } else {
-            // Toggle to opposite of current value
             sql = "UPDATE stationery_items SET available = NOT available WHERE stationery_id = ?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, stationeryId);
@@ -257,6 +333,7 @@ public class StaffStationeryServlet extends HttpServlet {
         String desc = req.getParameter("description");
         String cat = req.getParameter("category");
         String priceStr = req.getParameter("price");
+        String removeImage = req.getParameter("removeImage");
 
         if (idStr == null || idStr.trim().isEmpty()) {
             resp.getWriter().println("{\"success\":false,\"message\":\"Stationery ID is required\"}");
@@ -280,17 +357,32 @@ public class StaffStationeryServlet extends HttpServlet {
             cat = "Stationery";
         }
 
-        String sql = "UPDATE stationery_items SET item_name = ?, description = ?, category = ?, price = ? WHERE stationery_id = ?";
+        String uploadedUrl = saveUploadedImage(req, "stationery");
+
+        String sql;
+        if (uploadedUrl != null) {
+            sql = "UPDATE stationery_items SET item_name = ?, description = ?, category = ?, price = ?, image_url = ? WHERE stationery_id = ?";
+        } else if ("1".equals(removeImage) || "true".equalsIgnoreCase(removeImage)) {
+            sql = "UPDATE stationery_items SET item_name = ?, description = ?, category = ?, price = ?, image_url = NULL WHERE stationery_id = ?";
+        } else {
+            sql = "UPDATE stationery_items SET item_name = ?, description = ?, category = ?, price = ? WHERE stationery_id = ?";
+        }
+
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, name.trim());
             ps.setString(2, desc != null ? desc.trim() : "");
             ps.setString(3, cat.trim());
             ps.setDouble(4, price);
-            ps.setInt(5, stationeryId);
+            if (uploadedUrl != null) {
+                ps.setString(5, uploadedUrl);
+                ps.setInt(6, stationeryId);
+            } else {
+                ps.setInt(5, stationeryId);
+            }
 
             int rows = ps.executeUpdate();
             if (rows > 0) {
-                resp.getWriter().println("{\"success\":true,\"message\":\"Stationery item updated successfully!\"}");
+                resp.getWriter().println("{\"success\":true,\"message\":\"Stationery item updated successfully!\",\"imageUrl\":\"" + (uploadedUrl != null ? escapeJson(uploadedUrl) : "") + "\"}");
             } else {
                 resp.getWriter().println("{\"success\":false,\"message\":\"Stationery item not found\"}");
             }
